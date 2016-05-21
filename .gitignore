@@ -2,3 +2,6 @@
 bootstrap.json
 build/
 ext/
+ext601/classic/
+ext601/examples/
+ext601/welcome/
