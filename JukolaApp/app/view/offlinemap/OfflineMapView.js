@@ -1,4 +1,4 @@
-Ext.define('JukolaApp.view.offline.OfflineMapView', {
+Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     extend: 'Ext.Container',
     
     xtype: 'offlinemap',

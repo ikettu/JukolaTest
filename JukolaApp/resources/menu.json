@@ -26,10 +26,12 @@
                 "leaf": true
             },
             {
-                "text": "Online",
+                "text": "Jukola Web",
                 "iconCls": "x-fa fa-dot-circle-o",
                 "viewType": "online",
-                "routeId": "onlinetest",
+                "routeId": "jukolaweb",
+                "url":"http://www.jukola.com/2017",
+                "src":"http://www.jukola.com/2017",
                 "leaf": true
             }
         ]

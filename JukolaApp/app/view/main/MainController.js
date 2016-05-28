@@ -6,6 +6,13 @@
 Ext.define('JukolaApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.main',
+    
+    requires:[
+        'JukolaApp.view.welcome.WelcomeView',
+        'JukolaApp.view.online.OnlineView',
+        'JukolaApp.view.offline.OfflineView',
+        'JukolaApp.view.offlinemap.OfflineMapView'
+    ],
 
     listen : {
         controller : {
@@ -71,9 +78,11 @@ Ext.define('JukolaApp.view.main.MainController', {
             item = mainCard.child('component[routeId=' + hashTag + ']');
 
         if (!item) {
+            Ext.log('nodeUrl:'+node.get('url'));
             item = mainCard.add({
                 xtype: node.get('viewType'),
-                routeId: hashTag
+                routeId: hashTag,
+                node: node
             });
         }
         

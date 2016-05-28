@@ -1,4 +1,4 @@
-Ext.define('JukolaApp.view.offline.WelcomeView', {
+Ext.define('JukolaApp.view.welcome.WelcomeView', {
     extend: 'Ext.Container',
     
     xtype: 'welcome',
