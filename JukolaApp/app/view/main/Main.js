@@ -3,59 +3,51 @@
  * "mainView" property. That setting causes an instance of this class to be created and
  * added to the Viewport container.
  *
- * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('JukolaApp.view.main.Main', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.Container',
     xtype: 'app-main',
 
     requires: [
-        'Ext.MessageBox',
-
-        'JukolaApp.view.main.MainController',
-        'JukolaApp.view.main.MainModel',
-        'JukolaApp.view.main.List'
+        'Ext.MessageBox', 
+        'Ext.Button',
+        'Ext.list.Tree',
+        'Ext.navigation.View',
+        
+        'JukolaApp.view.main.MainController'
     ],
 
     controller: 'main',
-    viewModel: 'main',
 
-    defaults: {
-        tab: {
-            iconAlign: 'top'
-        },
-        styleHtmlContent: true
-    },
-
-    tabBarPosition: 'bottom',
-
+    layout: 'hbox',
+    
     items: [
         {
-            title: 'Home',
-            iconCls: 'x-fa fa-home',
-            layout: 'fit',
-            // The following grid shares a store with the classic version's grid as well!
-            items: [{
-                xtype: 'mainlist'
-            }]
-        },{
-            title: 'Users',
-            iconCls: 'x-fa fa-user',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Groups',
-            iconCls: 'x-fa fa-users',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Settings',
-            iconCls: 'x-fa fa-cog',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        }
+            xtype: 'container',
+            userCls: 'main-nav-container',
+            reference: 'navigation',
+            scrollable: true,
+            items: [
+                {
+                    xtype: 'treelist',
+                    reference: 'navigationTree',
+                    ui: 'navigation',
+                    store: 'MenuStore',
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        itemclick: 'onNavigationItemClick',
+                        selectionchange: 'onNavigationTreeSelectionChange'
+                    }
+                }
+            ]
+        },
+        {
+            xtype: 'navigationview',
+            flex: 1,
+            reference: 'mainCard',
+            userCls: 'main-container',
+            navigationBar: false
+        }        
     ]
 });

@@ -23,6 +23,12 @@
     },
     "config.rb.tpl.merge": {
       "33f446bd02c3fd24eb27891582eff6a2e789796b": "eJxLLi2KT8ksUrBVcMvMSdUDMvMSc1M14uPdPH1c4+M1ufJLSwpKS+KLSypzUoGqrPJSi0tSU7gALskTcA\u003d\u003d"
+    },
+    "{modelFileName}.js.tpl.merge": {
+      "31d5356142a167c72422f7902f19df3c583f3249": "eJxlUcFugzAMvfMVVqUq0CLorlC6w7TrfgBxSMG00dKAktAxRfn3GWg7rfMhdvKeX16c99EmDbZCYcjcpWtQfvALmp7X6BOnqPYsBhcABY4WVZMBc0du8E1yYwicoXlpBcrGZFC69byf4srlgCZZICggbAdVW9Epquaz6CZ+j7bTEF65Bo2W+GUVQ8+1nXqXhsT0UtiQxSyKQdDxLqe0X1iJRHWy5xy2W/GsvNjR0FLPTC5FdRfLWJT/I5ODpB/MOXQwDSKDttyRHfvdz/VLBf6pywfBk8Cg1ZTyX8BH4Z+h3CTWfm97OT2/WC3A6vDouRtgjx9ZTDA3Zc/AuxLCUagGRygKGOtuUDaCV2AMiBYzqPw+pQsOgVtDuoGj5OoTJP072I4cNkONcEF9Qqg71UpR08i/0sGgBmwEbTYpeZwdVcH07h/XJaFF"
+    },
+    "{controllerFileName}.js.tpl.merge": {
+      "b092f4aad11d2f7eaab5ce3e2dcc2fc3134f3188": "eJxzrSjRS0lNy8xL1VCvTs7PKynKz8lJLfJLzE0tLkhMTq3VQxOtVddRqOZSAILUipLUvBQrBXVXoBmJBQV6znCF6ly1mtZcACwSIF0\u003d"
     }
   },
   "targets": {
@@ -264,6 +270,51 @@
         "viewFileName": "Main",
         "viewName": "Main",
         "viewNamespace": "JukolaApp.view"
+      }
+    },
+    "app/model/MenuModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "JukolaApp",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:auto:null,name:auto:null,glyph:auto:null,controller:auto:null,url:auto:null,selector:auto:null,timestamp:auto:null,online:boolean:null",
+        "modelFileName": "MenuModel",
+        "modelNamespace": "JukolaApp.model",
+        "name": "MenuModel"
+      }
+    },
+    "app/controller/MapController.js": {
+      "source": "{controllerFileName}.js.tpl.merge",
+      "version": "b092f4aad11d2f7eaab5ce3e2dcc2fc3134f3188",
+      "parameters": {
+        "appName": "JukolaApp",
+        "controllerFileName": "MapController",
+        "controllerName": "MapController",
+        "controllerNamespace": "JukolaApp.controller",
+        "name": "MapController"
+      }
+    },
+    "app/controller/OnlineContentController.js": {
+      "source": "{controllerFileName}.js.tpl.merge",
+      "version": "b092f4aad11d2f7eaab5ce3e2dcc2fc3134f3188",
+      "parameters": {
+        "appName": "JukolaApp",
+        "controllerFileName": "OnlineContentController",
+        "controllerName": "OnlineContentController",
+        "controllerNamespace": "JukolaApp.controller",
+        "name": "OnlineContentController"
+      }
+    },
+    "app/controller/OfflineContentController.js": {
+      "source": "{controllerFileName}.js.tpl.merge",
+      "version": "b092f4aad11d2f7eaab5ce3e2dcc2fc3134f3188",
+      "parameters": {
+        "appName": "JukolaApp",
+        "controllerFileName": "OfflineContentController",
+        "controllerName": "OfflineContentController",
+        "controllerNamespace": "JukolaApp.controller",
+        "name": "OfflineContentController"
       }
     }
   }

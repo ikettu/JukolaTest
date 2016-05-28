@@ -1,0 +1,37 @@
+  {
+   "success": true,
+   "errors": null,
+   "children": {
+        "expanded": true,
+        "children": [
+            {
+                "text": "Welcome",
+                "iconCls": "x-fa fa-home",
+                "viewType": "welcome",
+                "routeId": "welcome",
+                "leaf": true
+            },
+            {
+                "text": "Map",
+                "iconCls": "x-fa fa-map",
+                "viewType": "offlinemap",
+                "routeId": "maptest",
+                "leaf": true
+            },
+            {
+                "text": "Offline",
+                "iconCls": "x-fa fa-circle-o",
+                "viewType": "offline",
+                "routeId": "offlinetest",
+                "leaf": true
+            },
+            {
+                "text": "Online",
+                "iconCls": "x-fa fa-dot-circle-o",
+                "viewType": "online",
+                "routeId": "onlinetest",
+                "leaf": true
+            }
+        ]
+   }
+ }

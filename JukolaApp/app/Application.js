@@ -9,11 +9,12 @@ Ext.define('JukolaApp.Application', {
     name: 'JukolaApp',
 
     stores: [
-        // TODO: add global / shared stores here
+        'MenuStore'
     ],
     
+    defaultToken : 'welcome',
+    
     launch: function () {
-        // TODO - Launch the application
     },
 
     onAppUpdate: function () {
