@@ -23,6 +23,7 @@
                 "iconCls": "x-fa fa-circle-o",
                 "viewType": "offline",
                 "routeId": "offlinetest",
+                "url":"https://crossorigin.me/http://www.jukola.com/2017/yhteystiedot",
                 "leaf": true
             },
             {
@@ -31,7 +32,6 @@
                 "viewType": "online",
                 "routeId": "jukolaweb",
                 "url":"http://www.jukola.com/2017",
-                "src":"http://www.jukola.com/2017",
                 "leaf": true
             }
         ]

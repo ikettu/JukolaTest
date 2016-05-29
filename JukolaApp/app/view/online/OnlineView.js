@@ -5,11 +5,13 @@ Ext.define('JukolaApp.view.online.OnlineView', {
     
     xtype: 'online',
     
-    // hashtag    
-    routeId: undefined,
+    config: {
+        // hashtag    
+        routeId: undefined,
     
-    // instance of MenuModel
-    node:undefined,
+        // instance of MenuModel
+        node:undefined,
+    },
     
     initConfig: function(config) {
         var me = this,
