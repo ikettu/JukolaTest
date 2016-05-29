@@ -16,7 +16,9 @@ Ext.define('JukolaApp.widget.IFrame', {
     updateSrc: function(newSrc) {
         var me=this,
             frameStyle = 'width:100%;height:100%;border:none',
-            iframe = me.iframe || me.element.createChild({tag:'iframe',style:frameStyle});
+            // http://www.html5rocks.com/en/tutorials/security/sandboxed-iframes/
+            sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms',
+            iframe = me.iframe || me.element.createChild({tag:'iframe',style:frameStyle, sandbox:sandbox});
          
         iframe.dom.setAttribute('src',newSrc);
     },
