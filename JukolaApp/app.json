@@ -216,6 +216,9 @@
      */
     "js": [
         {
+            "path": "libs/openlayers-3.15.1/proj4js-2.3.14.js"
+        },
+        {
             "path": "libs/openlayers-3.15.1/ol.js"
         },
         {
