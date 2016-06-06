@@ -219,7 +219,10 @@
             "path": "libs/openlayers-3.15.1/proj4js-2.3.14.js"
         },
         {
-            "path": "libs/openlayers-3.15.1/ol.js"
+            "path": "libs/openlayers-3.15.1/customprojs.js"
+        },
+        {
+            "path": "libs/openlayers-3.15.1/ol-debug.js"
         },
         {
             "path": "libs/localForage-1.4.2/localforage.min.js"

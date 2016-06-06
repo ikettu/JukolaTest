@@ -17,6 +17,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     
 
     initialize: function() {
+        
         this.callParent();
         this.initMap();
 
@@ -32,29 +33,114 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
             me.showMap(newNode);
         }
     },
+
+
+    storeKeyPrefix:'offlinemap_',
+
+    getKey:function(key) {
+        return this.storeKeyPrefix+key;
+    },
+
+
+    olCachingImageLoadFunc: function(image, src) {
+        Ext.log('olCachingImageLoadFunc('+image+','+src+')');
+        
+        var me = this,
+            key = 'offlinemap_'+src
+        ;
+        
+        localforage.getItem(key, function(err, value) {
+
+            if (value) {
+               var blob = value,
+                   imageURI = window.URL.createObjectURL(blob);
+               image.getImage().src = imageURI;
+
+            } else {
+
+                var req = new XMLHttpRequest();
+                req.open('GET', src, true);
+                req.responseType = 'arraybuffer';
+                req.addEventListener('load',function()  {
+                    var blob = new Blob([req.response]);
+                    localforage.setItem(key, blob,function(err, val) {
+                        Ext.log('val: '+val);
+                        var imageURI = window.URL.createObjectURL(blob);
+                        image.getImage().src = imageURI;
+                    });
+                });
+                req.send(null); 
+
+            }
+            
+            
+        });
+        
+    },
     
-    initLayer: function(node) {
-        return new ol.layer.Tile({
-             source: new ol.source.OSM()
-         });  
+    initLayers: function(node) {
+        var me=this;
+        var TM35FIN = ol.proj.get('EPSG:3067');
+    
+        var jnsLayer = new ol.layer.Image({
+           minResolution:1,
+           maxResolution:10,
+           source : new ol.source.ImageStatic({
+              imageLoadFunction: me.olCachingImageLoadFunc,
+              url : 'resources/map/N5424R.png',
+              projection: TM35FIN,
+              imageExtent: [632001.00, 6941999, 644001, 6953999],
+              imageSize: [6000, 6000] 
+           })
+            
+           
+        });
+
+        var jnsLayer2 = new ol.layer.Image({
+           minResolution:10,
+           maxResolution:512,
+           source : new ol.source.ImageStatic({
+              imageLoadFunction: me.olCachingImageLoadFunc,
+              url : 'resources/map/N54L.png',
+              projection: TM35FIN,
+//              imageExtent: [596004, 6953996, 644004, 7001996],
+              imageExtent: [596004, 6905996, 644004, 6953996],
+              imageSize: [6000, 6000] 
+           })
+            
+           
+        });
+
+        
+        return [jnsLayer2, jnsLayer];
+
+//        return new ol.layer.Tile({
+//             source: new ol.source.OSM()
+//         });
+    
+    
+         
+    
     },
     
     initMap: function(node) {
         var me = this;
         if (!me.map) {
 
-            var layer = me.initLayer(node),
+            var layers = me.initLayers(node),
             
-                projection = layer.getSource().getProjection(),
+                projection = layers[0].getSource().getProjection(),
             
                 olmap = new ol.Map({
                     
-                    layers: [ layer ],
+                    layers: layers,
               
                     view: new ol.View({
                         projection : projection,
                         center: ol.proj.transform([29.7576053, 62.5973648],'EPSG:4326',projection),
-                        resolution: 5
+                        resolution: 128,
+                        minResolution: 1,
+                        maxResolution:256
                    })
                 }),
             
