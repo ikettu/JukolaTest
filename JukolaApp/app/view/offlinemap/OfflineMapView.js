@@ -14,12 +14,15 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     
     map : undefined,
 
-    
+    geolocation : undefined,
+    geolocationLayer : undefined,
+    positionFeature : undefined,
 
     initialize: function() {
         
         this.callParent();
         this.initMap();
+        this.initGeolocation();
 
         this.on({
             painted: 'doResize',
@@ -154,6 +157,59 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
             me.map = olmap;
         }
         
+    },
+    
+    initGeolocation: function() {
+      var me = this;
+      
+      if (!me.geolocationLayer) {
+        me.positionFeature = new ol.Feature();
+        me.positionFeature.setStyle(new ol.style.Style({
+            image: new ol.style.Circle({
+              radius: 6,
+              fill: new ol.style.Fill({
+                color: '#3399CC'
+              }),
+              stroke: new ol.style.Stroke({
+                color: '#fff',
+                width: 2
+              })
+            })
+        }));
+        
+        me.geolocationLayer = new ol.layer.Vector({
+            map : me.map,
+            source : new ol.source.Vector({
+                features: [me.positionFeature]
+            })
+        });
+      }
+      
+      if (!me.geolocation) {
+        me.geolocation = new ol.Geolocation({
+            projection : me.map.getView().getProjection(),
+            tracking : true,
+            trackingOptions: {
+                 maximumAge : 60
+            }
+        });
+        
+        me.geolocation.on('error', function(error) {
+          Ext.toast({
+            message: error.message,
+            timeout: 5000,
+            ui:'ligth'
+          });
+        });
+        
+        me.geolocation.on('change:position', function() {
+           var coordinates = me.geolocation.getPosition();
+           Ext.log("coords: "+coordinates);
+           me.positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
+        });
+      }
+      
+      
     },
     
     showMap:function(node) {
