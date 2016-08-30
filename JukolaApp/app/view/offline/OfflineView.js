@@ -64,13 +64,27 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return dom;   
     },
     
+    stripTagsLeaveContent: function(dom, tagName) {
+        var tags = dom.getElementsByTagName(tagName);
+        var i = tags.length;
+        while (i--) {
+          var tag=tags[i], j = tag.childNodes.length;
+          while(j--) {
+            tag.parentNode.appendChild(tag.childNodes[j]);
+          }
+          tag.parentNode.removeChild(tags[i]);
+        }
+        return dom;   
+    },
+
+
     processResponse: function(response, selector) {
         var me=this,
         body = selector ? response.querySelector(selector) : response.getElementsByTagName('body')[0];
         
         me.stripTags(body,'button');
         me.stripTags(body,'script');
-        me.stripTags(body,'a');
+        me.stripTagsLeaveContent(body,'a');
         return body;
     },
     

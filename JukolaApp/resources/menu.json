@@ -23,7 +23,7 @@
                 "iconCls": "x-fa fa-circle-o",
                 "viewType": "offline",
                 "routeId": "offlinetest",
-                "url":"https://crossorigin.me/http://results.jukola.com/tulokset/fi/j2015_ju/ju/kilpailijat/?eka=kaikki",
+                "url":"https://crossorigin.me/http://results.jukola.com/tulokset/fi/j2016_ju/ju/kilpailijat/?eka=kaikki",
                 "leaf": true
             },
             {
