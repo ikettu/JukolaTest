@@ -86,7 +86,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         var TM35FIN = ol.proj.get('EPSG:3067');
     
         var jnsLayer = new ol.layer.Image({
-           minResolution:1,
+//           minResolution:1,
            maxResolution:10,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
@@ -95,27 +95,48 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               imageExtent: [632001.00, 6941999, 644001, 6953999],
               imageSize: [6000, 6000] 
            })
-            
-           
         });
 
         var jnsLayer2 = new ol.layer.Image({
            minResolution:10,
-           maxResolution:512,
+//           maxResolution:512,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
               url : 'resources/map/N54L.png',
               projection: TM35FIN,
-//              imageExtent: [596004, 6953996, 644004, 7001996],
               imageExtent: [596004, 6905996, 644004, 6953996],
               imageSize: [6000, 6000] 
            })
-            
-           
         });
 
         
-        return [jnsLayer2, jnsLayer];
+        var enoLayer = new ol.layer.Image({
+           minResolution:1,
+           maxResolution:75,
+           source : new ol.source.ImageStatic({
+              imageLoadFunction: me.olCachingImageLoadFunc,
+              url : 'resources/map/P5332R.png',
+              projection: TM35FIN,
+              imageExtent: [656001, 6971999, 662001, 6977999],
+              imageSize: [6000, 6000] 
+           })
+        });
+
+
+        var enoLayer2 = new ol.layer.Image({
+//           minResolution:0.25,
+           maxResolution:10,
+           opacity:0.8,
+           source : new ol.source.ImageStatic({
+              imageLoadFunction: me.olCachingImageLoadFunc,
+              url : 'resources/map/Enonkarttapohjaa.jpg',
+              projection: TM35FIN,
+              imageExtent: [658100, 6971803, 658666, 6972200],
+              imageSize: [1132, 795] 
+           })
+        });
+        
+        return [jnsLayer2, jnsLayer, enoLayer,enoLayer2];
 
 //        return new ol.layer.Tile({
 //             source: new ol.source.OSM()
@@ -141,9 +162,9 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
                     view: new ol.View({
                         projection : projection,
                         center: ol.proj.transform([29.7576053, 62.5973648],'EPSG:4326',projection),
-                        resolution: 128,
-                        minResolution: 1,
-                        maxResolution:256
+                        resolution: 64,
+                        minResolution: 0.25,
+                        maxResolution: 128
                    })
                 }),
             
