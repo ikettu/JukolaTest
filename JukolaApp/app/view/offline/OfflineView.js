@@ -64,9 +64,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return dom;   
     },
     
-    processResponse: function(response) {
+    processResponse: function(response, selector) {
         var me=this,
-        body = response.getElementsByTagName('body')[0];
+        body = selector ? response.querySelector(selector) : response.getElementsByTagName('body')[0];
         
         me.stripTags(body,'button');
         me.stripTags(body,'script');
@@ -78,6 +78,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         var me=this,
             req = new XMLHttpRequest(),
             url = node.get('url'),
+            selector = node.get('selector'),
             key=me.getKey(url)
             ;
 
@@ -87,7 +88,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         req.responseType='document';
         
         req.addEventListener('load',function()  {
-            var response = me.processResponse(req.response).innerHTML;
+            var response = me.processResponse(req.response, selector).innerHTML;
             Ext.log("key2:"+key);
             
             localforage.setItem(key, response, function(err, value) {
