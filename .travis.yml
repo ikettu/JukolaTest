@@ -26,3 +26,11 @@ before_script:
   - "cd $TRAVIS_BUILD_DIR/JukolaApp && sencha app build"
   # Change directory back to the root of the repository ready for running tests
   - "cd $TRAVIS_BUILD_DIR"
+deploy:
+  provider: s3
+  access_key_id: "AKIAIEYH2J4YAS67SY6A"
+  secret_access_key: "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"
+  bucket: "jukolatest"
+  region: eu-west-1
+  skip_cleanup: true
+  local_dir: build
