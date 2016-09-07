@@ -15,10 +15,10 @@ before_script:
   #- "ln -sv `pwd`/ext-4.2.1.883 $TRAVIS_BUILD_DIR/../ext"
   # Install Sencha Cmd
   #http://cdn.sencha.com/cmd/6.1.3/no-jre/SenchaCmd-6.1.3-linux-amd64.sh.zip
-  - "wget http://cdn.sencha.com/cmd/$X_SENCHA_CMD_VERSION/no-jre/SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh.zip"
-  - "unzip -q SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh.zip"
-  - "chmod +x SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh"
-  - "./SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh --mode unattended"
+  - "wget http://cdn.sencha.com/cmd/$X_SENCHA_CMD_VERSION/no-jre/SenchaCmd-$X_SENCHA_CMD_VERSION-linux-amd64.sh.zip"
+  - "unzip -q SenchaCmd-$X_SENCHA_CMD_VERSION-linux-amd64.sh.zip"
+  - "chmod +x SenchaCmd-$X_SENCHA_CMD_VERSION-linux-amd64.sh"
+  - "./SenchaCmd-$X_SENCHA_CMD_VERSION-linux-amd64.sh --mode unattended"
   # Make Sencha Cmd and CoffeeScript available in the PATH
   - "export PATH=~/bin/Sencha/Cmd/$X_SENCHA_CMD_VERSION/:$TRAVIS_BUILD_DIR/node_modules/karma/bin:$TRAVIS_BUILD_DIR/node_modules/coffee-script/bin:$PATH"
   # Change directory to the package and build the package
