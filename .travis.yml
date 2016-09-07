@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 0.8
 env:
-  - X_SENCHA_CMD_VERSION="6.1.2.15"
+  - X_SENCHA_CMD_VERSION="6.1.3"
 before_script:
   # Framebuffer for Firefox
   - "export DISPLAY=:99.0"
@@ -10,14 +10,15 @@ before_script:
   # Install JSDuck dependency
   - "gem install jsduck"
   # Download, unzip and symlink Sencha Ext JS dependency
-  - "wget http://cdn.sencha.com/ext/commercial/ext-4.2.1-commercial.zip"
-  - "unzip -q ext-4.2.1-commercial.zip"
-  - "ln -sv `pwd`/ext-4.2.1.883 $TRAVIS_BUILD_DIR/../ext"
+  #- "wget http://cdn.sencha.com/ext/commercial/ext-4.2.1-commercial.zip"
+  #- "unzip -q ext-4.2.1-commercial.zip"
+  #- "ln -sv `pwd`/ext-4.2.1.883 $TRAVIS_BUILD_DIR/../ext"
   # Install Sencha Cmd
-  - "wget http://cdn.sencha.com/cmd/$X_SENCHA_CMD_VERSION/SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.run.zip"
-  - "unzip -q SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.run.zip"
-  - "chmod +x SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.run"
-  - "./SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.run --mode unattended"
+  #http://cdn.sencha.com/cmd/6.1.3/no-jre/SenchaCmd-6.1.3-linux-amd64.sh.zip
+  - "wget http://cdn.sencha.com/cmd/$X_SENCHA_CMD_VERSION/no-jre/SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh.zip"
+  - "unzip -q SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh.zip"
+  - "chmod +x SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh"
+  - "./SenchaCmd-$X_SENCHA_CMD_VERSION-linux-x64.sh --mode unattended"
   # Make Sencha Cmd and CoffeeScript available in the PATH
   - "export PATH=~/bin/Sencha/Cmd/$X_SENCHA_CMD_VERSION/:$TRAVIS_BUILD_DIR/node_modules/karma/bin:$TRAVIS_BUILD_DIR/node_modules/coffee-script/bin:$PATH"
   # Change directory to the package and build the package
