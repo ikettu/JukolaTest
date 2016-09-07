@@ -16,7 +16,7 @@
     "url": "https://github.com/ikettu/JukolaTest.git"
   },
   "devDependencies": {
-    "karma": "~0.10"
+
   },
   "scripts": {
     "test": "echo xxx || cd packages/deft && ant test -Dkarma.browsers=PhantomJS,Firefox"
