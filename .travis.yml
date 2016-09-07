@@ -20,7 +20,7 @@ before_script:
   - "chmod +x SenchaCmd-$X_SENCHA_CMD_VERSION.*-linux-amd64.sh"
   - "./SenchaCmd-$X_SENCHA_CMD_VERSION.*-linux-amd64.sh -q"
   # Make Sencha Cmd and CoffeeScript available in the PATH
-  - "export PATH=~/bin/Sencha/Cmd/$X_SENCHA_CMD_VERSION/:$TRAVIS_BUILD_DIR/node_modules/karma/bin:$TRAVIS_BUILD_DIR/node_modules/coffee-script/bin:$PATH"
+  - "export PATH=~/bin/Sencha/Cmd/$X_SENCHA_CMD_VERSION.*/:$TRAVIS_BUILD_DIR/node_modules/karma/bin:$TRAVIS_BUILD_DIR/node_modules/coffee-script/bin:$PATH"
   # Change directory to the package and build the package
   - "cd $TRAVIS_BUILD_DIR/JukolaApp && sencha app build"
   # Change directory back to the root of the repository ready for running tests
