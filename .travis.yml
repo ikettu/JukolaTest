@@ -33,4 +33,4 @@ deploy:
   bucket: "jukolatest"
   region: eu-west-1
   skip_cleanup: true
-  local_dir: build
+  local_dir: build/production/JukolaApp
