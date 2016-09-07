@@ -24,7 +24,7 @@
     "karma-safari-launcher": "~0.1.1"
   },
   "scripts": {
-    "test": "echo "xxx" || cd packages/deft && ant test -Dkarma.browsers=PhantomJS,Firefox"
+    "test": "echo xxx || cd packages/deft && ant test -Dkarma.browsers=PhantomJS,Firefox"
   },
   "license": "GPL"
 }
