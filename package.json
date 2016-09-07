@@ -1,0 +1,30 @@
+{
+  "name": "JukolaTest",
+  "version": "0.10.0",
+  "author": {
+    "name": "Ilpo Kettunen",
+    "email": "ikettu@gmail.com"
+  },
+  "contributors": [{
+    "name": "Juha Ruotsalainen",
+    "email": "foo.bar@example.com"
+  }],
+  "description": "App for Jukola Relay"
+  "homepage": "http://www.jukola.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ikettu/JukolaTest.git"
+  },
+  "devDependencies": {
+    "karma": "~0.10",
+    "coffee-script": "1.6.3",
+    "mocha": "~1.17.0",
+    "karma-mocha": "~0.1.1",
+    "karma-coverage": "~0.1.4",
+    "karma-safari-launcher": "~0.1.1"
+  },
+  "scripts": {
+    "test": "echo "xxx" || cd packages/deft && ant test -Dkarma.browsers=PhantomJS,Firefox"
+  },
+  "license": "GPL"
+}
