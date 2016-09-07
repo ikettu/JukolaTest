@@ -19,7 +19,7 @@
 
   },
   "scripts": {
-    "test": "echo xxx || cd packages/deft && ant test -Dkarma.browsers=PhantomJS,Firefox"
+    "test": "echo xxx"
   },
   "license": "GPL"
 }
