@@ -9,7 +9,7 @@
     "name": "Juha Ruotsalainen",
     "email": "foo.bar@example.com"
   }],
-  "description": "App for Jukola Relay"
+  "description": "App for Jukola Relay",
   "homepage": "http://www.jukola.com/",
   "repository": {
     "type": "git",
