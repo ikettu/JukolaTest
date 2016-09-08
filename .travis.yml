@@ -28,8 +28,9 @@ before_script:
   - "cd $TRAVIS_BUILD_DIR"
 deploy:
   provider: s3
-  access_key_id: "AKIAIEYH2J4YAS67SY6A"
-  secret_access_key: "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"
+  access_key_id: "AKIAJWVD6C3522MIUEVA"
+  secret_access_key:
+    secure: "a+hyV/xB1en1+hmZ72ghx25QBoutqwHevOVwB1A6vUQ/I+yYRTCmUn6WTeXj2XS7VhlX5NDFE100uIWZ9iOL2fDXHT7MfXT3aUnoUlZYUHHf2qKGfhDwPIk0w9/RJCYVRn4QtxoOc6yu7ObHenScZGyuDorMt0sR04wTsP8iRnB/Y9TDDVzlL0uDnFNqHGckdei2RumvIcff4OJai5kimaJ0LC/o7J63AneHLrIIBoD18dTaPUwWLi9Yj9FqAqmFJGQsIWV9mADlUjDuXcxB/8CuuQ0FA3HlU0X9IdF7T/HdeYhmmdZTAQkh1Fq8PF33FJvfnEqIjRTQPbEsoXR2gLo+JwbgH4lPXjn/y7f3Hs9ELp6FtNECAOFqLlhr/6b0mwTJivhEjsk43QzVke4P1E1RX+0Tm51hOR1psusskL0WTcQvpqtVUZ5hF9TzBLt3J6HnYYVzgErwhB+54EEdQzg3RY5f7mvwFaqDaDvdqhyYaf5ygn/I4n/or4IBYyPMmE6R65P35UDAUWcpQqos/sdLPgNbYeE4z1AMKY4Lm19Ih+WCCT+mbK8jAlTnAVdvEQOhznROh6CFRUlVe/6WhRmvsS0ru+cOXHydSlRTxodgCw1V65z80A3fSMCAsOZd9+bZf6biPZsjoZUBngtjTFrMBZ4Avj/D4xkT8d/95no="
   bucket: "jukolatest"
   region: eu-west-1
   skip_cleanup: true
