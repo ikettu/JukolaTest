@@ -85,20 +85,20 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         var me=this;
         var TM35FIN = ol.proj.get('EPSG:3067');
     
-        var jnsLayer = new ol.layer.Image({
+//        var jnsLayer = new ol.layer.Image({
 //           minResolution:1,
-           maxResolution:10,
-           source : new ol.source.ImageStatic({
-              imageLoadFunction: me.olCachingImageLoadFunc,
-              url : 'resources/map/N5424R.png',
-              projection: TM35FIN,
-              imageExtent: [632001.00, 6941999, 644001, 6953999],
-              imageSize: [6000, 6000] 
-           })
-        });
+//           maxResolution:10,
+//           source : new ol.source.ImageStatic({
+//              imageLoadFunction: me.olCachingImageLoadFunc,
+//              url : 'resources/map/N5424R.png',
+//              projection: TM35FIN,
+//              imageExtent: [632001.00, 6941999, 644001, 6953999],
+//              imageSize: [6000, 6000] 
+//           })
+//        });
 
         var jnsLayer2 = new ol.layer.Image({
-           minResolution:10,
+//           minResolution:10,
 //           maxResolution:512,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
@@ -136,7 +136,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
            })
         });
         
-        return [jnsLayer2, jnsLayer, enoLayer,enoLayer2];
+        return [jnsLayer2, enoLayer,enoLayer2];
 
 //        return new ol.layer.Tile({
 //             source: new ol.source.OSM()
