@@ -34,6 +34,8 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             
             Ext.log("key1:"+key);
             
+            me.setLoading(true);
+
             localforage.getItem(key, function(err, value) {
                 Ext.log("Found1:"+key);
                 Ext.log('value1:'+value);
@@ -53,6 +55,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     showHtml:function(html) {
        var me=this;
        me.down('#content').setHtml(html); 
+       me.setLoading(false);
     },
 
     stripTags: function(dom, tagName) {
