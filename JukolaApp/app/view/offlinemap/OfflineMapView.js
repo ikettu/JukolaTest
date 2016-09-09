@@ -85,6 +85,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         var me=this;
         var TM35FIN = ol.proj.get('EPSG:3067');
     
+/*    
         var jnsLayer = new ol.layer.Image({
 //           minResolution:1,
            maxResolution:10,
@@ -96,9 +97,9 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               imageSize: [6000, 6000] 
            })
         });
-
+*/
         var jnsLayer2 = new ol.layer.Image({
-           minResolution:10,
+           minResolution:1,
 //           maxResolution:512,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
@@ -108,35 +109,23 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               imageSize: [6000, 6000] 
            })
         });
-
         
-        var enoLayer = new ol.layer.Image({
-           minResolution:1,
-           maxResolution:75,
-           source : new ol.source.ImageStatic({
-              imageLoadFunction: me.olCachingImageLoadFunc,
-              url : 'resources/map/P5332R.png',
-              projection: TM35FIN,
-              imageExtent: [656001, 6971999, 662001, 6977999],
-              imageSize: [6000, 6000] 
-           })
-        });
 
 
         var enoLayer2 = new ol.layer.Image({
 //           minResolution:0.25,
-           maxResolution:10,
+           maxResolution:64,
            opacity:0.8,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
               url : 'resources/map/Enonkarttapohjaa.jpg',
               projection: TM35FIN,
-              imageExtent: [658100, 6971803, 658666, 6972200],
+              imageExtent: [660347, 6965678, 661479, 6966473],
               imageSize: [1132, 795] 
            })
         });
         
-        return [jnsLayer2, jnsLayer, enoLayer,enoLayer2];
+        return [jnsLayer2, enoLayer2];
 
 //        return new ol.layer.Tile({
 //             source: new ol.source.OSM()
@@ -161,8 +150,9 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               
                     view: new ol.View({
                         projection : projection,
-                        center: ol.proj.transform([29.7576053, 62.5973648],'EPSG:4326',projection),
-                        resolution: 64,
+                        center: ol.proj.transform([30.153677, 62.788682],'EPSG:4326',projection),
+//                        center: ol.proj.transform([29.7576053, 62.5973648],'EPSG:4326',projection),
+                        resolution: 2,
                         minResolution: 0.25,
                         maxResolution: 128
                    })
