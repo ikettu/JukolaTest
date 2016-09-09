@@ -99,7 +99,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         });
 */
         var jnsLayer2 = new ol.layer.Image({
-           minResolution:1,
+//           minResolution:1,
 //           maxResolution:512,
            source : new ol.source.ImageStatic({
               imageLoadFunction: me.olCachingImageLoadFunc,
