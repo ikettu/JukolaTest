@@ -14,7 +14,9 @@ Ext.define('JukolaApp.view.main.Main', {
         'Ext.list.Tree',
         'Ext.navigation.View',
         
-        'JukolaApp.view.main.MainController'
+        'JukolaApp.store.MenuStore',
+        'JukolaApp.view.main.MainController',
+        'JukolaApp.view.welcome.WelcomeView'
     ],
 
     controller: 'main',

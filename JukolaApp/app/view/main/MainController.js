@@ -8,6 +8,7 @@ Ext.define('JukolaApp.view.main.MainController', {
     alias: 'controller.main',
     
     requires:[
+        'JukolaApp.store.MenuStore',
         'JukolaApp.view.welcome.WelcomeView',
         'JukolaApp.view.online.OnlineView',
         'JukolaApp.view.offline.OfflineView',
@@ -57,7 +58,17 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     onRouteChange: function (id) {
-        this.setCurrentView(id);
+        
+        var me = this,
+            navigationTree = me.navigationTree,
+            store = navigationTree.getStore();
+            
+        if (store.isLoading()) {
+            Ext.defer(me.setCurrentView, 1000, me, [id]);
+            return;
+        }
+        
+        me.setCurrentView(id);
     },
 
 
@@ -77,18 +88,21 @@ Ext.define('JukolaApp.view.main.MainController', {
                    store.findNode('viewType', hashTag),
             item = mainCard.child('component[routeId=' + hashTag + ']');
 
-        if (!item) {
-            Ext.log('nodeUrl:'+node.get('url'));
-            item = mainCard.add({
-                xtype: node.get('viewType'),
-                routeId: hashTag,
-                node: node
-            });
+        if (!node) {
+            Ext.log("Node not found for "+hashTag);
+        } else {
+            if (!item) {
+                item = mainCard.add({
+                    xtype: node.get('viewType'),
+                    routeId: hashTag,
+                    node: node
+                });
+            }
+            
+            mainCard.setActiveItem(item);
+            
+            navigationTree.setSelection(node);
         }
-        
-        mainCard.setActiveItem(item);
-        
-        navigationTree.setSelection(node);
 
         //if (newView.isFocusable(true)) {
         //    newView.focus();
