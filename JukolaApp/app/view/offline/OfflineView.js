@@ -1,7 +1,8 @@
+/* globals localforage */
 Ext.define('JukolaApp.view.offline.OfflineView', {
     extend: 'Ext.Container',
     
-    requires: ['JukolaApp.model.MenuModel'],
+    requires: ['Ext.LoadMask','JukolaApp.model.MenuModel'],
     
     xtype: 'offline',
 

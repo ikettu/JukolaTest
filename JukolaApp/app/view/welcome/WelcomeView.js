@@ -1,6 +1,8 @@
 Ext.define('JukolaApp.view.welcome.WelcomeView', {
     extend: 'Ext.Container',
     
+    requires:['Ext.Img'],
+    
     xtype: 'welcome',
     
     items: [

@@ -1,5 +1,8 @@
+/* globals ol,localforage */
 Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     extend: 'Ext.Container',
+
+    requires: ['Ext.LoadMask'],
     
     xtype: 'offlinemap',
     
