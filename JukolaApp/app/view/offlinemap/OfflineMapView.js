@@ -19,7 +19,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     positionFeature : undefined,
 
     initialize: function() {
-        
+        Ext.log("map initialize");
         this.callParent();
         this.initMap();
         this.initGeolocation();
@@ -229,7 +229,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
 
         me.initMap();        
             
-        XMap = me.map;
+        me.setMasked(false);
     },
     
     doResize: function() {
@@ -243,7 +243,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         {
             itemId:'container',
             width:'100%',
-            height:'100%'
+            height:'100%',
+            masked: {xtype:'loadmask'}
         }
     ]
 });
