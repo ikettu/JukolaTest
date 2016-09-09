@@ -9,9 +9,6 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
             src:'resources/jukola-logo.png',
             width:180,
             height:328
-        },
-        {
-            html:'Jukola 2017'
         }
     ]
 });
