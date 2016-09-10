@@ -38,9 +38,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
   
             XTMPme = me;          
             
-            me.setMasked({
-                xtype:'loadmask'
-            });
+            if (me.isVisible()) {
+                me.setMasked({
+                    xtype:'loadmask'
+                });
+            }
             
 
             localforage.getItem(key, function(err, value) {
