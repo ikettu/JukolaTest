@@ -3,6 +3,7 @@
  * the "controller" of the Main view class.
  *
  */
+/* globals localforage */
 Ext.define('JukolaApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.main',
@@ -24,6 +25,7 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     routes: {
+        'reload': 'clearCaches',
         ':node': 'onRouteChange'
     },
 
@@ -107,6 +109,14 @@ Ext.define('JukolaApp.view.main.MainController', {
         //if (newView.isFocusable(true)) {
         //    newView.focus();
         //}
+    },
+    
+    clearCaches: function() {
+      var me=this;
+      localforage.clear(function() {
+        Ext.Msg.alert("","Cache cleared.");
+        me.redirectTo("welcome");
+      });
     },
 
     updateShowNavigation: function (showNavigation, oldValue) {
