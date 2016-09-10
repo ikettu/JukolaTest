@@ -59,8 +59,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     },
     
     showHtml:function(html) {
-       var me=this;
-       me.down('#content').setHtml(html); 
+       var me=this, content=me.down('#content');
+       content.setHtml(html);
+       var cDom = content.el.dom, toc = me.tocForDoc(cDom,'h2');
+       me.down('#toc').setHtml(toc);
+       
        me.setMasked(false);
     },
 
@@ -97,6 +100,26 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return body;
     },
     
+    tocForDoc: function(document, selector) {
+        var me=this, routeId = me.getRouteId(), elems = document.querySelectorAll(selector),
+            toc =''
+        ;
+        
+        
+        
+        if (elems) {
+            var index = 0, myId = me.down('#content').el.down('div').id;
+            toc = "<ul>";
+            for( index=0; index < elems.length; index++ ) {
+                var elem = elems[index];
+                elem.id = "toc_"+routeId+'_'+index;
+                toc = toc + "<li onclick=\"Ext.get('toc_"+routeId+'_'+index+"').scrollIntoView('"+myId+"'); Ext.get('"+myId+"').scroll('d',150);\">"+elem.textContent+"</a></li>";
+            }
+            toc = toc + "</ul>";
+        }
+        return toc;
+    },
+    
     updateCache:function(node,show) {
         var me=this,
             req = new XMLHttpRequest(),
@@ -111,7 +134,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         req.responseType='document';
         
         req.addEventListener('load',function()  {
-            var response = me.processResponse(req.response, selector).innerHTML;
+            var responseDom = me.processResponse(req.response, selector),
+                response = responseDom.innerHTML;
+            
             Ext.log("key2:"+key);
             
             localforage.setItem(key, response, function(err, value) {
@@ -137,6 +162,28 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             width:'100%',
             height:'100%',
             scrollable: true
+        }, {
+            itemId:'toc',
+            html:'',
+            style:'overflow:hidden; background-color:#F0F0F0',
+            scrollable: true,
+            plugins: 'responsive',
+            visible: false,
+            responsiveConfig: {
+                'width > 500 && wide': {
+                    visible: true,
+                    docked:'left',
+                    width:'20%',
+                    height:'100%'
+                },
+                'height > 500 && tall' : {
+                    visible: true,
+                    docked:'top',
+                    width: '100%',
+                    height: 100                    
+                }
+                
+            }
         }
     ]
         
