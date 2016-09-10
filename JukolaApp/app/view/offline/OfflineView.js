@@ -2,7 +2,8 @@
 Ext.define('JukolaApp.view.offline.OfflineView', {
     extend: 'Ext.Container',
     
-    requires: ['Ext.LoadMask','JukolaApp.model.MenuModel'],
+    requires: ['Ext.LoadMask','Ext.plugin.Responsive',
+               'JukolaApp.model.MenuModel'],
     
     xtype: 'offline',
 
@@ -62,7 +63,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
        var me=this, content=me.down('#content');
        content.setHtml(html);
        var cDom = content.el.dom, toc = me.tocForDoc(cDom,'h2');
-       me.down('#toc').setHtml(toc);
+       if (!toc || toc.length<50) {
+         me.down('#toc').setHidden(true);
+       } else {
+           me.down('#toc').setHtml(toc);
+       }
        
        me.setMasked(false);
     },
@@ -151,8 +156,6 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         });
         
         req.send(null);        
-        
-        
     },
     
     items: [
@@ -168,16 +171,16 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             style:'overflow:hidden; background-color:#F0F0F0',
             scrollable: true,
             plugins: 'responsive',
-            visible: false,
+            hidden: true,
             responsiveConfig: {
                 'width > 500 && wide': {
-                    visible: true,
+                    hidden: false,
                     docked:'left',
                     width:'20%',
                     height:'100%'
                 },
                 'height > 500 && tall' : {
-                    visible: true,
+                    hidden: false,
                     docked:'top',
                     width: '100%',
                     height: 100                    
@@ -186,6 +189,5 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             }
         }
     ]
-        
     
 });
