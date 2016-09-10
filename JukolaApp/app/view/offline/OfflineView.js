@@ -120,7 +120,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             for( index=0; index < elems.length; index++ ) {
                 var elem = elems[index];
                 elem.id = "toc_"+routeId+'_'+index;
-                toc = toc + "<li onclick=\"Ext.get('toc_"+routeId+'_'+index+"').scrollIntoView('"+myId+"'); Ext.get('"+myId+"').scroll('d',150);\">"+elem.textContent+"</a></li>";
+                toc = toc + "<li><a href=\"javascript:Ext.get('toc_"+routeId+'_'+index+"').scrollIntoView('"+myId+"'); Ext.get('"+myId+"').scroll('d',150);\">"+elem.textContent+"</a></li>";
             }
             toc = toc + "</ul>";
         }
