@@ -72,6 +72,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
          Xtoc = me.down('#toc').add(toc);
        }
        
+       // debug
+       me.imagesToOffline(cDom);
+       
        me.setMasked(false);
     },
 
@@ -97,6 +100,54 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return dom;   
     },
 
+    imagesToOffline: function(dom) {
+       var me=this,
+          onePixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+          imgs = dom.getElementsByTagName('img'),
+          revokeFunc = function() {
+            window.URL.revokeObjectURL(this.src);
+          },
+          
+          offliner = function(img) {
+            var src=img.src, key=me.getKey(src);
+
+            Ext.log(src+" 1");
+            img.src = onePixel;
+            img.srcset = '';
+            img.sizes = '';
+
+
+            localforage.getItem(key, function(err, value) {
+              Ext.log(src+" 2");
+                if (value) {
+                    img.src = URL.createObjectURL(value);
+                    img.onload = revokeFunc;
+                } else {
+                    var req = new XMLHttpRequest();
+                    req.open('GET', 'https://crossorigin.me/'+src, true);
+                    req.responseType='blob';
+        
+                    req.addEventListener('load',function()  {
+                        Ext.log(src+" 3");
+                        var blob = req.response;
+                        img.src = URL.createObjectURL(blob);
+                        img.onload = revokeFunc;
+                        localforage.setItem(key, blob, function(err2, value2) {
+                            Ext.log('saved '+value2);
+                        });
+                    });
+                    
+                    req.send(null);        
+                }
+            });
+          },
+          
+          i=0;
+
+       for(i=0; i<imgs.length; i++) {
+          offliner(imgs[i]);
+       }
+    },
 
     processResponse: function(response, selector) {
         var me=this,
