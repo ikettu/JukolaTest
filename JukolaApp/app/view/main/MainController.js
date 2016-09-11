@@ -128,13 +128,23 @@ Ext.define('JukolaApp.view.main.MainController', {
             var me = this,
                 cls = me.collapsedCls,
                 refs = me.getReferences(),
-                logo = refs.logo,
+//                logo = refs.logo,
                 navigation = me.nav,
                 navigationTree = refs.navigationTree,
-                rootEl = navigationTree.rootItem.el;
+                rootEl = navigationTree.rootItem.el
+                ;
+                
 
+            // TODO: should use css as admin-dashboard demo but this is just quick fix for now.                
+            if (navigation.getWidth() < 100) {
+                navigation.setWidth(200);
+            } else {
+                navigation.setWidth(46);
+            }
+                
+/*
             navigation.toggleCls(cls);
-            logo.toggleCls(cls);
+ //           logo.toggleCls(cls);
 
             if (showNavigation) {
                 // Restore the text and other decorations before we expand so that they
@@ -148,17 +158,19 @@ Ext.define('JukolaApp.view.main.MainController', {
                 rootEl.setWidth(rootEl.getWidth());
             }
 
-            logo.element.on({
-                transitionend: function () {
-                    if (showNavigation) {
-                        // after expanding, we should remove the forced width
-                        rootEl.setWidth('');
-                    } else {
-                        navigationTree.setMicro(true);
-                    }
-                },
-                single: true
-            });
+//            logo.element.on({
+//                transitionend: function () {
+//                    if (showNavigation) {
+//                        // after expanding, we should remove the forced width
+//                        rootEl.setWidth('');
+//                    } else {
+//                        navigationTree.setMicro(true);
+//                    }
+//                },
+//               single: true
+//            });
+
+*/
         }
     }
 
