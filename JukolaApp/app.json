@@ -465,7 +465,8 @@
             "resources/menu.json",
             "resources/fonts/OpenSans-Light.ttf",
             "resources/fonts/OpenSans-Regular.ttf",
-            "resources/font-awesome/fonts/fontawesome-webfont.woff2?v=4.4.0"
+            "resources/fonts/OpenSans-Bold.ttf",
+            "resources/font-awesome/fonts/fontawesome-webfont.woff2"
 /*            
             "resources/JukolaApp-all.css?_dc=${build.timestamp}",
             "libs/openlayers-3.15.1/ol.css?_dc=${build.timestamp}",
