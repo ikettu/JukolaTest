@@ -279,7 +279,7 @@
             // value of the generated output css file for the app,
             // defined in .sencha/app/defaults.properties
             "path": "${build.out.css.path}",
-            "update" : "full"
+            "update" : "full",
             "bundle": true,
             "exclude": ["fashion"]
         }
