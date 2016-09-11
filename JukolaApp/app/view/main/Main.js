@@ -29,7 +29,27 @@ Ext.define('JukolaApp.view.main.Main', {
             userCls: 'main-nav-container',
             reference: 'navigation',
             scrollable: true,
+            width:200,
+            plugins: 'responsive',
+            responsiveConfig: {
+                'width < 500': {
+                    width:46
+                }
+            },
+            
+            
             items: [
+                {
+                    xtype: 'button',
+                    dock: 'top',
+                    ui: 'header',
+                    iconCls: 'x-fa fa-bars',
+                    margin: '0 0 0 10',
+                    listeners: {
+                        tap: 'onToggleNavigationSize'
+                    }
+                },
+                
                 {
                     xtype: 'treelist',
                     reference: 'navigationTree',
