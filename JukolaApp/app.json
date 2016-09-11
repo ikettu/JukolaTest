@@ -265,7 +265,8 @@
      */
     "css": [
         {
-            "path": "libs/openlayers-3.15.1/ol.css"
+            "path": "libs/openlayers-3.15.1/ol.css",
+            "update" : "full"
         },
         {
             // this entry uses an ant variable that is the calculated
@@ -453,6 +454,14 @@
          */
         "cache": [
             "index.html"
+            "resources/JukolaApp-all.css".
+            "libs/openlayers-3.15.1/ol.css",
+            "libs/openlayers-3.15.1/proj4js-2.3.14.js",
+            "libs/openlayers-3.15.1/customprojs.js",
+            "libs/openlayers-3.15.1/ol-debug.js",
+            "libs/localForage-1.4.2/localforage.min.js",
+            "app.js"
+            
         ],
         /**
          * List of items in the NETWORK section
