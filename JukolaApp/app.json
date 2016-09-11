@@ -462,6 +462,7 @@
         "cache": [
             "index.html",
             "resources/jukola-logo.png",
+            "resources/menu.json",
             "resources/menu.json?node=root"
 /*            
             "resources/JukolaApp-all.css?_dc=${build.timestamp}",
