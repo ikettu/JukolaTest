@@ -42,6 +42,7 @@ Ext.define('JukolaApp.view.main.Main', {
                 {
                     xtype: 'button',
                     dock: 'top',
+                    width: 50,
                     ui: 'header',
                     iconCls: 'x-fa fa-bars',
                     margin: '0 0 0 10',
