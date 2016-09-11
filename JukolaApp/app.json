@@ -454,12 +454,12 @@
          */
         "cache": [
             "index.html",
-            "resources/JukolaApp-all.css",
-            "libs/openlayers-3.15.1/ol.css",
-            "libs/openlayers-3.15.1/proj4js-2.3.14.js",
-            "libs/openlayers-3.15.1/customprojs.js",
-            "libs/openlayers-3.15.1/ol-debug.js",
-            "libs/localForage-1.4.2/localforage.min.js",
+            "resources/JukolaApp-all.css?_dc=${build.timestamp}",
+            "libs/openlayers-3.15.1/ol.css?_dc=${build.timestamp}",
+            "libs/openlayers-3.15.1/proj4js-2.3.14.js?_dc=${build.timestamp}",
+            "libs/openlayers-3.15.1/customprojs.js?_dc=${build.timestamp}",
+            "libs/openlayers-3.15.1/ol-debug.js?_dc=${build.timestamp}",
+            "libs/localForage-1.4.2/localforage.min.js?_dc=${build.timestamp}",
             "app.js"
             
         ],
