@@ -14,6 +14,7 @@ Ext.define('JukolaApp.store.MenuStore', {
     
     proxy: {
         type:'ajax',
+        noCache:false,
         url:'resources/menu.json',
         reader: {
             type:'json'

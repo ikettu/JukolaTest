@@ -237,6 +237,7 @@
         },
         {
             "path": "app.js",
+            "update" : "full"
             "bundle": true
         }
     ],
@@ -458,7 +459,9 @@
          * List of items in the CACHE MANIFEST section
          */
         "cache": [
-            "index.html"
+            "index.html",
+            "resources/jukola-logo.png",
+            "resources/menu.json"
 /*            
             "resources/JukolaApp-all.css?_dc=${build.timestamp}",
             "libs/openlayers-3.15.1/ol.css?_dc=${build.timestamp}",
