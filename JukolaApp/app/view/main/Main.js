@@ -33,7 +33,7 @@ Ext.define('JukolaApp.view.main.Main', {
             plugins: 'responsive',
             responsiveConfig: {
                 'width < 500': {
-                    width:46
+                    width:75
                 }
             },
             

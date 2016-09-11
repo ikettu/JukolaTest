@@ -139,7 +139,7 @@ Ext.define('JukolaApp.view.main.MainController', {
             if (navigation.getWidth() < 100) {
                 navigation.setWidth(200);
             } else {
-                navigation.setWidth(46);
+                navigation.setWidth(75);
             }
                 
 /*
