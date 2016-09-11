@@ -65,10 +65,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
        var me=this, content=me.down('#content');
        content.setHtml(html);
        var cDom = content.el.dom, toc = me.tocForDoc(cDom,'h2');
-       if (!toc || toc.length<50) {
+       if (!toc) {
          me.down('#toc').setHidden(true);
        } else {
-           me.down('#toc').setHtml(toc);
+         me.down('#toc').removeAll(true,true);
+         Xtoc = me.down('#toc').add(toc);
        }
        
        me.setMasked(false);
@@ -109,22 +110,45 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     
     tocForDoc: function(document, selector) {
         var me=this, routeId = me.getRouteId(), elems = document.querySelectorAll(selector),
-            toc =''
+            toc = []
         ;
-        
-        
         
         if (elems) {
             var index = 0, myId = me.down('#content').el.down('div').id;
-            toc = "<ul>";
             for( index=0; index < elems.length; index++ ) {
-                var elem = elems[index];
-                elem.id = "toc_"+routeId+'_'+index;
-                toc = toc + "<li><a href=\"javascript:Ext.get('toc_"+routeId+'_'+index+"').scrollIntoView('"+myId+"'); Ext.get('"+myId+"').scroll('d',150);\">"+elem.textContent+"</a></li>";
+                var elem = elems[index], tocId = "toc_"+routeId+'_'+index;
+                elem.id = tocId;
+                toc.push({
+                    tocId : tocId,
+                    text:  elem.textContent
+                });
             }
-            toc = toc + "</ul>";
         }
-        return toc;
+        
+        if (!toc) {
+            return null;
+        }
+        
+        var tocList = {
+            xtype:'list',
+            width:'100%',
+            height:'100%',
+            data:toc,
+            tpl:'{text}',
+            listeners:{
+                select: function( list, record ) {
+                    var tocId = record.get('tocId');
+                    Ext.log(tocId+" "+myId);
+                    var tocElem = Ext.get(tocId), nextElem = tocElem.next('*');
+                    if (nextElem) {
+                        nextElem.scrollIntoView(myId);
+                    }
+                    tocElem.scrollIntoView(myId);
+                }
+            }
+        };
+        
+        return tocList;
     },
     
     updateCache:function(node,show) {
@@ -168,10 +192,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             height:'100%',
             scrollable: true
         }, {
+            xtype:'container',
+            layout:'fit',
             itemId:'toc',
-            html:'',
-            style:'overflow:hidden; background-color:#F0F0F0',
-            scrollable: true,
             plugins: 'responsive',
             hidden: true,
             responsiveConfig: {
