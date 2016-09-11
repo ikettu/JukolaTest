@@ -72,7 +72,6 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
          Xtoc = me.down('#toc').add(toc);
        }
        
-       // debug
        me.imagesToOffline(cDom);
        
        me.setMasked(false);
@@ -176,7 +175,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             }
         }
         
-        if (!toc) {
+        if (toc.length < 2) {
             return null;
         }
         

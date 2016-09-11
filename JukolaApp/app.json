@@ -439,7 +439,7 @@
     
     "cache": {
         "enable": false,
-        "deltas": true
+        "deltas": false
     },
     
 
