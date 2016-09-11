@@ -216,19 +216,24 @@
      */
     "js": [
         {
-            "path": "libs/openlayers-3.15.1/proj4js-2.3.14.js"
+            "path": "libs/openlayers-3.15.1/proj4js-2.3.14.js",
+            "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.15.1/customprojs.js"
+            "path": "libs/openlayers-3.15.1/customprojs.js",
+            "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.15.1/ol-debug.js"
+            "path": "libs/openlayers-3.15.1/ol-debug.js",
+            "update" : "full"
         },
         {
-            "path": "libs/localForage-1.4.2/localforage.min.js"
+            "path": "libs/localForage-1.4.2/localforage.min.js",
+            "update" : "full"
         },
         {
-            "path": "${framework.dir}/build/ext-modern-all-debug.js"
+            "path": "${framework.dir}/build/ext-modern-all-debug.js",
+            "update" : "full"
         },
         {
             "path": "app.js",
@@ -453,7 +458,8 @@
          * List of items in the CACHE MANIFEST section
          */
         "cache": [
-            "index.html",
+            "index.html"
+/*            
             "resources/JukolaApp-all.css?_dc=${build.timestamp}",
             "libs/openlayers-3.15.1/ol.css?_dc=${build.timestamp}",
             "libs/openlayers-3.15.1/proj4js-2.3.14.js?_dc=${build.timestamp}",
@@ -461,7 +467,7 @@
             "libs/openlayers-3.15.1/ol-debug.js?_dc=${build.timestamp}",
             "libs/localForage-1.4.2/localforage.min.js?_dc=${build.timestamp}",
             "app.js"
-            
+*/            
         ],
         /**
          * List of items in the NETWORK section
