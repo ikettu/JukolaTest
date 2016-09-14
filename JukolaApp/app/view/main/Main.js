@@ -25,31 +25,54 @@ Ext.define('JukolaApp.view.main.Main', {
     
     items: [
         {
+            xtype:'container',
+            docked:'top',
+            width:'100%',
+//            height:50,
+            ui: 'header',
+            layout: 'hbox',
+            style:'background-color: #c00000; color: #ffffff',
+            items: [
+                {
+                    xtype: 'button',
+//                    width: 30,
+                    ui: 'header',
+                    iconCls: 'x-fa fa-bars',
+                    margin: '2 2 2 10',
+                    listeners: {
+                        tap: 'onToggleNavigationSize'
+                    }
+                },
+                {
+                    xtype: 'component',
+                    flex: 1,
+                    ui: 'header',
+                    margin: '5 10 5 5',
+                    style: 'font-weight: bold;',
+                    html: 'JukolaApp'
+
+                }
+                
+            ]
+        },
+        
+        
+        {
             xtype: 'container',
             userCls: 'main-nav-container',
             reference: 'navigation',
             scrollable: true,
             width:200,
+            height:'100%',
             plugins: 'responsive',
             responsiveConfig: {
                 'width < 500': {
-                    width:75
+                    hidden: true
                 }
             },
             
             
             items: [
-                {
-                    xtype: 'button',
-                    dock: 'top',
-                    width: 50,
-                    ui: 'header',
-                    iconCls: 'x-fa fa-bars',
-                    margin: '0 0 0 10',
-                    listeners: {
-                        tap: 'onToggleNavigationSize'
-                    }
-                },
                 
                 {
                     xtype: 'treelist',

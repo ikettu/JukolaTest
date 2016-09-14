@@ -135,11 +135,17 @@ Ext.define('JukolaApp.view.main.MainController', {
                 ;
                 
 
-            // TODO: should use css as admin-dashboard demo but this is just quick fix for now.                
-            if (navigation.getWidth() < 100) {
+            // TODO: should use css as admin-dashboard demo but this is just quick fix for now.
+            // TODO: this is actually toggle and does not even check showNavigation parameter
+            if ((navigation.getWidth() < 100) || (navigation.getHidden())) {
                 navigation.setWidth(200);
+                navigation.setHidden(false);
             } else {
-                navigation.setWidth(75);
+                var screen_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                if (screen_width < 500) {
+                    navigation.setHidden(true);
+                }
+                navigation.setWidth(65);
             }
                 
 /*
