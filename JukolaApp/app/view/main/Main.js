@@ -59,6 +59,7 @@ Ext.define('JukolaApp.view.main.Main', {
         
         {
             xtype: 'container',
+            itemId:'navigation',
             userCls: 'main-nav-container',
             reference: 'navigation',
             scrollable: true,
