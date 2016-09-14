@@ -6,7 +6,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                'JukolaApp.model.MenuModel'],
     
     xtype: 'offline',
-
+    
     config: {
         // hashtag    
         routeId: undefined,
@@ -16,6 +16,8 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     },
 
     storeKeyPrefix:'offline_',
+    
+    selectSemaphor: false,
 
     getKey:function(key) {
         return this.storeKeyPrefix+key;
@@ -160,14 +162,19 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     
     tocForDoc: function(document, selector) {
         var me=this, routeId = me.getRouteId(), elems = document.querySelectorAll(selector),
-            toc = []
+            myId = me.down('#content').el.down('div').id, toc = []
         ;
         
         if (elems) {
-            var index = 0, myId = me.down('#content').el.down('div').id;
+            var index = 0;
             for( index=0; index < elems.length; index++ ) {
                 var elem = elems[index], tocId = "toc_"+routeId+'_'+index;
                 elem.id = tocId;
+                if (elem.classList) {
+                    elem.classList.add('xtoc');
+                } else {
+                    elem.className += ' xtoc';
+                }
                 toc.push({
                     tocId : tocId,
                     text:  elem.textContent
@@ -178,9 +185,38 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         if (toc.length < 2) {
             return null;
         }
+
+        
+        me.down('#content').getScrollable().on({
+            scroll: function(z,x,y) {
+                
+                if (me.selectSemaphor) {
+                    return;
+                }
+                
+                var index = 0, scrollerElem = Ext.get(myId), tocView = me.down('#toc').down('list');
+                for( index=0; index < elems.length; index++ ) {
+                    var elem = elems[index], tocElem = Ext.get(elem),
+                        offsets = tocElem.getOffsetsTo(scrollerElem);
+                    if (offsets[1]>=0) {
+                        var selections = tocView.getSelections();
+                        if (selections[0] && selections[0].get('tocId') === elem.id) {
+                            return;
+                        }
+                        Ext.log(elem.id);
+                        tocView.select(index, false, true);
+                        tocView.scrollToRecord(tocView.getSelections()[0]);
+                        return;
+                    }
+                    
+                }
+            }
+        });
+        
         
         var tocList = {
             xtype:'list',
+            itemId: 'toc',
             width:'100%',
             height:'100%',
             data:toc,
@@ -189,11 +225,15 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 select: function( list, record ) {
                     var tocId = record.get('tocId');
                     Ext.log(tocId+" "+myId);
-                    var tocElem = Ext.get(tocId), nextElem = tocElem.next('*');
-                    if (nextElem) {
-                        nextElem.scrollIntoView(myId);
-                    }
-                    tocElem.scrollIntoView(myId);
+                    var tocElem = Ext.get(tocId), scrollerElem = Ext.get(myId),
+                    offsets = tocElem.getOffsetsTo(scrollerElem),
+                    scroller = me.down('#content').getScrollable()
+                    ;
+                    Ext.log(tocElem.getY()+" "+offsets[1]);
+                    
+                    me.selectSemaphor = true;
+                    scroller.scrollTo(0, scroller.getPosition().y+offsets[1]);
+                    me.selectSemaphor = false;
                 }
             }
         };
