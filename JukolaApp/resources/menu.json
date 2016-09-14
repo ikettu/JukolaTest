@@ -5,14 +5,14 @@
         "expanded": true,
         "children": [
             {
-                "text": "Welcome",
+                "text": "Jukola 2017",
                 "iconCls": "x-fa fa-home",
                 "viewType": "welcome",
                 "routeId": "welcome",
                 "leaf": true
             },
             {
-                "text": "Map",
+                "text": "Kartta",
                 "iconCls": "x-fa fa-map",
                 "viewType": "offlinemap",
                 "routeId": "maptest",
@@ -20,7 +20,7 @@
             },
             {
                 "text": "Joukkueet",
-                "iconCls": "x-fa fa-circle-o",
+                "iconCls": "x-fa fa-users",
                 "viewType": "offline",
                 "routeId": "teams",
                 "url":"https://crossorigin.me/http://results.jukola.com/tulokset/fi/j2016_ju/ju/kilpailijat/?eka=kaikki",
@@ -29,7 +29,7 @@
             },
             {
                 "text": "Näin toimit Jukolassa",
-                "iconCls": "x-fa fa-circle-o",
+                "iconCls": "x-fa fa-question",
                 "viewType": "offline",
                 "routeId": "ntjukola",
                 "url":"https://crossorigin.me/http://www.jukola.com/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
@@ -38,7 +38,7 @@
             },
             {
                 "text": "Kilpailuohjeet",
-                "iconCls": "x-fa fa-circle-o",
+                "iconCls": "x-fa fa-hand-o-right",
                 "viewType": "offline",
                 "routeId": "kohjeet",
                 "url":"https://crossorigin.me/http://www.jukola.com/2016/yleista/kilpailuohjeet/",
@@ -47,7 +47,7 @@
             },
             {
                 "text": "Jukola Web",
-                "iconCls": "x-fa fa-dot-circle-o",
+                "iconCls": "x-fa fa-external-link",
                 "viewType": "online",
                 "routeId": "jukolaweb",
                 "url":"https://www.jukola.com/2017",
