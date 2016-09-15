@@ -28,8 +28,12 @@
      *      }
      *
      */
-    "frameworks": {
-        "ext601": "ext601"
+    "frameworks": {        "ext601": {
+            "path":"ext62",
+            "version":"6.2.0.981"
+        }
+
+        
     },
 
     /**
