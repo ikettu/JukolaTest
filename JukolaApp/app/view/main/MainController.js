@@ -70,6 +70,10 @@ Ext.define('JukolaApp.view.main.MainController', {
             return;
         }
         
+        if (Ext.os.is.Phone) {
+            me.nav.setHidden(true);
+        }
+        
         me.setCurrentView(id);
     },
 
