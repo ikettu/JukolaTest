@@ -469,7 +469,11 @@
             "resources/font-awesome/fonts/fontawesome-webfont.woff2",
             "resources/font-awesome/fonts/fontawesome-webfont.eot",
             "resources/font-awesome/fonts/fontawesome-webfont.svg",
-            "resources/font-awesome/fonts/fontawesome-webfont.ttf"
+            "resources/font-awesome/fonts/fontawesome-webfont.ttf",
+            "resources/fonts/MaterialIcons-Regular.ttf",
+            "resources/fonts/roboto/Roboto-Medium.ttf",
+            "resources/fonts/roboto/Roboto-Bold.ttf"
+            
         ],
         /**
          * List of items in the NETWORK section
