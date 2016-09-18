@@ -49,7 +49,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
 
             localforage.getItem(key, function(err, value) {
                 Ext.log("Found1:"+key);
-                Ext.log('value1:'+value);
+//                Ext.log('value1:'+value);
                 Ext.log("err1:"+JSON.stringify(err));
                 if (value) {
                     Ext.log("1");
@@ -261,7 +261,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             Ext.log("key2:"+key);
             
             localforage.setItem(key, response, function(err, value) {
-                Ext.log('value2:'+value);
+//                Ext.log('value2:'+value);
                 Ext.log("err2:"+JSON.stringify(err));
 
                 if (show && value) {

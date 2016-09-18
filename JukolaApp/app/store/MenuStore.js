@@ -1,23 +1,24 @@
 Ext.define('JukolaApp.store.MenuStore', {
     extend: 'Ext.data.TreeStore',
-    requires: ['JukolaApp.model.MenuModel', 'JukolaApp.store.CleanProxy'],
+//    requires: ['JukolaApp.model.MenuModel', 'JukolaApp.store.CleanProxy'],
 
     alias: 'store.menustore',
 
-    model: 'JukolaApp.model.MenuModel',
+//    model: 'JukolaApp.model.MenuModel',
     
     root: {
         expanded: true
     },
-    
-    autload:true,
+/*    
+    autload:false,
     
     proxy: {
         type:'clean',
         noCache:false,
-        url:'resources/menu.json',
+        url:'resources/menu_default.json',
         reader: {
             type:'json'
         }
     }
+    */
 });

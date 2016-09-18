@@ -1,0 +1,16 @@
+  {
+   "success": true,
+   "errors": null,
+   "children": {
+        "expanded": true,
+        "children": [
+            {
+                "text": "Jukola 2017",
+                "iconCls": "x-fa fa-home",
+                "viewType": "welcome",
+                "routeId": "welcome",
+                "leaf": true
+            }
+        ]
+   }
+ }

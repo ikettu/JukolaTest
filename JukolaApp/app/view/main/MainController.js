@@ -35,6 +35,8 @@ Ext.define('JukolaApp.view.main.MainController', {
 
     collapsedCls: 'main-nav-collapsed',
 
+    menuDataReady: false,
+    
     init: function (view) {
         var me = this,
             refs = me.getReferences();
@@ -43,6 +45,42 @@ Ext.define('JukolaApp.view.main.MainController', {
 
         me.nav = refs.navigation;
         me.navigationTree = refs.navigationTree;
+        
+        me.loadMenu();
+    },
+    
+    loadMenu: function(purl)  {
+      var me = this, url=purl||'resources/menu.json'
+      ;
+      
+      Ext.Ajax.request({
+        url:url,
+        methpod:'GET',
+        timeout: 5000, // short timeout to use cached value
+        success: function(resp/*,opts*/) {
+            Ext.log("Loaded menu from "+url);
+            var menuData = Ext.decode(resp.responseText);
+
+            me.navigationTree.getStore().setRoot(menuData);        
+            me.menuDataReady = true;
+            
+            localforage.setItem('menu.json', menuData, function(err/*, value*/) {
+                Ext.log("Menu data cached "+err);
+
+            });
+            
+        },
+        failure: function(resp/*,opts*/) {
+            Ext.log("Failed to load menu "+resp);
+            
+            localforage.getItem('menu.json', function(err, value) {
+                Ext.log("Menu data cache load "+err);
+                me.navigationTree.getStore().setRoot(value);        
+                me.menuDataReady = true;
+            });
+        }
+      });
+      
     },
 
     onNavigationItemClick: function () {
@@ -61,12 +99,12 @@ Ext.define('JukolaApp.view.main.MainController', {
 
     onRouteChange: function (id) {
         
-        var me = this,
-            navigationTree = me.navigationTree,
-            store = navigationTree.getStore();
+        var me = this
+        ;
             
-        if (store.isLoading()) {
-            Ext.defer(me.setCurrentView, 1000, me, [id]);
+        // retry if we are not yet ready    
+        if (!me.menuDataReady) {
+            Ext.defer(me.onRouteChange, 1000, me, [id]);
             return;
         }
         

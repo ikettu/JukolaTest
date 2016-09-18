@@ -462,7 +462,7 @@
         "cache": [
             "index.html",
             "resources/jukola-logo.png",
-            "resources/menu.json",
+            "resources/menu_default.json",
             "resources/fonts/OpenSans-Light.ttf",
             "resources/fonts/OpenSans-Regular.ttf",
             "resources/fonts/OpenSans-Bold.ttf",
