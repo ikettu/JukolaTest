@@ -11,7 +11,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         routeId: undefined,
     
         // instance of MenuModel
-        node:undefined,
+        node:undefined
     },
 
     storeKeyPrefix:'offline_',
