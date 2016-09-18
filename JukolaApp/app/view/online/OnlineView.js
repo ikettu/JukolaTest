@@ -10,7 +10,7 @@ Ext.define('JukolaApp.view.online.OnlineView', {
         routeId: undefined,
     
         // instance of MenuModel
-        node:undefined,
+        node:undefined
     },
     
     initConfig: function(config) {
