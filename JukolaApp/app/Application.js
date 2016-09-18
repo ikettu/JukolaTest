@@ -15,6 +15,10 @@ Ext.define('JukolaApp.Application', {
     defaultToken : 'welcome',
     
     launch: function () {
+        var splash = Ext.get('splash');
+        if (splash) {
+            splash.destroy();
+        }
     },
 
     onAppUpdate: function () {
