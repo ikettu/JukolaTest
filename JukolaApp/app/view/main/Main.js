@@ -45,9 +45,10 @@ Ext.define('JukolaApp.view.main.Main', {
                 },
                 {
                     xtype: 'component',
+                    reference:'heading',
                     flex: 1,
                     ui: 'header',
-                    margin: '5 10 5 5',
+                    margin: '7 14 7 7',
                     style: 'font-weight: bold;',
                     html: 'JukolaApp'
 

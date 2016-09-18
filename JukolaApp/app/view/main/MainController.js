@@ -70,6 +70,10 @@ Ext.define('JukolaApp.view.main.MainController', {
             return;
         }
         
+        if (Ext.os.is.Phone) {
+            me.nav.setHidden(true);
+        }
+        
         me.setCurrentView(id);
     },
 
@@ -104,6 +108,7 @@ Ext.define('JukolaApp.view.main.MainController', {
             mainCard.setActiveItem(item);
             
             navigationTree.setSelection(node);
+            refs.heading.setHtml(node.get('text'));
         }
 
         //if (newView.isFocusable(true)) {
