@@ -41,4 +41,4 @@ deploy:
   default_text_charset: "utf-8"
   cache_control: "public, max-age=600"
   on:
-    branch: ext62
+    branch: master
