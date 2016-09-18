@@ -2,8 +2,7 @@
 Ext.define('JukolaApp.view.offline.OfflineView', {
     extend: 'Ext.Container',
     
-    requires: ['Ext.LoadMask','Ext.plugin.Responsive',
-               'JukolaApp.model.MenuModel'],
+    requires: ['Ext.LoadMask','Ext.plugin.Responsive'],
     
     xtype: 'offline',
     
