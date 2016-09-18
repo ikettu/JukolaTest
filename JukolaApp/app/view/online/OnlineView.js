@@ -1,7 +1,7 @@
 Ext.define('JukolaApp.view.online.OnlineView', {
     extend: 'Ext.Container',
     
-    requires: ['JukolaApp.widget.IFrame','JukolaApp.model.MenuModel'],
+    requires: ['JukolaApp.widget.IFrame'],
     
     xtype: 'online',
     
