@@ -47,6 +47,9 @@ Ext.define('JukolaApp.view.main.MainController', {
         me.navigationTree = refs.navigationTree;
         
         me.loadMenu();
+        
+        // TODO: no working version of this yet.
+        // Ext.defer(me.initViews, 10000, me);
     },
     
     loadMenu: function(purl)  {
@@ -123,6 +126,44 @@ Ext.define('JukolaApp.view.main.MainController', {
         this.setShowNavigation(!this.getShowNavigation());
     },
 
+    
+ /*
+  * Trying to precache uninitialized data but mainCard.add shows cards too eagerly
+  * TODO  to find some other way to at least fill caches eagerly
+  *
+    initViews: function() {
+        var me = this,
+            refs = me.getReferences(),
+            mainCard = refs.mainCard,
+            navigationTree = me.navigationTree,
+            store = navigationTree.getStore()
+        ;
+        
+        Ext.log("View bg init. "+store.getCount());
+        
+        store.getRoot().eachChild(function(topNode) {
+          topNode.eachChild(function(node) {
+            var viewType = node.get('viewType'),hashTag = node.get('routeId') || viewType,
+                item = mainCard.child('component[routeId=' + hashTag + ']');
+
+            Ext.log("Eager bg init view "+hashTag);
+            
+            if (!item) {
+                Ext.log("Eager bg init add view "+hashTag);
+                
+                // TODO would be nice to add these to mainCard but mainCard would show all added.
+                mainCard.add({
+                    xtype: node.get('viewType'),
+                    routeId: hashTag,
+                    node: node
+                });
+            }
+            
+          });
+            
+        });
+    },
+*/
     setCurrentView: function (hashTag) {
         hashTag = (hashTag || '').toLowerCase();
 
