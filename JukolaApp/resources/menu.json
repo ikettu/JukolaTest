@@ -23,6 +23,7 @@
                 "iconCls": "x-fa fa-users",
                 "viewType": "offline",
                 "routeId": "teams",
+                "version": 1,
                 "url":"https://crossorigin.me/http://results.jukola.com/tulokset/fi/j2016_ju/ju/kilpailijat/?eka=kaikki",
                 "selector":"div#site_main",
                 "leaf": true
@@ -32,6 +33,7 @@
                 "iconCls": "x-fa fa-question",
                 "viewType": "offline",
                 "routeId": "ntjukola",
+                "version": 1,
                 "url":"https://crossorigin.me/http://www.jukola.com/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
                 "selector":"div.entry-content",
                 "leaf": true
@@ -41,6 +43,7 @@
                 "iconCls": "x-fa fa-hand-o-right",
                 "viewType": "offline",
                 "routeId": "kohjeet",
+                "version": 1,
                 "url":"https://crossorigin.me/http://www.jukola.com/2016/yleista/kilpailuohjeet/",
                 "selector":"div.entry-content",
                 "leaf": true
