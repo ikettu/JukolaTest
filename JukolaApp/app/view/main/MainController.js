@@ -104,6 +104,9 @@ Ext.define('JukolaApp.view.main.MainController', {
             
         // retry if we are not yet ready    
         if (!me.menuDataReady) {
+            me.getReferences().mainCard.setMasked({
+                xtype:'loadmask'
+            });
             Ext.defer(me.onRouteChange, 1000, me, [id]);
             return;
         }
@@ -132,6 +135,8 @@ Ext.define('JukolaApp.view.main.MainController', {
                    store.findNode('viewType', hashTag),
             item = mainCard.child('component[routeId=' + hashTag + ']');
 
+        mainCard.setMasked(false);
+            
         if (!node) {
             Ext.log("Node not found for "+hashTag);
         } else {
