@@ -59,14 +59,13 @@ Ext.define('JukolaApp.view.main.MainController', {
         timeout: 5000, // short timeout to use cached value
         success: function(resp/*,opts*/) {
             Ext.log("Loaded menu from "+url);
-            var menuData = Ext.decode(resp.responseText);
+            var menuTxt=resp.responseText,menuData = Ext.decode(menuTxt);
 
             me.navigationTree.getStore().setRoot(menuData);        
             me.menuDataReady = true;
             
-            localforage.setItem('menu.json', menuData, function(err/*, value*/) {
-                Ext.log("Menu data cached "+err);
-
+            localforage.setItem('menu.json', menuTxt, function(err/*, value*/) {
+                Ext.log("Menu data cached");
             });
             
         },
@@ -74,8 +73,9 @@ Ext.define('JukolaApp.view.main.MainController', {
             Ext.log("Failed to load menu "+resp);
             
             localforage.getItem('menu.json', function(err, value) {
-                Ext.log("Menu data cache load "+err);
-                me.navigationTree.getStore().setRoot(value);        
+                var menuData = Ext.decode(value);
+                Ext.log("Menu data loaded from cache ");
+                me.navigationTree.getStore().setRoot(menuData);        
                 me.menuDataReady = true;
             });
         }
