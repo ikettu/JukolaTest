@@ -6,6 +6,8 @@
 Ext.define('JukolaApp.Application', {
     extend: 'Ext.app.Application',
     
+    requires: ['JukolaApp.AnalyticsManager'],
+    
     name: 'JukolaApp',
 
     stores: [
