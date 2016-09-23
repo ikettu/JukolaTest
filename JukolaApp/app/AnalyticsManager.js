@@ -73,6 +73,7 @@ Ext.define('JukolaApp.AnalyticsManager', {
                tid:me.tid,
                cid:me.cid,
                t:'pageview',
+               dp:'/'+pageHit.pageName,
                qt: now-pageHit.date,
                z:now
             },
