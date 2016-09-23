@@ -1,7 +1,8 @@
 .architect
 bootstrap.json
-build/
-ext/
-ext601/classic/
-ext601/examples/
-ext601/welcome/
+bootstrap.jsonp
+/build/
+/ext/
+/ext62/classic/
+/ext62/examples/
+/ext62/welcome/
