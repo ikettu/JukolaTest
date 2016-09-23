@@ -1,6 +1,5 @@
 .architect
-bootstrap.json
-bootstrap.jsonp
+bootstrap.*
 /build/
 /ext/
 /ext62/classic/
