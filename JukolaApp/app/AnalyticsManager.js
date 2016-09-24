@@ -3,6 +3,9 @@ Ext.define('JukolaApp.AnalyticsManager', {
     
     singleton: true,
     
+//    analyticsURL: 'https://www.google-analytics.com/debug/collect',
+    analyticsURL: 'https://www.google-analytics.com/collect',
+    
     queueKey:'analytisQueue',
     cidKey:'analytisCid',
     
@@ -40,15 +43,26 @@ Ext.define('JukolaApp.AnalyticsManager', {
         return uuid;
     },
     
+    isOnline: function() {
+      return navigator.onLine;  
+    },
     
-    recordPagehit: function(pageName) {
+    recordPagehit: function(pageName, title) {
         var me = this, now = new Date().getTime(),
             pageHit={
                 pageName:pageName,
+                title: title,
+                hostname:window.location.hostname,
                 date:now
             };
             
+        if (me.isOnline()) {
+            me.sendSinglePageHitNow(pageHit,undefined,function() {
+                me.queuePageHit(pageHit);
+            });
+        } else {
             me.queuePageHit(pageHit);
+        }
     },
     
     queuePageHit: function(pageHit) {
@@ -66,7 +80,7 @@ Ext.define('JukolaApp.AnalyticsManager', {
         var me = this, now=new Date().getTime();
               
         Ext.Ajax.request({
-            url: 'https://www.google-analytics.com/collect',
+            url: me.analyticsURL,
             method:'POST',
             params: {
                v:1,
@@ -74,6 +88,8 @@ Ext.define('JukolaApp.AnalyticsManager', {
                cid:me.cid,
                t:'pageview',
                dp:'/'+pageHit.pageName,
+               dh:pageHit.hostname,
+               dt:pageHit.title||pageHit.pageName,
                qt: now-pageHit.date,
                z:now
             },
@@ -87,6 +103,9 @@ Ext.define('JukolaApp.AnalyticsManager', {
     
     sendPagehits: function() {
         var me = this, now = new Date();
+        if (!me.isOnline()) {
+            return;
+        }
         localforage.getItem(me.queueKey, function(err, value) {
             
             if (value) {
@@ -98,7 +117,9 @@ Ext.define('JukolaApp.AnalyticsManager', {
                     me.sendSinglePageHitNow(pageHit, undefined, function() {
                         
                         pageHit.fails = (pageHit.fails||0)+1;
-                        me.queuePageHit(pageHit);
+                        if (pageHit.fails < 10) {
+                            me.queuePageHit(pageHit);
+                        }
                     });
                                         
                 });
