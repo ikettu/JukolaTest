@@ -1,21 +1,21 @@
 /* globals localforage */
 Ext.define('JukolaApp.view.offline.OfflineView', {
     extend: 'Ext.Container',
-    
-    requires: ['Ext.LoadMask','Ext.plugin.Responsive'],
-    
+
+    requires: ['Ext.LoadMask','Ext.plugin.Responsive',
+               'JukolaApp.model.MenuModel'],
+
     xtype: 'offline',
-    
+
     config: {
-        // hashtag    
+        // hashtag
         routeId: undefined,
-    
+
         // instance of MenuModel
         node:undefined
     },
 
     storeKeyPrefix:'offline_',
-    storeVersionKeyPrefix:'offline_vrs_',
 
     selectSemaphor: false,
 
@@ -23,68 +23,46 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return this.storeKeyPrefix+key;
     },
 
-    getVersionKey:function(key) {
-        return this.storeVersionKeyPrefix+key;
-    },
-    
     updateNode: function(newNode) {
         var me=this;
         if (newNode) {
             me.showContentFromCache(newNode, true);
         }
     },
-    
+
     showContentFromCache:function(node, fetch) {
             var me=this,
                 url = node.get('url'),
-                version = node.get('version'),
-                key=me.getKey(url),
-                versionKey=me.getVersionKey(url)
+                key=me.getKey(url)
             ;
-            
+
             Ext.log("key1:"+key);
-  
+
             XTMPme = me;
-            
+
             if (me.isVisible()) {
                 me.setMasked({
                     xtype:'loadmask'
                 });
             }
-            
-            var getFromCacheFunc = function() {
-                localforage.getItem(key, function(err, value) {
-                    Ext.log("Found1:"+key);
-    //                Ext.log('value1:'+value);
-                    Ext.log("err1:"+JSON.stringify(err));
-                    if (value) {
-                        Ext.log("1");
-                        me.showHtml.apply(me, [value]);
-                    } else if (fetch) {
-                        Ext.log("2");
-                        me.updateCache.apply(me, [node, true]);
-                        Ext.log("4");
-                    }
-                });
-            };
-            
-            if (version === -1) {
-                // forced upgrade
-                me.updateCache.apply(me, [node, true]);
-            } else if (version) {
-                localforage.getItem(versionKey, function(err,cachedVersion) {
-                    if (!cachedVersion || cachedVersion < version) {
-                        me.updateCache.apply(me, [node, true]);
-                    } else {
-                        getFromCacheFunc();
-                    }
-                });
-            } else {
-                getFromCacheFunc();
-            }
-            
+
+
+            localforage.getItem(key, function(err, value) {
+                Ext.log("Found1:"+key);
+                Ext.log('value1:'+value);
+                Ext.log("err1:"+JSON.stringify(err));
+                if (value) {
+                    Ext.log("1");
+                    me.showHtml.apply(me, [value]);
+                } else if (fetch) {
+                    Ext.log("2");
+                    me.updateCache.apply(me, [node, true]);
+                    Ext.log("4");
+                }
+            });
+
     },
-    
+
     showHtml:function(html) {
        var me=this, content=me.down('#content');
        content.setHtml(html);
@@ -95,9 +73,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
          me.down('#toc').removeAll(true,true);
          Xtoc = me.down('#toc').add(toc);
        }
-       
+
        me.imagesToOffline(cDom);
-       
+
        me.setMasked(false);
     },
 
@@ -107,9 +85,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         while (i--) {
           tags[i].parentNode.removeChild(tags[i]);
         }
-        return dom;   
+        return dom;
     },
-    
+
     stripTagsLeaveContent: function(dom, tagName) {
         var tags = dom.getElementsByTagName(tagName);
         var i = tags.length;
@@ -120,7 +98,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
           }
           tag.parentNode.removeChild(tags[i]);
         }
-        return dom;   
+        return dom;
     },
 
     imagesToOffline: function(dom) {
@@ -130,7 +108,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
           revokeFunc = function() {
             window.URL.revokeObjectURL(this.src);
           },
-          
+
           offliner = function(img) {
             var src=img.src, key=me.getKey(src);
 
@@ -149,7 +127,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     var req = new XMLHttpRequest();
                     req.open('GET', 'https://crossorigin.me/'+src, true);
                     req.responseType='blob';
-        
+
                     req.addEventListener('load',function()  {
                         Ext.log(src+" 3");
                         var blob = req.response;
@@ -159,12 +137,12 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                             Ext.log('saved '+value2);
                         });
                     });
-                    
-                    req.send(null);        
+
+                    req.send(null);
                 }
             });
           },
-          
+
           i=0;
 
        for(i=0; i<imgs.length; i++) {
@@ -175,18 +153,18 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     processResponse: function(response, selector) {
         var me=this,
         body = selector ? response.querySelector(selector) : response.getElementsByTagName('body')[0];
-        
+
         me.stripTags(body,'button');
         me.stripTags(body,'script');
         me.stripTagsLeaveContent(body,'a');
         return body;
     },
-    
+
     tocForDoc: function(document, selector) {
         var me=this, routeId = me.getRouteId(), elems = document.querySelectorAll(selector),
             myId = me.down('#content').el.down('div').id, toc = []
         ;
-        
+
         if (elems) {
             var index = 0;
             for( index=0; index < elems.length; index++ ) {
@@ -203,19 +181,19 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 });
             }
         }
-        
+
         if (toc.length < 2) {
             return null;
         }
 
-        
+
         me.down('#content').getScrollable().on({
             scroll: function(z,x,y) {
-                
+
                 if (me.selectSemaphor) {
                     return;
                 }
-                
+
                 var index = 0, scrollerElem = Ext.get(myId), tocView = me.down('#toc').down('list');
                 for( index=0; index < elems.length; index++ ) {
                     var elem = elems[index], tocElem = Ext.get(elem),
@@ -230,12 +208,12 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                         tocView.scrollToRecord(tocView.getSelections()[0]);
                         return;
                     }
-                    
+
                 }
             }
         });
-        
-        
+
+
         var tocList = {
             xtype:'list',
             itemId: 'toc',
@@ -252,56 +230,50 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     scroller = me.down('#content').getScrollable()
                     ;
                     Ext.log(tocElem.getY()+" "+offsets[1]);
-                    
+
                     me.selectSemaphor = true;
                     scroller.scrollTo(0, scroller.getPosition().y+offsets[1]);
                     me.selectSemaphor = false;
                 }
             }
         };
-        
+
         return tocList;
     },
-    
+
     updateCache:function(node,show) {
         var me=this,
             req = new XMLHttpRequest(),
             url = node.get('url'),
-            version = node.get('version'),
             selector = node.get('selector'),
             key=me.getKey(url)
             ;
 
         Ext.log("3");
-        
+
         req.open('GET',url,true);
         req.responseType='document';
-        
+
         req.addEventListener('load',function()  {
             var responseDom = me.processResponse(req.response, selector),
                 response = responseDom.innerHTML;
-            
+
             Ext.log("key2:"+key);
-            
+
             localforage.setItem(key, response, function(err, value) {
-//                Ext.log('value2:'+value);
+                Ext.log('value2:'+value);
                 Ext.log("err2:"+JSON.stringify(err));
 
                 if (show && value) {
                     me.showHtml.apply(me, [value]);
                 }
-                
-                if (version) {
-                    localforage.setItem(me.getVersionKey(url), version, function(/*err,value*/) {
-                    });
-                }
             });
-            
+
         });
-        
-        req.send(null);        
+
+        req.send(null);
     },
-    
+
     items: [
         {
             itemId:'content',
@@ -326,11 +298,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     hidden: false,
                     docked:'top',
                     width: '100%',
-                    height: 100                    
+                    height: 100
                 }
-                
+
             }
         }
     ]
-    
+
 });

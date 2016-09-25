@@ -1,18 +1,18 @@
 Ext.define('JukolaApp.view.online.OnlineView', {
     extend: 'Ext.Container',
-    
-    requires: ['JukolaApp.widget.IFrame'],
-    
+
+    requires: ['JukolaApp.widget.IFrame','JukolaApp.model.MenuModel'],
+
     xtype: 'online',
-    
+
     config: {
-        // hashtag    
+        // hashtag
         routeId: undefined,
-    
+
         // instance of MenuModel
         node:undefined
     },
-    
+
     initConfig: function(config) {
         var me = this,
             url = config.node.get('url');
@@ -25,5 +25,5 @@ Ext.define('JukolaApp.view.online.OnlineView', {
             src: url
         });
     }
-    
+
 });
