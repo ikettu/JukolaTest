@@ -41,10 +41,9 @@ Ext.define('JukolaApp.view.main.Main', {
                     iconCls: 'x-fa fa-bars',
                     margin: '2 2 2 10',
                     listeners: {
-                        tap: 'onToggleNavigationSize'
+                        tap: 'onToggleMenu'
                     }
-                },
-                {
+                }, {
                     xtype: 'component',
                     reference:'heading',
                     flex: 1,
@@ -74,7 +73,6 @@ Ext.define('JukolaApp.view.main.Main', {
                         }
                     }
                 }
-
             ]
         }, {
             xtype: 'navigationview',
