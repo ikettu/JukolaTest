@@ -30,7 +30,6 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     config: {
-        showNavigation: false
     },
 
     collapsedCls: 'main-nav-collapsed',
@@ -151,11 +150,13 @@ Ext.define('JukolaApp.view.main.MainController', {
         me.setCurrentView(id);
     },
 
-
-    onToggleNavigationSize: function () {
-        this.setShowNavigation(!this.getShowNavigation());
+    onToggleMenu: function () {
+        var me = this;
+        if (!Ext.Viewport.getMenus().left) {
+            me.createMainMenu();
+        }
+        Ext.Viewport.toggleMenu('left');
     },
-
 
  /*
   * Trying to precache uninitialized data but mainCard.add shows cards too eagerly
@@ -236,13 +237,5 @@ Ext.define('JukolaApp.view.main.MainController', {
         Ext.Msg.alert("","Cache cleared.");
         me.redirectTo("welcome");
       });
-    },
-
-    updateShowNavigation: function (/*showNavigation, oldValue*/) {
-        // Ignore the first update since our initial state is managed specially. This
-        // logic depends on view state that must be fully setup before we can toggle
-        // things.
-        //
-        Ext.Viewport.toggleMenu('left');
     }
 });
