@@ -3,11 +3,11 @@
  * the "controller" of the Main view class.
  *
  */
-/* globals localforage */
+/* globals localforage, Ext */
 Ext.define('JukolaApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.main',
-    
+
     requires:[
         'JukolaApp.store.MenuStore',
         'JukolaApp.view.welcome.WelcomeView',
@@ -30,7 +30,7 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     config: {
-        showNavigation: true
+        showNavigation: false
     },
 
     collapsedCls: 'main-nav-collapsed',
@@ -39,17 +39,35 @@ Ext.define('JukolaApp.view.main.MainController', {
     
     init: function (view) {
         var me = this,
-            refs = me.getReferences();
+            menu = Ext.create('Ext.Menu', {
+                items: [{
+                    xtype: 'treelist',
+                    reference: 'navigationTree',
+                    ui: 'navigation',
+                    store: 'MenuStore',
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        itemclick: 'onNavigationItemClick',
+                        selectionchange: 'onNavigationTreeSelectionChange'
+                    }
+                }]
+            }),
+            innerItems;
 
-        me.callParent([ view ]);
+        innerItems = menu.getInnerItems();
+        me.callParent([view]);
 
-        me.nav = refs.navigation;
-        me.navigationTree = refs.navigationTree;
+        if (innerItems.length > 0) {
+            me.navigationTree = innerItems[0];
+        } else {
+            me.navigationTree = {};
+        }
+
         
         me.loadMenu();
         
         // TODO: no working version of this yet.
-        // Ext.defer(me.initViews, 10000, me);
     },
     
     loadMenu: function(purl)  {
@@ -58,12 +76,11 @@ Ext.define('JukolaApp.view.main.MainController', {
       
       Ext.Ajax.request({
         url:url,
-        methpod:'GET',
         timeout: 5000, // short timeout to use cached value
         success: function(resp/*,opts*/) {
             Ext.log("Loaded menu from "+url);
             var menuTxt=resp.responseText,menuData = Ext.decode(menuTxt);
-
+            reveal: true
             me.navigationTree.getStore().setRoot(menuData);        
             me.menuDataReady = true;
             
@@ -101,10 +118,10 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     onRouteChange: function (id) {
-        
+
         var me = this
         ;
-            
+
         // retry if we are not yet ready    
         if (!me.menuDataReady) {
             me.getReferences().mainCard.setMasked({
@@ -113,11 +130,11 @@ Ext.define('JukolaApp.view.main.MainController', {
             Ext.defer(me.onRouteChange, 1000, me, [id]);
             return;
         }
-        
+
         if (Ext.os.is.Phone) {
             me.nav.setHidden(true);
         }
-        
+
         me.setCurrentView(id);
     },
 
@@ -188,9 +205,9 @@ Ext.define('JukolaApp.view.main.MainController', {
                     node: node
                 });
             }
-            
+
             mainCard.setActiveItem(item);
-            
+
             navigationTree.setSelection(node);
             refs.heading.setHtml(node.get('text'));
         }
@@ -199,7 +216,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         //    newView.focus();
         //}
     },
-    
+
     clearCaches: function() {
       var me=this;
       localforage.clear(function() {
@@ -214,59 +231,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         // things.
         //
         if (oldValue !== undefined) {
-            var me = this,
-                cls = me.collapsedCls,
-                refs = me.getReferences(),
-//                logo = refs.logo,
-                navigation = me.nav,
-                navigationTree = refs.navigationTree,
-                rootEl = navigationTree.rootItem.el
-                ;
-                
-
-            // TODO: should use css as admin-dashboard demo but this is just quick fix for now.
-            // TODO: this is actually toggle and does not even check showNavigation parameter
-            if ((navigation.getWidth() < 100) || (navigation.getHidden())) {
-                navigation.setWidth(200);
-                navigation.setHidden(false);
-            } else {
-                var screen_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-                if (screen_width < 500) {
-                    navigation.setHidden(true);
-                }
-                navigation.setWidth(65);
-            }
-                
-/*
-            navigation.toggleCls(cls);
- //           logo.toggleCls(cls);
-
-            if (showNavigation) {
-                // Restore the text and other decorations before we expand so that they
-                // will be revealed properly. The forced width is still in force from
-                // the collapse so the items won't wrap.
-                navigationTree.setMicro(false);
-            } else {
-                // Ensure the right-side decorations (they get munged by the animation)
-                // get clipped by propping up the width of the tree's root item while we
-                // are collapsed.
-                rootEl.setWidth(rootEl.getWidth());
-            }
-
-//            logo.element.on({
-//                transitionend: function () {
-//                    if (showNavigation) {
-//                        // after expanding, we should remove the forced width
-//                        rootEl.setWidth('');
-//                    } else {
-//                        navigationTree.setMicro(true);
-//                    }
-//                },
-//               single: true
-//            });
-
-*/
+            Ext.Viewport.toggleMenu('left');
         }
     }
-
 });

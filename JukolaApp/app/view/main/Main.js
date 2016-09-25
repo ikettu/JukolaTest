@@ -9,11 +9,11 @@ Ext.define('JukolaApp.view.main.Main', {
     xtype: 'app-main',
 
     requires: [
-        'Ext.MessageBox', 
+        'Ext.MessageBox',
         'Ext.Button',
         'Ext.list.Tree',
         'Ext.navigation.View',
-        
+
         'JukolaApp.store.MenuStore',
         'JukolaApp.view.main.MainController',
         'JukolaApp.view.welcome.WelcomeView'
@@ -22,7 +22,7 @@ Ext.define('JukolaApp.view.main.Main', {
     controller: 'main',
 
     layout: 'hbox',
-    
+
     items: [
         {
             xtype:'container',
@@ -73,49 +73,14 @@ Ext.define('JukolaApp.view.main.Main', {
                         }
                     }
                 }
-                
+
             ]
-        },
-        
-        
-        {
-            xtype: 'container',
-            itemId:'navigation',
-            userCls: 'main-nav-container',
-            reference: 'navigation',
-            scrollable: true,
-            width:200,
-            height:'100%',
-            plugins: 'responsive',
-            responsiveConfig: {
-                'width < 500': {
-                    hidden: true
-                }
-            },
-            
-            
-            items: [
-                
-                {
-                    xtype: 'treelist',
-                    reference: 'navigationTree',
-                    ui: 'navigation',
-                    store: 'MenuStore',
-                    expanderFirst: false,
-                    expanderOnly: false,
-                    listeners: {
-                        itemclick: 'onNavigationItemClick',
-                        selectionchange: 'onNavigationTreeSelectionChange'
-                    }
-                }
-            ]
-        },
-        {
+        }, {
             xtype: 'navigationview',
             flex: 1,
             reference: 'mainCard',
             userCls: 'main-container',
             navigationBar: false
-        }        
+        }
     ]
 });

@@ -1,17 +1,16 @@
 Ext.define('JukolaApp.view.welcome.WelcomeView', {
     extend: 'Ext.Container',
-    
+
     requires:['Ext.Img'],
-    
+
     xtype: 'welcome',
-    
+
     listeners: {
         show: function() {
-            var menu = this.up('app-main').down('#navigation');
-            menu.setHidden(false);
+            Ext.Viewport.showMenu('left');
         }
     },
-    
+
     items: [
         {
             xtype:'image',
