@@ -1,3 +1,4 @@
+/* globals Ext */
 Ext.define('JukolaApp.view.welcome.WelcomeView', {
     extend: 'Ext.Container',
 
@@ -7,7 +8,10 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
 
     listeners: {
         show: function() {
-            Ext.Viewport.showMenu('left');
+            var leftMenu = Ext.Viewport.getMenus().left;
+            if (leftMenu && !leftMenu.isVisible()) {
+                Ext.Viewport.showMenu('left');
+            }
         }
     },
 
