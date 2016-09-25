@@ -4,6 +4,7 @@
  * added to the Viewport container.
  *
  */
+/* globals Ext, Fashion */
 Ext.define('JukolaApp.view.main.Main', {
     extend: 'Ext.Container',
     xtype: 'app-main',
