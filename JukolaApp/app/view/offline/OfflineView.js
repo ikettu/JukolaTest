@@ -1,9 +1,8 @@
-/* globals localforage */
+/* globals localforage, Ext */
 Ext.define('JukolaApp.view.offline.OfflineView', {
     extend: 'Ext.Container',
 
-    requires: ['Ext.LoadMask','Ext.plugin.Responsive',
-               'JukolaApp.model.MenuModel'],
+    requires: ['Ext.LoadMask','Ext.plugin.Responsive'],
 
     xtype: 'offline',
 
@@ -188,7 +187,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
 
 
         me.down('#content').getScrollable().on({
-            scroll: function(z,x,y) {
+            scroll: function(/* z,x,y */) {
 
                 if (me.selectSemaphor) {
                     return;
