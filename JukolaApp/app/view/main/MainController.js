@@ -36,8 +36,19 @@ Ext.define('JukolaApp.view.main.MainController', {
     collapsedCls: 'main-nav-collapsed',
 
     menuDataReady: false,
-    
+
     init: function (view) {
+        var me = this;
+
+        me.callParent([view]);
+
+        me.createMainMenu();
+        me.loadMenu();
+
+        // TODO: no working version of this yet.
+    },
+
+    createMainMenu: function() {
         var me = this,
             menu = Ext.create('Ext.Menu', {
                 items: [{
@@ -48,59 +59,60 @@ Ext.define('JukolaApp.view.main.MainController', {
                     expanderFirst: false,
                     expanderOnly: false,
                     listeners: {
-                        itemclick: 'onNavigationItemClick',
-                        selectionchange: 'onNavigationTreeSelectionChange'
+                        itemclick: {
+                            fn: me.onNavigationItemClick,
+                            scope: me
+                        },
+                        selectionchange: {
+                            fn: me.onNavigationTreeSelectionChange,
+                            scope: me
+                        }
                     }
                 }]
             }),
-            innerItems;
-
-        innerItems = menu.getInnerItems();
-        me.callParent([view]);
+            innerItems = menu.getInnerItems();
 
         if (innerItems.length > 0) {
             me.navigationTree = innerItems[0];
         } else {
             me.navigationTree = {};
         }
-
-        
-        me.loadMenu();
-        
-        // TODO: no working version of this yet.
+        Ext.Viewport.setMenu(menu, {
+            side: 'left',
+            cover: false,
+            reveal: true
+        });
     },
-    
+
     loadMenu: function(purl)  {
       var me = this, url=purl||'resources/menu.json'
       ;
-      
       Ext.Ajax.request({
         url:url,
         timeout: 5000, // short timeout to use cached value
         success: function(resp/*,opts*/) {
             Ext.log("Loaded menu from "+url);
             var menuTxt=resp.responseText,menuData = Ext.decode(menuTxt);
-            reveal: true
-            me.navigationTree.getStore().setRoot(menuData);        
+            me.navigationTree.getStore().setRoot(menuData);
             me.menuDataReady = true;
-            
-            localforage.setItem('menu.json', menuTxt, function(err/*, value*/) {
+
+            localforage.setItem('menu.json', menuTxt, function(/*err , value*/) {
                 Ext.log("Menu data cached");
             });
-            
+
         },
         failure: function(resp/*,opts*/) {
             Ext.log("Failed to load menu "+resp);
-            
+
             localforage.getItem('menu.json', function(err, value) {
                 var menuData = Ext.decode(value);
                 Ext.log("Menu data loaded from cache ");
-                me.navigationTree.getStore().setRoot(menuData);        
+                me.navigationTree.getStore().setRoot(menuData);
                 me.menuDataReady = true;
             });
         }
       });
-      
+
     },
 
     onNavigationItemClick: function () {
@@ -110,10 +122,11 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     onNavigationTreeSelectionChange: function (tree, node) {
-        var to = node && (node.get('routeId') || node.get('viewType'));
+        var to = node && (node.get('routeId') || node.get('viewType')),
+            me = this;
 
         if (to) {
-            this.redirectTo(to);
+            me.redirectTo(to);
         }
     },
 
@@ -122,7 +135,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         var me = this
         ;
 
-        // retry if we are not yet ready    
+        // retry if we are not yet ready
         if (!me.menuDataReady) {
             me.getReferences().mainCard.setMasked({
                 xtype:'loadmask'
@@ -132,7 +145,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         }
 
         if (Ext.os.is.Phone) {
-            me.nav.setHidden(true);
+            Ext.Viewport.hideMenu('left');
         }
 
         me.setCurrentView(id);
@@ -143,7 +156,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         this.setShowNavigation(!this.getShowNavigation());
     },
 
-    
+
  /*
   * Trying to precache uninitialized data but mainCard.add shows cards too eagerly
   * TODO  to find some other way to at least fill caches eagerly
@@ -155,19 +168,19 @@ Ext.define('JukolaApp.view.main.MainController', {
             navigationTree = me.navigationTree,
             store = navigationTree.getStore()
         ;
-        
+
         Ext.log("View bg init. "+store.getCount());
-        
+
         store.getRoot().eachChild(function(topNode) {
           topNode.eachChild(function(node) {
             var viewType = node.get('viewType'),hashTag = node.get('routeId') || viewType,
                 item = mainCard.child('component[routeId=' + hashTag + ']');
 
             Ext.log("Eager bg init view "+hashTag);
-            
+
             if (!item) {
                 Ext.log("Eager bg init add view "+hashTag);
-                
+
                 // TODO would be nice to add these to mainCard but mainCard would show all added.
                 mainCard.add({
                     xtype: node.get('viewType'),
@@ -175,9 +188,9 @@ Ext.define('JukolaApp.view.main.MainController', {
                     node: node
                 });
             }
-            
+
           });
-            
+
         });
     },
 */
@@ -194,7 +207,7 @@ Ext.define('JukolaApp.view.main.MainController', {
             item = mainCard.child('component[routeId=' + hashTag + ']');
 
         mainCard.setMasked(false);
-            
+
         if (!node) {
             Ext.log("Node not found for "+hashTag);
         } else {
@@ -225,13 +238,11 @@ Ext.define('JukolaApp.view.main.MainController', {
       });
     },
 
-    updateShowNavigation: function (showNavigation, oldValue) {
+    updateShowNavigation: function (/*showNavigation, oldValue*/) {
         // Ignore the first update since our initial state is managed specially. This
         // logic depends on view state that must be fully setup before we can toggle
         // things.
         //
-        if (oldValue !== undefined) {
-            Ext.Viewport.toggleMenu('left');
-        }
+        Ext.Viewport.toggleMenu('left');
     }
 });
