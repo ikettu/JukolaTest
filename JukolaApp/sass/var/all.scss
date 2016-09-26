@@ -5,4 +5,6 @@
 $enable-font-awesome: dynamic(true);
 
 // $base-color: #cc0000;
-$base-color-name: red;
+$base-color-name: dynamic(red);
+$accent-color-name: dynamic(blue);
+
