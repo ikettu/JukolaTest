@@ -175,7 +175,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
 
                     layers: layers,
 
-                    logos: false,
+                    logo: false,
 
                     view: new ol.View({
                         projection : projection,
