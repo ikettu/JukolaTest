@@ -21,12 +21,16 @@ Ext.define('JukolaApp.Application', {
         if (splash) {
             splash.destroy();
         }
+
+        JukolaApp.AnalyticsManager.recordPagehit("index","index",true);
+
     },
 
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {
                 if (choice === 'yes') {
+                    JukolaApp.AnalyticsManager.recordEvent('AppUpdate','reload');
                     window.location.reload();
                 }
             }

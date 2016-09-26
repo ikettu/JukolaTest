@@ -226,6 +226,8 @@ Ext.define('JukolaApp.view.main.MainController', {
             refs.titlebar.setTitle(node.get('text'));
         }
 
+        JukolaApp.AnalyticsManager.recordPagehit(hashTag);
+
         //if (newView.isFocusable(true)) {
         //    newView.focus();
         //}
