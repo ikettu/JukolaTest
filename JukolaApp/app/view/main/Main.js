@@ -29,6 +29,7 @@ Ext.define('JukolaApp.view.main.Main', {
             xtype:'titlebar',
             reference:'titlebar',
             docked:'top',
+            shadow: true,
             style:'background-color: #c00000; color: #ffffff',
             items: [
                 {
