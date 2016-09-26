@@ -223,7 +223,7 @@ Ext.define('JukolaApp.view.main.MainController', {
             mainCard.setActiveItem(item);
 
             navigationTree.setSelection(node);
-            refs.heading.setHtml(node.get('text'));
+            refs.titlebar.setTitle(node.get('text'));
         }
 
         //if (newView.isFocusable(true)) {

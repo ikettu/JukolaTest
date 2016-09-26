@@ -26,35 +26,22 @@ Ext.define('JukolaApp.view.main.Main', {
 
     items: [
         {
-            xtype:'container',
+            xtype:'titlebar',
+            reference:'titlebar',
             docked:'top',
-            width:'100%',
-//            height:50,
-            ui: 'header',
-            layout: 'hbox',
             style:'background-color: #c00000; color: #ffffff',
             items: [
                 {
                     xtype: 'button',
-//                    width: 30,
-                    ui: 'header',
+                    align: 'left',
+                    ui: 'action',
                     iconCls: 'x-fa fa-bars',
-                    margin: '2 2 2 10',
                     listeners: {
                         tap: 'onToggleMenu'
                     }
                 }, {
-                    xtype: 'component',
-                    reference:'heading',
-                    flex: 1,
-                    ui: 'header',
-                    margin: '7 14 7 7',
-                    style: 'font-weight: bold;',
-                    html: 'JukolaApp'
-
-                }, {
                     xtype: 'button',
-                    docked: 'right',
+                    align: 'right',
                     ui: 'action',
                     iconCls: 'x-fa fa-sun-o',
                     enableToggle: true,
