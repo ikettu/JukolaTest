@@ -65,6 +65,7 @@ Ext.define('JukolaApp.view.main.Main', {
         }, {
             xtype: 'navigationview',
             flex: 1,
+            margin:8,
             reference: 'mainCard',
             userCls: 'main-container',
             navigationBar: false
