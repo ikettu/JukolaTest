@@ -219,19 +219,23 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 }
 
                 var index = 0, scrollerElem = Ext.get(myId), tocView = me.down('#toc').down('list');
-                for( index=0; index < elems.length; index++ ) {
-                    var elem = elems[index], tocElem = Ext.get(elem),
-                        offsets = tocElem.getOffsetsTo(scrollerElem);
-                    if (offsets[1]>=0) {
-                        var selections = tocView.getSelections();
-                        if (selections[0] && selections[0].get('tocId') === elem.id) {
-                            return;
-                        }
-                        Ext.log(elem.id);
-                        tocView.select(index, false, true);
-                        tocView.scrollToRecord(tocView.getSelections()[0]);
-                        return;
-                    }
+                if (tocView) {
+                  for( index=0; index < elems.length; index++ ) {
+                      var elem = elems[index], tocElem = Ext.get(elem),
+                          offsets = tocElem.getOffsetsTo(scrollerElem);
+                      if (offsets[1]>=0) {
+                          var selections = tocView.getSelections();
+                          if (selections[0] && selections[0].get('tocId') === elem.id) {
+                              return;
+                          }
+                          Ext.log(elem.id);
+                          tocView.select(index, false, true);
+                          if (tocView.isVisible(true) && tocView.getSelections()) {
+                              tocView.scrollToRecord(tocView.getSelections()[0]);
+                          }
+                          return;
+                      }
+                  }
 
                 }
             }
@@ -323,12 +327,12 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     docked:'left',
                     width:'20%',
                     height:'100%'
-                },
-                'height > 700 && tall' : {
-                    hidden: false,
-                    docked:'top',
-                    width: '100%',
-                    height: 100
+//                },
+//                'height > 700 && tall' : {
+//                    hidden: false,
+//                    docked:'top',
+//                    width: '100%',
+//                    height: 100
                 }
 
             }
