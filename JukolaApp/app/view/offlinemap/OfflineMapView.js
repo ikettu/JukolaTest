@@ -84,6 +84,25 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
 
     },
 
+    weatherLayers: function(node) {
+      var
+        weatherLayer = new ol.layer.Tile({
+            opacity: 0.25,
+            source: new ol.source.TileWMS({
+                url: 'http://wms.fmi.fi:80/fmi-apikey/dd9a5197-3143-440a-8635-1373fa3d583b/geoserver/ows?',
+                params: {
+                    'LAYERS': 'Weather:precipitation-forecast',
+                    'VERSION': '1.1.1',
+                    'FORMAT': 'image/png',
+                    'TILED': true
+                }
+            })
+
+
+        });
+        return weatherLayer;
+    }, 
+
     initLayers: function(node) {
         var me=this;
         var TM35FIN = ol.proj.get('EPSG:3067');
@@ -143,13 +162,20 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         var me = this;
         if (!me.map) {
 
-            var layers = me.initLayers(node),
+            var layers = me.initLayers(node);
 
-                projection = layers[0].getSource().getProjection(),
+            if (navigator.onLine) {
+              layers.push(me.weatherLayers());
+            }
+
+
+            var projection = layers[0].getSource().getProjection(),
 
                 olmap = new ol.Map({
 
                     layers: layers,
+
+                    logos: false,
 
                     view: new ol.View({
                         projection : projection,

@@ -15,12 +15,17 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     },
 
     storeKeyPrefix:'offline_',
+    storeVersionKeyPrefix:'offline_vrs_',
 
     selectSemaphor: false,
 
     getKey:function(key) {
         return this.storeKeyPrefix+key;
     },
+
+    getVersionKey:function(key) {
+        return this.storeVersionKeyPrefix+key;
+    },  
 
     updateNode: function(newNode) {
         var me=this;
@@ -32,6 +37,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     showContentFromCache:function(node, fetch) {
             var me=this,
                 url = node.get('url'),
+                version = node.get('version'),
+                key=me.getKey(url),
+                versionKey=me.getVersionKey(url),
                 key=me.getKey(url)
             ;
 
@@ -45,20 +53,37 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 });
             }
 
-
-            localforage.getItem(key, function(err, value) {
-                Ext.log("Found1:"+key);
-                Ext.log('value1:'+value);
-                Ext.log("err1:"+JSON.stringify(err));
-                if (value) {
-                    Ext.log("1");
-                    me.showHtml.apply(me, [value]);
-                } else if (fetch) {
-                    Ext.log("2");
-                    me.updateCache.apply(me, [node, true]);
-                    Ext.log("4");
-                }
-            });
+            var getFromCacheFunc = function() {
+                 localforage.getItem(key, function(err, value) {
+                     Ext.log("Found1:"+key);
+     //                Ext.log('value1:'+value);
+                     Ext.log("err1:"+JSON.stringify(err));
+                     if (value) {
+                         Ext.log("1");
+                         me.showHtml.apply(me, [value]);
+                     } else if (fetch) {
+                         Ext.log("2");
+                         me.updateCache.apply(me, [node, true]);
+                         Ext.log("4");
+                     }
+                 });
+             };
+             
+             if (version === -1) {
+                 // forced upgrade
+                 me.updateCache.apply(me, [node, true]);
+             } else if (version) {
+                 localforage.getItem(versionKey, function(err,cachedVersion) {
+                     if (!cachedVersion || cachedVersion < version) {
+                         me.updateCache.apply(me, [node, true]);
+                     } else {
+                         getFromCacheFunc();
+                     }
+                 });
+             } else {
+                 getFromCacheFunc();
+             }
+ 
 
     },
 
@@ -244,6 +269,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         var me=this,
             req = new XMLHttpRequest(),
             url = node.get('url'),
+            version = node.get('version'),
             selector = node.get('selector'),
             key=me.getKey(url)
             ;
@@ -260,11 +286,16 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             Ext.log("key2:"+key);
 
             localforage.setItem(key, response, function(err, value) {
-                Ext.log('value2:'+value);
+                // Ext.log('value2:'+value);
                 Ext.log("err2:"+JSON.stringify(err));
 
                 if (show && value) {
                     me.showHtml.apply(me, [value]);
+                }
+
+                if (version) {
+                    localforage.setItem(me.getVersionKey(url), version, function(/*err,value*/) {
+                    });
                 }
             });
 
