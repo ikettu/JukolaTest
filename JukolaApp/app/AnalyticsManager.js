@@ -11,10 +11,13 @@ Ext.define('JukolaApp.AnalyticsManager', {
     
     tid:'UA-8420034-5',
     cid:undefined,
+
+    sendTimer: undefined,
     
     constructor:function() {
         var me=this;
-        
+
+        // create installation specific unique id         
         if (!me.cid) {
             localforage.getItem(me.cidKey, function(err, value) {
                 if (value) {
@@ -27,7 +30,13 @@ Ext.define('JukolaApp.AnalyticsManager', {
             });
         }
         
-        me.callParent(arguments);  
+        me.callParent(arguments);
+        
+        var onlineFunc = function() {
+          me.initSendTimer();    
+        };
+        
+        window.addEventListener('online',  onlineFunc);
     },
     
     generateUUID: function (){
@@ -47,52 +56,84 @@ Ext.define('JukolaApp.AnalyticsManager', {
       return navigator.onLine;  
     },
     
-    recordPagehit: function(pageName, title) {
+    recordPagehit: function(pageName, title, newSession) {
         var me = this, now = new Date().getTime(),
             pageHit={
-                pageName:pageName,
-                title: title,
-                hostname:window.location.hostname,
-                date:now
+               t:'pageview',
+               dp:'/'+pageName,
+               dh:location.hostname,
+               dt:title||pageName,
+               date:now
+            };
+         
+         if (newSession) {
+            var size = Ext.Viewport.getSize();
+            pageHit = Ext.apply({
+                sc:'start',
+                ul:'fi',  //TODO: dynamic
+                vp:size.width+'x'+size.height
+            }, pageHit);
+         }   
+            
+         me.sendOrQueueMeasurement(pageHit);   
+    },
+    
+    recordEvent: function(eventCategory, eventAction, label, value) {
+        var me = this, now = new Date().getTime(),
+            enventRecord={
+               t:'event',         // Event hit type
+               ec:eventCategory,
+               ea:eventAction,       // Event Action. Required.
+               date:now
             };
             
+         if (label) {
+            eventRecord.el = label;
+            eventRecord.ev = value;
+         }
+            
+         me.sendOrQueueMeasurement(enventRecord);   
+    },
+
+    
+    sendOrQueueMeasurement: function(measurementRecord) {
+        var me = this;
         if (me.isOnline()) {
-            me.sendSinglePageHitNow(pageHit,undefined,function() {
-                me.queuePageHit(pageHit);
+            me.sendMeasurementNow(measurementRecord,undefined,function() {
+                me.queueMeasurement(measurementRecord);
             });
         } else {
-            me.queuePageHit(pageHit);
+            me.queueMeasurement(measurementRecord);
         }
     },
     
-    queuePageHit: function(pageHit) {
+    queueMeasurement: function(measurementRecord) {
         var me = this;
-        localforage.getItem(me.queueKey, function(err, value) {
-            value = value||[];
-            value.push(pageHit);
-            localforage.setItem(me.queueKey, value, function(err,value){
-                Ext.log("Pagehit queued "+JSON.stringify(value));
+        localforage.getItem(me.queueKey, function(err, queue) {
+            queue = queue||[];
+            queue.push(measurementRecord);
+            localforage.setItem(me.queueKey, queue, function(/*err, storedQueue*/){
+                Ext.log("measurementRecord queued "+JSON.stringify(measurementRecord));
+                me.initSendTimer();
             });
         });        
     },
     
-    sendSinglePageHitNow: function(pageHit, success, failure) {
-        var me = this, now=new Date().getTime();
+    sendMeasurementNow: function(measurementRecord, success, failure) {
+        var me = this, now=new Date().getTime(),
+            params=Ext.apply({
+                v:1,
+                tid:me.tid,
+                cid:me.cid,
+                qt: now-measurementRecord.date,
+                z: now
+            },measurementRecord)
+        ;
               
         Ext.Ajax.request({
             url: me.analyticsURL,
             method:'POST',
-            params: {
-               v:1,
-               tid:me.tid,
-               cid:me.cid,
-               t:'pageview',
-               dp:'/'+pageHit.pageName,
-               dh:pageHit.hostname,
-               dt:pageHit.title||pageHit.pageName,
-               qt: now-pageHit.date,
-               z:now
-            },
+            params: params,
             useDefaultXhrHeader:false,
             cors:true,
             
@@ -101,32 +142,59 @@ Ext.define('JukolaApp.AnalyticsManager', {
         });
     },
     
-    sendPagehits: function() {
-        var me = this, now = new Date();
+    sendMeasurementFromQueue: function() {
+        var me = this, now = new Date().getTime();
         if (!me.isOnline()) {
             return;
         }
-        localforage.getItem(me.queueKey, function(err, value) {
+        localforage.getItem(me.queueKey, function(err, queue) {
             
-            if (value) {
+            if (queue) {
                 
-                var pageHit = value.pop();
+                var measurementRecord = queue.shift();
                 
-                localforage.setItem(me.queueKey, value, function(err,value){
+                if (!queue) {
+                    me.clearSendTimer();
+                }
+                
+                localforage.setItem(me.queueKey, queue, function(/*err,value*/){
                     
-                    me.sendSinglePageHitNow(pageHit, undefined, function() {
-                        
-                        pageHit.fails = (pageHit.fails||0)+1;
-                        if (pageHit.fails < 10) {
-                            me.queuePageHit(pageHit);
-                        }
-                    });
+                    if ( measurementRecord && ( (now - measurementRecord.date) < (6 * 60 * 60 * 1000) ) ) {
+                    
+                        me.sendMeasurementNow(measurementRecord,
+                          function() {
+                             me.initSendTimer();
+                          },
+                          function() {
+                            
+                            measurementRecord.fails = (measurementRecord.fails||0)+1;
+                            if (measurementRecord.fails < 10) {
+                                me.queueMeasurement(measurementRecord);
+                            }
+                            me.initSendTimer();
+                        });
+                    }
                                         
                 });
                 
             }
         });        
+    },
+    
+    initSendTimer: function() {
+        var me =this;
+        if (me.sendTimer) {
+            me.clearSendTimer();
+        }
+        me.sendTimer = Ext.defer(me.sendMeasurementFromQueue, 1000, me);
+    },
+    
+    clearSendTimer: function() {
+        var me = this;
+        if (me.sendTimer) {
+            window.clearTimeout(me.sendTimer);
+            delete me.sendTimer;
+        }
     }
-    
-    
+
 });
