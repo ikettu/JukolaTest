@@ -103,6 +103,26 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
        me.setMasked(false);
     },
 
+    stripAttributes: function(dom, tagName, attributePrefix) {
+        var tags = dom.getElementsByTagName(tagName||'*');
+        var i = tags.length,j;
+        while (i--) {
+          var tag = tags[i], attrs=tag.attributes, toDelete=[];
+          for(j=0; j<attrs.length; j++) {
+            var attr=attrs[j];
+            if (attributePrefix && !attr.name.startsWith(attributePrefix)) {
+                continue;
+            }
+            toDelete.push(attr.name);
+          }
+          for(j=0; j<toDelete.length; j++) {
+            tag.removeAttribute(toDelete[j]);
+          }
+        }
+        return dom;
+    },
+
+    
     stripTags: function(dom, tagName) {
         var tags = dom.getElementsByTagName(tagName);
         var i = tags.length;
@@ -180,7 +200,9 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
 
         me.stripTags(body,'button');
         me.stripTags(body,'script');
+        me.stripTags(body,'link');
         me.stripTagsLeaveContent(body,'a');
+        me.stripAttributes(body, '*','on');
         return body;
     },
 
