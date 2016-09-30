@@ -464,9 +464,11 @@
             "resources/jukola-logo.png",
             "resources/Asikainen-640.jpg",
             "resources/menu_default.json",
+/*
             "resources/fonts/OpenSans-Light.ttf",
             "resources/fonts/OpenSans-Regular.ttf",
             "resources/fonts/OpenSans-Bold.ttf",
+*/
             "resources/font-awesome/fonts/fontawesome-webfont.woff2",
             "resources/font-awesome/fonts/fontawesome-webfont.eot",
             "resources/font-awesome/fonts/fontawesome-webfont.svg",
