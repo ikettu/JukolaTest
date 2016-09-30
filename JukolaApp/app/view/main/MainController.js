@@ -77,6 +77,17 @@ Ext.define('JukolaApp.view.main.MainController', {
                             scope: me
                         }
                     }
+                },{
+                    xtype:'spacer'
+                },{
+                    xtype:'button',
+                    text:'about',
+                    handler: function() {
+                        Ext.Msg.show({
+                           title:'About',
+                           message :'<div>tekijät: mrX & mrY</div><div>2016</div>' 
+                        });
+                    }
                 }]
             }),
             innerItems = menu.getInnerItems();
