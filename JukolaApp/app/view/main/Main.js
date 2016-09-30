@@ -14,6 +14,7 @@ Ext.define('JukolaApp.view.main.Main', {
         'Ext.Button',
         'Ext.list.Tree',
         'Ext.navigation.View',
+        'Ext.LoadMask','Ext.plugin.Responsive',
 
         'JukolaApp.store.MenuStore',
         'JukolaApp.view.main.MainController',
@@ -65,10 +66,18 @@ Ext.define('JukolaApp.view.main.Main', {
         }, {
             xtype: 'navigationview',
             flex: 1,
-            margin:8,
+            margin: '6 0 0 0',
             reference: 'mainCard',
             userCls: 'main-container',
-            navigationBar: false
+            navigationBar: false,
+            plugins: 'responsive',
+            responsiveConfig: {
+                'width > 700': {
+                    margin: 16,
+                    shadow: true
+                }
+                
+            }
         }
     ]
 });
