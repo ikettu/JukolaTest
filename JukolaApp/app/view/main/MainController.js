@@ -51,6 +51,16 @@ Ext.define('JukolaApp.view.main.MainController', {
         var me = this,
             menu = Ext.create('Ext.Menu', {
                 items: [{
+                   xtype:'img',
+                   src:'resources/Asikainen-640.jpg',
+                   mode:'img',
+                   width:'100%',
+                   listeners: {
+                      tap: function() {
+                        Ext.Viewport.hideMenu('left');
+                      }
+                   }
+                },{
                     xtype: 'treelist',
                     reference: 'navigationTree',
                     ui: 'navigation',
@@ -71,8 +81,8 @@ Ext.define('JukolaApp.view.main.MainController', {
             }),
             innerItems = menu.getInnerItems();
 
-        if (innerItems.length > 0) {
-            me.navigationTree = innerItems[0];
+        if (innerItems.length > 1) {
+            me.navigationTree = innerItems[1];
         } else {
             me.navigationTree = {};
         }
