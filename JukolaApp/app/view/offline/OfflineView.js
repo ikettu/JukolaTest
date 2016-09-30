@@ -93,6 +93,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
        var cDom = content.el.dom, toc = me.tocForDoc(cDom,'h2');
        if (!toc) {
          me.down('#toc').setHidden(true);
+         me.down('#toc').setDisabled(true);
        } else {
          me.down('#toc').removeAll(true,true);
          Xtoc = me.down('#toc').add(toc);
