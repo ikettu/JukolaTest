@@ -72,7 +72,7 @@ Ext.define('JukolaApp.view.main.Main', {
             navigationBar: false,
             plugins: 'responsive',
             responsiveConfig: {
-                'width > 700': {
+                'width > 960': {
                     margin: 16,
                     shadow: true
                 }
