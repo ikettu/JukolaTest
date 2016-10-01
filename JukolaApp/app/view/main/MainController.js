@@ -84,9 +84,11 @@ Ext.define('JukolaApp.view.main.MainController', {
                 },{
                     xtype:'button',
                     text:'about',
+                    iconCls:'x-fa fa-info-circle',
                     handler: function() {
                         Ext.Msg.show({
                            title:'About',
+                           // iconCls:'x-fa fa-info-circle',
                            message :'<div>tekijät: mrX & mrY</div><div>2016</div>' 
                         });
                     }
