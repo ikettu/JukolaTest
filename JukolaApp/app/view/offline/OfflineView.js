@@ -347,7 +347,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             plugins: 'responsive',
             hidden: true,
             responsiveConfig: {
-                'width <= 600': {
+                'width <= 600 || tall': {
                     hidden: true,
                     shadow: false
                 },
