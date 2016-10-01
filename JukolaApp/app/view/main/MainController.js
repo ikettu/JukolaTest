@@ -35,6 +35,8 @@ Ext.define('JukolaApp.view.main.MainController', {
     collapsedCls: 'main-nav-collapsed',
 
     menuDataReady: false,
+    
+    menuCover: true,
 
     init: function (view) {
         var me = this;
@@ -99,8 +101,8 @@ Ext.define('JukolaApp.view.main.MainController', {
         }
         Ext.Viewport.setMenu(menu, {
             side: 'left',
-            cover: false,
-            reveal: true
+            cover: me.menuCover,
+            reveal: !me.menuCover
         });
     },
 
@@ -164,7 +166,7 @@ Ext.define('JukolaApp.view.main.MainController', {
             return;
         }
 
-        if (Ext.os.is.Phone) {
+        if (me.menuCover || Ext.os.is.Phone) {
             Ext.Viewport.hideMenu('left');
         }
 
