@@ -216,15 +216,15 @@
      */
     "js": [
         {
-            "path": "libs/openlayers-3.15.1/proj4js-2.3.14.js",
+            "path": "libs/openlayers-3.18.2/proj4js-2.3.14.js",
             "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.15.1/customprojs.js",
+            "path": "libs/openlayers-3.18.2/customprojs.js",
             "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.15.1/ol-debug.js",
+            "path": "libs/openlayers-3.18.2/ol-debug.js",
             "update" : "full"
         },
         {
@@ -271,7 +271,7 @@
      */
     "css": [
         {
-            "path": "libs/openlayers-3.15.1/ol.css",
+            "path": "libs/openlayers-3.18.2/ol.css",
             "update" : "full"
         },
         {
