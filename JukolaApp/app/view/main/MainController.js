@@ -106,6 +106,11 @@ Ext.define('JukolaApp.view.main.MainController', {
             cover: me.menuCover,
             reveal: !me.menuCover
         });
+        
+        me.on({
+            edgeswipe: function(x) { Ext.log('x'+x);},
+            swipe: function(y) { Ext.log('y'+y);}
+        });
     },
 
     loadMenu: function(purl)  {
