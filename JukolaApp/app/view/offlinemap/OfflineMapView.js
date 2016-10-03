@@ -21,13 +21,29 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
     geolocationLayer : undefined,
     positionFeature : undefined,
 
+    
     initialize: function() {
+        var me = this;
         Ext.log("map initialize");
-        this.callParent();
-        this.initMap();
-        this.initGeolocation();
+        me.callParent();
+        me.initMap();
+    
+        var tracking = me.getNode().get('tracking')||true;
+        
+        if (tracking) {
+            me.initGeolocation();
+            me.on({
+                activate: function() {
+                    me.startTracking();
+                },
+                deactivate: function() {
+                    me.pauseTracking();
+                },
+                scope: me
+            });
+        }
 
-        this.on({
+        me.on({
             painted: 'doResize',
             scope: this
         });
@@ -76,14 +92,11 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
                     });
                 });
                 req.send(null);
-
             }
-
-
         });
-
     },
 
+ /*   
     weatherLayers: function(node) {
       var
         weatherLayer = new ol.layer.Tile({
@@ -102,7 +115,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         });
         return weatherLayer;
     }, 
-
+*/
     initLayers: function(node) {
         var me=this;
         var TM35FIN = ol.proj.get('EPSG:3067');
@@ -119,7 +132,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               imageSize: [6000, 6000]
            })
         });
-*/
+
         var jnsLayer2 = new ol.layer.Image({
 //           minResolution:1,
 //           maxResolution:512,
@@ -131,6 +144,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
               imageSize: [6000, 6000]
            })
         });
+*/
 
 
 
@@ -147,7 +161,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
            })
         });
 
-        return [jnsLayer2, enoLayer2];
+        return [enoLayer2];
 
 //        return new ol.layer.Tile({
 //             source: new ol.source.OSM()
@@ -162,11 +176,16 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         var me = this;
         if (!me.map) {
 
-            var layers = me.initLayers(node);
+            var layers = [];
 
             if (navigator.onLine) {
-              layers.push(me.weatherLayers());
+              layers.push(new ol.layer.Tile({
+                source: new ol.source.OSM()
+              }));
             }
+
+        
+            layers = layers.concat(me.initLayers(node));
 
 
             var projection = layers[0].getSource().getProjection(),
@@ -199,7 +218,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
 
     },
 
-    initGeolocation: function() {
+    initGeolocation: function(node) {
       var me = this;
 
       if (!me.geolocationLayer) {
@@ -228,9 +247,9 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
       if (!me.geolocation) {
         me.geolocation = new ol.Geolocation({
             projection : me.map.getView().getProjection(),
-            tracking : true,
+            tracking : false,
             trackingOptions: {
-                 maximumAge : 60
+                 maximumAge : 15000
             }
         });
 
@@ -249,14 +268,25 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         });
       }
 
+    },
 
+    startTracking: function() {
+        var me=this;
+        Ext.log("Start tracking.");
+        me.geolocation.setTracking(true);
+    },
+    
+    pauseTracking: function() {
+        var me = this;
+        Ext.log("Pause tracking.");
+        me.geolocation.setTracking(false);
     },
 
     showMap:function(node) {
 
         var me=this;
 
-        me.initMap();
+        me.initMap(node);
 
         me.setMasked(false);
     },

@@ -15,7 +15,7 @@
                 "text": "Kartta",
                 "iconCls": "x-fa fa-map",
                 "viewType": "offlinemap",
-                "routeId": "maptest",
+                "routeId": "map",
                 "leaf": true
             },
             {
