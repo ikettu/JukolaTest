@@ -39,8 +39,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 url = node.get('url'),
                 version = node.get('version'),
                 key=me.getKey(url),
-                versionKey=me.getVersionKey(url),
-                key=me.getKey(url)
+                versionKey=me.getVersionKey(url)
             ;
 
             Ext.log("key1:"+key);
