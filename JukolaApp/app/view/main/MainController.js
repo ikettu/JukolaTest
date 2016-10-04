@@ -13,7 +13,8 @@ Ext.define('JukolaApp.view.main.MainController', {
         'JukolaApp.view.welcome.WelcomeView',
         'JukolaApp.view.online.OnlineView',
         'JukolaApp.view.offline.OfflineView',
-        'JukolaApp.view.offlinemap.OfflineMapView'
+        'JukolaApp.view.offlinemap.OfflineMapView',
+        'JukolaApp.view.weather.WeatherView'
     ],
 
     listen : {
