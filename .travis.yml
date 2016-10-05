@@ -39,6 +39,6 @@ deploy:
   skip_cleanup: true
   local_dir: build/production/JukolaApp
   default_text_charset: "utf-8"
-  cache_control: "public, max-age=600"
+  cache_control: "no-cache"
   on:
     branch: master
