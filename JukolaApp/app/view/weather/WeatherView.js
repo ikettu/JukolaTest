@@ -51,6 +51,13 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
           dataview=me.down('dataview'), store=dataview.getStore(),
           req = new XMLHttpRequest();
 
+      if (me.isVisible()) {
+         me.setMasked({
+           xtype:'loadmask'
+         });
+       }
+  
+          
        req.open('GET', me.url, true);
        req.responseType='document';
 
@@ -85,6 +92,9 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
                     precipitation1h:precipitation1hmap[timeFormatted]||0
                 });
             }
+            
+            me.setMasked(false);
+
  
        });
 
@@ -100,7 +110,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         width:'100%',
         height:'100%',
         store: [],
-        itemTpl: '<div style="display: flex;align-items: center;">{time} <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C {windspeedms:round}m/s  {precipitation1h:round}mm</div>'
+        itemTpl: '<div style="display: flex;align-items: center;"><b>{time}</b> <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C {windspeedms:round}m/s  {precipitation1h:round}mm</div>'
     }]
     
 });
