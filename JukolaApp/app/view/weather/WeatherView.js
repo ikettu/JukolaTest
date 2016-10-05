@@ -24,6 +24,27 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         }
     },
        
+    createDataMap:function(doc, dataId) {
+            var i, datamap={},
+                 datas=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-'+dataId+'] *|MeasurementTVP')
+                 ;
+ 
+            
+            for(i in datas) {
+                if (!datas.hasOwnProperty(i)) {
+                    continue;
+                }
+                var data=datas[i],
+                  time=Ext.Date.parse(data.querySelector('*|time').textContent,'c'),
+                  timeFormatted = Ext.Date.format(time, 'D H:i'),
+                  value=data.querySelector('*|value').textContent;
+                
+                datamap[timeFormatted] = value;
+            }
+            
+            return datamap;
+    },
+       
     fetchData:function() {
         
       var me=this,
@@ -36,22 +57,13 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
        req.addEventListener('load',function()  {
             var doc= req.response;
 
-            var i, symbolmap={},
-                 symbols=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-WeatherSymbol3] *|MeasurementTVP'),
-                 temps=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-Temperature] *|MeasurementTVP');
- 
-            
-            for(i in symbols) {
-                if (!symbols.hasOwnProperty(i)) {
-                    continue;
-                }
-                var s=symbols[i],time=Ext.Date.parse(s.querySelector('*|time').textContent,'c'),
-                  timeFormatted = Ext.Date.format(time, 'D H:i'),
-                  symbol=s.querySelector('*|value').textContent;
-                
-                symbolmap[timeFormatted] = symbol;
-            }
-WSB = symbols; 
+            var i,
+                 temps=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-Temperature] *|MeasurementTVP'),
+                 symbolmap = me.createDataMap(doc,'WeatherSymbol3'),
+                 precipitation1hmap = me.createDataMap(doc,'Precipitation1h'),
+                 windspeedmsmap = me.createDataMap(doc,'WindSpeedMS')
+                 ;
+                       
  
             store.removeAll();
 
@@ -68,7 +80,9 @@ WSB = symbols;
                 store.add({
                     time:timeFormatted,
                     temp:temp,
-                    symbol:symbolmap[timeFormatted]
+                    symbol:symbolmap[timeFormatted]||93,
+                    windspeedms:windspeedmsmap[timeFormatted]||0,
+                    precipitation1h:precipitation1hmap[timeFormatted]||0
                 });
             }
  
@@ -85,8 +99,8 @@ WSB = symbols;
         xtype:'dataview',
         width:'100%',
         height:'100%',
-        store: [{}],
-        itemTpl: '<div style="display: flex;align-items: center;">{time} <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C</div>'
+        store: [],
+        itemTpl: '<div style="display: flex;align-items: center;">{time} <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C {windspeedms:round}m/s  {precipitation1h:round}mm</div>'
     }]
     
 });
