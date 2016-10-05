@@ -84,6 +84,13 @@ Ext.define('JukolaApp.view.main.MainController', {
                     xtype:'spacer'
                 },{
                     xtype:'button',
+                    text:'reload',
+                    iconCls:'x-fa fa-refresh',
+                    handler: function() {
+                        me.clearCaches(true);
+                    }
+                },{
+                    xtype:'button',
                     text:'about',
                     iconCls:'x-fa fa-info-circle',
                     handler: function() {
@@ -264,10 +271,15 @@ Ext.define('JukolaApp.view.main.MainController', {
         //}
     },
 
-    clearCaches: function() {
+    clearCaches: function(codeCache) {
       var me=this;
       localforage.clear(function() {
-        Ext.Msg.alert("","Cache cleared.");
+
+        if (codeCache) {
+            localStorage.clear();
+        }
+
+        Ext.Msg.alert("-","Cache cleared.");
         me.redirectTo("welcome");
       });
     }
