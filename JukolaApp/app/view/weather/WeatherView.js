@@ -15,7 +15,19 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
 
     url:'https://crossorigin.me/http://data.fmi.fi/fmi-apikey/dd9a5197-3143-440a-8635-1373fa3d583b/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=eno&param=temperature,windspeedmsm,WindDirection,WeatherSymbol3',
  
- 
+    
+    initialize: function() {
+        var me=this;
+        
+        Ext.log('initialize');
+        
+        me.on({
+            activate : me.checkRefresh,
+            scope: me
+        });
+        
+        me.callParent();
+    },
  
      updateNode: function(newNode) {
         var me=this;
@@ -51,6 +63,13 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
           dataview=me.down('dataview'), store=dataview.getStore(),
           req = new XMLHttpRequest();
 
+      if (me.isVisible()) {
+         me.setMasked({
+           xtype:'loadmask'
+         });
+       }
+  
+          
        req.open('GET', me.url, true);
        req.responseType='document';
 
@@ -78,6 +97,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
                 
                 Ext.log('adding '+temp);
                 store.add({
+                    ts:time,
                     time:timeFormatted,
                     temp:temp,
                     symbol:symbolmap[timeFormatted]||93,
@@ -85,11 +105,32 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
                     precipitation1h:precipitation1hmap[timeFormatted]||0
                 });
             }
+            
+            me.setMasked(false);
+
  
        });
 
        req.send(null);
        
+    },
+    
+    
+    checkRefresh: function() {
+        var me=this, store=me.down('dataview').getStore(), now = new Date()// for testing Ext.Date.add(new Date(), Ext.Date.HOUR, 3)
+        ;
+        
+        Ext.log('checkRefresh '+now);
+        
+        while(store.getCount()>0 && store.first().get('ts')<now) {
+            Ext.log('Removing old weather '+store.first);
+            store.removeAt(0);
+        }
+        
+        if (store.getCount() < 33) {
+            me.fetchData();
+        }
+        
     },
     
     items: [
@@ -100,7 +141,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         width:'100%',
         height:'100%',
         store: [],
-        itemTpl: '<div style="display: flex;align-items: center;">{time} <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C {windspeedms:round}m/s  {precipitation1h:round}mm</div>'
+        itemTpl: '<div style="display: flex;align-items: center;"><b>{time}</b> <img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>  {temp:round}&#176;C {windspeedms:round}m/s  {precipitation1h:round}mm</div>'
     }]
     
 });

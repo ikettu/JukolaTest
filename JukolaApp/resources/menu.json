@@ -49,7 +49,7 @@
                 "leaf": true
             },
             {
-                "text": "Sää",
+                "text": "Sää Enossa",
                 "iconCls": "x-fa fa-cloud",
                 "viewType": "weather",
                 "routeId": "weather",
