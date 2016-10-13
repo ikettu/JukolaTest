@@ -153,7 +153,7 @@ Ext.define('JukolaApp.AnalyticsManager', {
                 
                 var measurementRecord = queue.shift();
                 
-                if (!queue) {
+                if (queue.length <= 0) {
                     me.clearSendTimer();
                 }
                 
