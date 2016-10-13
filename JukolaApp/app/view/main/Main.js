@@ -45,17 +45,17 @@ Ext.define('JukolaApp.view.main.Main', {
                     xtype: 'button',
                     align: 'right',
                     ui: 'action',
-                    iconCls: 'x-fa fa-sun-o',
+                    iconCls: 'x-fa fa-moon-o',
                     enableToggle: true,
                     handler: function() {
                         var me = this;
                         if (me.isPressed()) {
-                            me.setIconCls('x-fa fa-moon-o');
+                          //  me.setIconCls('x-fa fa-moon-o');
                             Fashion.css.setVariables({
                                  "dark-mode": "true"
                             });
                         } else {
-                            me.setIconCls('x-fa fa-sun-o');
+                          //  me.setIconCls('x-fa fa-sun-o');
                             Fashion.css.setVariables({
                                 "dark-mode": "false"
                             });
