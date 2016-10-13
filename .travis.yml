@@ -37,7 +37,7 @@ addons:
       name: "ikettu/JukolaTest"
     notification_email: ikettu@gmail.com
     build_command_prepend: ""
-    build_command:   ""
+    build_command:   "npm"
     branch_pattern: coverity_scan
     
 deploy:
