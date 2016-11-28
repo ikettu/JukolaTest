@@ -178,11 +178,11 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
 
             var layers = [];
 
-            if (navigator.onLine) {
-              layers.push(new ol.layer.Tile({
-                source: new ol.source.OSM()
-              }));
-            }
+//            if (navigator.onLine) {
+//              layers.push(new ol.layer.Tile({
+//                source: new ol.source.OSM()
+//              }));
+//            }
 
         
             layers = layers.concat(me.initLayers(node));
@@ -256,8 +256,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineMapView', {
         me.geolocation.on('error', function(error) {
           Ext.toast({
             message: error.message,
-            timeout: 5000,
-            ui:'ligth'
+            timeout: 5000
           });
         });
 
