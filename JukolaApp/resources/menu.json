@@ -54,15 +54,7 @@
                 "viewType": "weather",
                 "routeId": "weather",
                 "leaf": true
-            },
-            {
-                "text": "Jukola Web",
-                "iconCls": "x-fa fa-external-link",
-                "viewType": "online",
-                "routeId": "jukolaweb",
-                "url":"https://www.jukola.com/2017",
-                "leaf": true
-            }
+             }
         ]
    }
  }
