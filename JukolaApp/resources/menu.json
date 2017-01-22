@@ -19,7 +19,7 @@
                 "leaf": true
             },
             {
-                "text": "Joukkueet",
+                "text": "Joukkueet 2016",
                 "iconCls": "x-fa fa-users",
                 "viewType": "offline",
                 "routeId": "teams",
@@ -29,7 +29,7 @@
                 "leaf": true
             },
             {
-                "text": "Näin toimit Jukolassa",
+                "text": "Näin toimit Jukolassa 2016",
                 "iconCls": "x-fa fa-question",
                 "viewType": "offline",
                 "routeId": "ntjukola",
@@ -39,13 +39,24 @@
                 "leaf": true
             },
             {
-                "text": "Kilpailuohjeet",
+                "text": "Kilpailuohjeet 2016",
                 "iconCls": "x-fa fa-hand-o-right",
                 "viewType": "offline",
                 "routeId": "kohjeet",
                 "version": 1,
                 "url":"https://crossorigin.me/http://www.jukola.com/2016/yleista/kilpailuohjeet/",
                 "selector":"div.entry-content",
+                "leaf": true
+            },
+            {
+                "text": "Kilpailukutsu 2017",
+                "iconCls": "x-fa fa-star-o ",
+                "viewType": "offline",
+                "routeId": "kkutsu",
+                "version": 1,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/kilpailukutsu/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
                 "leaf": true
             },
             {

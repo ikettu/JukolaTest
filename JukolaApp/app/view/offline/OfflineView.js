@@ -38,6 +38,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             var me=this,
                 url = node.get('url'),
                 version = node.get('version'),
+                tocSelector = node.get('tocSelector') || 'h2',
                 key=me.getKey(url),
                 versionKey=me.getVersionKey(url)
             ;
@@ -59,7 +60,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                      Ext.log("err1:"+JSON.stringify(err));
                      if (value) {
                          Ext.log("1");
-                         me.showHtml.apply(me, [value]);
+                         me.showHtml.apply(me, [value, tocSelector]);
                      } else if (fetch) {
                          Ext.log("2");
                          me.updateCache.apply(me, [node, true]);
@@ -86,10 +87,10 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
 
     },
 
-    showHtml:function(html) {
+    showHtml:function(html, tocSelector) {
        var me=this, content=me.down('#content');
        content.setHtml(html);
-       var cDom = content.el.dom, toc = me.tocForDoc(cDom,'h2');
+       var cDom = content.el.dom, toc = me.tocForDoc(cDom,tocSelector||'h2');
        if (!toc) {
          var tocElem = me.down('#toc');
          if (tocElem) {
@@ -299,6 +300,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             url = node.get('url'),
             version = node.get('version'),
             selector = node.get('selector'),
+            tocSelector = node.get('tocSelector') || 'h2',
             key=me.getKey(url)
             ;
 
@@ -318,7 +320,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                 Ext.log("err2:"+JSON.stringify(err));
 
                 if (show && value) {
-                    me.showHtml.apply(me, [value]);
+                    me.showHtml.apply(me, [value, tocSelector]);
                 }
 
                 if (version) {
