@@ -237,7 +237,7 @@
         },
         {
             "path": "app.js",
-            //"update" : "full",
+            "update" : "full",
             "bundle": true
         }
     ],
