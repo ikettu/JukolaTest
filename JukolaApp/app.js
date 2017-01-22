@@ -23,4 +23,7 @@ Ext.application({
     // customize this file, doing so below this section reduces the likelihood
     // of merge conflicts when upgrading to new versions of Sencha Cmd.
     //-------------------------------------------------------------------------
+    
+    // this is just to try to have cmd to upgrade app.js hash.
+    ,iVersion: '1.0.0.3'
 });
