@@ -150,7 +150,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
 
     imageFetchURL:function(src) {
         return 'https://crossorigin.me/'+src;
-    }
+    },
     
     imagesToOffline: function(dom) {
        var me=this,
@@ -176,7 +176,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     img.onload = revokeFunc;
                 } else {
                     var req = new XMLHttpRequest();
-                    req.open('GET', imageFetchURL(src), true);
+                    req.open('GET', me.imageFetchURL(src), true);
                     req.responseType='blob';
 
                     req.addEventListener('load',function()  {
