@@ -7,7 +7,7 @@
     /**
      * The version of the application.
      */
-    "version": "1.0.0.5",
+    "version": "1.0.0.6",
 
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).
@@ -237,7 +237,7 @@
         },
         {
             "path": "app.js",
-            "update" : "full",
+//            "update" : "full",
             "bundle": true
         }
     ],
@@ -314,9 +314,9 @@
             "appCache": {
                 "enable": true,
                 "path": "cache.appcache"
-//            },
-//            "manifest": {
-//               "embed": true
+            },
+            "manifest": {
+               "embed": true
             }           
         },
         "loader": {
@@ -428,9 +428,9 @@
         "base": "${workspace.build.dir}/${build.environment}/${app.name}",
         "appCache": {
             "enable": false
-//        },
-//        "manifest": {
-//            "embed": true
+        },
+        "manifest": {
+            "embed": true
         }        
     },
     
