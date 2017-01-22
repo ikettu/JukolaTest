@@ -237,7 +237,7 @@
         },
         {
             "path": "app.js",
-            "update" : "full",
+            "update" : "${build.timestamp}",
             "bundle": true
         }
     ],
