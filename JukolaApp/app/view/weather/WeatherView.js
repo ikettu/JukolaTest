@@ -13,8 +13,8 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         node:undefined
     },
 
-    url:'https://crossorigin.me/http://data.fmi.fi/fmi-apikey/dd9a5197-3143-440a-8635-1373fa3d583b/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=eno&param=temperature,windspeedmsm,WindDirection,WeatherSymbol3',
- 
+//    url:'https://crossorigin.me/http://data.fmi.fi/fmi-apikey/dd9a5197-3143-440a-8635-1373fa3d583b/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=eno&param=temperature,windspeedmsm,WindDirection,WeatherSymbol3',
+    url:'https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/fmi-eno-weather', 
     
     initialize: function() {
         var me=this;
