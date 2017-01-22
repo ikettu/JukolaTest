@@ -148,6 +148,10 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         return dom;
     },
 
+    imageFetchURL:function(src) {
+        return 'https://crossorigin.me/'+src;
+    }
+    
     imagesToOffline: function(dom) {
        var me=this,
           onePixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
@@ -172,7 +176,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
                     img.onload = revokeFunc;
                 } else {
                     var req = new XMLHttpRequest();
-                    req.open('GET', 'https://crossorigin.me/'+src, true);
+                    req.open('GET', imageFetchURL(src), true);
                     req.responseType='blob';
 
                     req.addEventListener('load',function()  {
