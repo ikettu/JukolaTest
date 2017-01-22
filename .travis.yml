@@ -5,7 +5,7 @@ git:
   depth: 5
 env:
   global:
-    - X_SENCHA_CMD_VERSION="6.2.0"
+    - X_SENCHA_CMD_VERSION="6.2.1"
     # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
     #   via the "travis encrypt" command using the project repo's public key
     - secure: "B9sq+vmP9wrGVAccrfcw0O1COJ4xPCDvCWxAD+StDulLfezD0/m2u0PyvToFh73larr9I9T9MJ+KA7cR2QFvD3O28Qtts/drULCc0S15SQTy+Q3BkXk0ztjPq4zn+TFgAU//rYODgUGoFO10TtQdUKtH1K4S9gM6EQ7P1IawTfjbdG1rNn7qMUdDP5aPQObu9bS+0CWfOoNtX4ttnVzo5qeGwgnJkvloOTYnbS51Ur5Pn5XpY1FPMOujq7Cxrp2/l7RYLO6oKKz8XXHQBWZtBNzn2WOo0rMpGIj8sxa5SZnEDI/SwD51bslCe7suCePvhPjVsrtMDVkOIx4C9wSYVudEqUPxRA9zFYM5PuLHZ00ues/28YfhJzFYVaDc/BkXubbAx5cjSSLFW+3dcEn/sQODnLuLcQp5MGYy3Z/atylk8aSzQQJGqAnnxc51NpmBva0gWKhl+ldfqQ1cV/Sg8xWzj/Jz+LfOYrw38MB2j9icOaIWQVKK2Un/3M7asFOzBAuhqUsd580sjDzsDQnlF4pwSZQkTyVaOrl/Aby4Q+GTm38thJ34XMZbWHBT7m8Dp8WIlmyWS1gutUihegDbv+b1sOxOkVsWFDSfaXp3pmcBGnLkMBgnqSYnhvlR670Z9zFrBBHCG9Se1/jAUSiFT9P1aVaWmcLVjWUtBArMwIs="
