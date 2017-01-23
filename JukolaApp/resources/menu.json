@@ -53,7 +53,7 @@
                 "iconCls": "x-fa fa-star-o ",
                 "viewType": "offline",
                 "routeId": "kkutsu",
-                "version": 1,
+                "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",

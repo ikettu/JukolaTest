@@ -208,6 +208,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         me.stripTags(body,'button');
         me.stripTags(body,'script');
         me.stripTags(body,'link');
+        me.stripTags(body,'iframe');
         me.stripTagsLeaveContent(body,'a');
         me.stripAttributes(body, '*','on');
         return body;
