@@ -320,7 +320,7 @@
                 "path": "cache.appcache"
             },
             "manifest": {
-               "embed": true
+               "embed": false
             }           
         },
         "loader": {
@@ -344,7 +344,7 @@
                 "path": "cache.appcache"
             },
             "manifest": {
-               "embed": true
+               "embed": false
             }           
         },
         "loader": {
