@@ -16,7 +16,7 @@ Ext.Microloader = Ext.Microloader || (function () {
     var Boot = Ext.Boot,
     //<debug>
         _debug = function (message) {
-            //console.log(message);
+            console.log("[DEBUG] " + message);
         },
     //</debug>
         _warn = function (message) {
