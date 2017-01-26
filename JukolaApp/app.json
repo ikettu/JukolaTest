@@ -237,7 +237,7 @@
         },
         {
             "path": "app.js",
-//            "update" : "full",
+            "update" : "full",
             "bundle": true
         }
     ],
@@ -334,6 +334,21 @@
      * Settings specific to testing builds.
      */
     "testing": {
+        "output": {
+            "appCache": {
+                "enable": true,
+                "path": "cache.appcache"
+            },
+            "manifest": {
+               "embed": true
+            }           
+        },
+        "loader": {
+            "cache": "${build.timestamp}"
+        },
+        "cache": {
+            "enable": true
+        }
     },
     
     /**
