@@ -215,26 +215,28 @@
      *
      */
     "js": [
+/*
         {
-            "path": "libs/openlayers-3.18.2/proj4js-2.3.14.js",
-            "update" : "full"
+            "path": "libs/openlayers-3.18.2/proj4js-2.3.14.js"
+//            "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.18.2/customprojs.js",
-            "update" : "full"
+            "path": "libs/openlayers-3.18.2/customprojs.js"
+//            "update" : "full"
         },
         {
-            "path": "libs/openlayers-3.18.2/ol-debug.js",
-            "update" : "full"
+            "path": "libs/openlayers-3.18.2/ol-debug.js"
+//            "update" : "full"
         },
         {
-            "path": "libs/localForage-1.4.2/localforage.min.js",
-            "update" : "full"
+            "path": "libs/localForage-1.4.2/localforage.min.js"
+//            "update" : "full"
         },
         {
             "path": "${framework.dir}/build/ext-modern-all-debug.js",
             "update" : "full"
         },
+*/        
         {
             "path": "app.js",
             "update" : "full",
@@ -270,10 +272,12 @@
      *      }
      */
     "css": [
+/*        
         {
             "path": "libs/openlayers-3.18.2/ol.css",
             "update" : "full"
         },
+*/        
         {
             // this entry uses an ant variable that is the calculated
             // value of the generated output css file for the app,
@@ -491,7 +495,13 @@
             "resources/fonts/MaterialIcons-Regular.ttf",
             "resources/fonts/roboto/Roboto-Medium.ttf",
             "resources/fonts/roboto/Roboto-Regular.ttf",
-            "resources/fonts/roboto/Roboto-Bold.ttf"
+            "resources/fonts/roboto/Roboto-Bold.ttf",
+  
+            "resources/libs/openlayers-3.18.2/ol.css",
+            "resources/libs/openlayers-3.18.2/proj4js-2.3.14.js",
+            "resources/libs/openlayers-3.18.2/customprojs.js",
+            "resources/libs/openlayers-3.18.2/ol.js",
+            "resources/libs/localForage-1.4.2/localforage.min.js"
             
         ],
         /**
