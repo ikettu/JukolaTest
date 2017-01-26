@@ -84,14 +84,14 @@ Ext.define('JukolaApp.view.main.MainController', {
                     xtype:'spacer'
                 },{
                     xtype:'button',
-                    text:'reload',
+                    text:'Reload',
                     iconCls:'x-fa fa-refresh',
                     handler: function() {
                         me.clearCaches(true);
                     }
                 },{
                     xtype:'button',
-                    text:'about',
+                    text:'About',
                     iconCls:'x-fa fa-info-circle',
                     handler: function() {
                         Ext.Msg.show({
