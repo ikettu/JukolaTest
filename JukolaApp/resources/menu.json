@@ -12,12 +12,13 @@
                 "leaf": true
             },
             {
-                "text": "Kartta",
+                "text": "Kilpailukeskus",
                 "iconCls": "x-fa fa-map",
                 "viewType": "offlinemap",
                 "routeId": "map",
                 "leaf": true
             },
+/*
             {
                 "text": "Joukkueet 2016",
                 "iconCls": "x-fa fa-users",
@@ -28,28 +29,29 @@
                 "selector":"div#site_main",
                 "leaf": true
             },
+*/            
             {
-                "text": "Näin toimit Jukolassa 2016",
+                "text": "2016 Näin toimit Jukolassa",
                 "iconCls": "x-fa fa-question",
                 "viewType": "offline",
                 "routeId": "ntjukola",
                 "version": 1,
-                "url":"https://crossorigin.me/http://www.jukola.com/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
                 "selector":"div.entry-content",
                 "leaf": true
             },
             {
-                "text": "Kilpailuohjeet 2016",
+                "text": "2016 Kilpailuohjeet",
                 "iconCls": "x-fa fa-hand-o-right",
                 "viewType": "offline",
                 "routeId": "kohjeet",
                 "version": 1,
-                "url":"https://crossorigin.me/http://www.jukola.com/2016/yleista/kilpailuohjeet/",
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2016/yleista/kilpailuohjeet/",
                 "selector":"div.entry-content",
                 "leaf": true
             },
             {
-                "text": "Kilpailukutsu 2017",
+                "text": "2017 Kilpailukutsu",
                 "iconCls": "x-fa fa-star-o ",
                 "viewType": "offline",
                 "routeId": "kkutsu",

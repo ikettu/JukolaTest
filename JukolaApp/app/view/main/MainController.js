@@ -97,7 +97,7 @@ Ext.define('JukolaApp.view.main.MainController', {
                         Ext.Msg.show({
                            title:'About',
                            // iconCls:'x-fa fa-info-circle',
-                           message :'<div>&copy; 2016-2017 @ikettu &amp; @kontza</div><div>https://github.com/ikettu/JukolaTest</div>' 
+                           message :'<div><b>&copy; 2016-2017 @ikettu &amp; @kontza</b></div><div>https://github.com/ikettu/JukolaTest</div>' 
                         });
                     }
                 }]

@@ -18,6 +18,11 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     storeVersionKeyPrefix:'offline_vrs_',
 
     selectSemaphor: false,
+    
+    imagePrefixMap:[{
+//        'http://www.jukola.com/' : ' https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/'
+        'http://www.jukola.com/' : 'https://crossorigin.me/https://www.jukola.com/'
+    }],
 
     getKey:function(key) {
         return this.storeKeyPrefix+key;
@@ -149,7 +154,23 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     },
 
     imageFetchURL:function(src) {
-        return 'https://crossorigin.me/'+src;
+        var me=this,i, fetchUrl;
+        for(i in me.imagePrefixMap) {
+            var imagePrefixObj = me.imagePrefixMap[i];
+            for(var imagePrefix in imagePrefixObj) {
+                if (imagePrefixObj.hasOwnProperty(imagePrefix)) {
+                    if (src.startsWith(imagePrefix)) {
+                        fetchUrl = imagePrefixObj[imagePrefix] + src.substring(imagePrefix.length);
+                        Ext.log('image '+src+" ->"+fetchUrl);
+                        return fetchUrl;
+                    }
+                }
+            }
+        }
+
+        fetchUrl = 'https://crossorigin.me/'+src;
+        Ext.log('image '+src+" ->"+fetchUrl);
+        return fetchUrl;
     },
     
     imagesToOffline: function(dom) {
