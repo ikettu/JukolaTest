@@ -5,7 +5,7 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
     requires:['Ext.Img'],
 
     xtype: 'welcome',
-
+    
     listeners: {
         show: function() {
             var leftMenu = Ext.Viewport.getMenus().left;
@@ -26,7 +26,7 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
         });
         
         var tpl = new Ext.XTemplate(
-            '<div style="font-size:larger; font-weight:bolder;">{[this.until(values.date)]} {text}</div>', {
+            '<div style="text-align:center; font-size:larger; font-weight:bolder;">{[this.until(values.date)]} {text}</div>', {
                until:function(date) {
                   var elapsed=Math.abs(Ext.Date.getElapsed(date)),
                   millisInMinute = (60*1000),
@@ -46,7 +46,8 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
         me.add({
            xtype:'dataview',
            store:me.eventStore,
-           itemTpl: tpl
+           itemTpl: tpl,
+           docked:'bottom'
         });
         
         me.callParent();
@@ -58,7 +59,8 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
             xtype:'image',
             src:'resources/jukola-logo.png',
             width:180,
-            height:328
+            height:328,
+            centered: true
         }
     ]
 });
