@@ -3,7 +3,11 @@ h1.xtoc, h2.xtoc, h3.xtoc, h4.xtoc, h5.xtoc, h6.xtoc {
 }
 h1.xtoc, h2.xtoc, h3.xtoc {
   font-size: larger;
+  padding-top: 1em;
 }
 h1,h2,h3,h4,h5,h6 {
   text-transform: uppercase;
+}
+p {
+  padding-top: 0.5em;
 }
