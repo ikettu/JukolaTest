@@ -18,18 +18,17 @@
                 "routeId": "map",
                 "leaf": true
             },
-/*
+
             {
-                "text": "Joukkueet 2016",
-                "iconCls": "x-fa fa-users",
-                "viewType": "offline",
-                "routeId": "teams",
+                "text": "Twitter",
+                "iconCls": "x-fa fa-twitter",
+                "viewType": "online",
+                "routeId": "twitter",
                 "version": 1,
-                "url":"https://crossorigin.me/http://results.jukola.com/tulokset/fi/j2016_ju/ju/kilpailijat/?eka=kaikki",
-                "selector":"div#site_main",
+                "url":"resources/twitter.html",
                 "leaf": true
             },
-*/            
+           
             {
                 "text": "2016 Näin toimit Jukolassa",
                 "iconCls": "x-fa fa-question",
