@@ -167,7 +167,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         width:'100%',
         height:'100%',
         store: [],
-        itemTpl: '<div style="display: flex;align-items: center;"><b>{time}</b>&nbsp;<img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>&nbsp;<b>{temp:round}&#176;C</b>&nbsp;&nbsp;<i>{windspeedms:round}<sup>m</sup>/<sub>s</sub>&nbsp;&nbsp;{precipitation1h:round}mm</i></div>'
+        itemTpl: '<div style="display: flex;align-items: center;" class="x-shadow"><b>{time}</b>&nbsp;<img src="resources/weatherSymbols/{symbol:round}.svg" width="40" height="40"/>&nbsp;<b>{temp:round}&#176;C</b>&nbsp;&nbsp;<i>{windspeedms:round}<sup>m</sup>/<sub>s</sub>&nbsp;&nbsp;{precipitation1h:round}mm</i></div>'
     }]
     
 });
