@@ -14,7 +14,8 @@ Ext.define('JukolaApp.view.main.MainController', {
         'JukolaApp.view.online.OnlineView',
         'JukolaApp.view.offline.OfflineView',
         'JukolaApp.view.offlinemap.OfflineMapView',
-        'JukolaApp.view.weather.WeatherView'
+        'JukolaApp.view.weather.WeatherView',
+        'Ext.util.Format'
     ],
 
     listen : {
@@ -46,10 +47,36 @@ Ext.define('JukolaApp.view.main.MainController', {
 
         me.createMainMenu();
         me.loadMenu();
-
-        // TODO: no working version of this yet.
+        
+        
+        window.addEventListener('online',  me.checkOnOffline.bind(me));
+        window.addEventListener('offline', me.checkOnOffline.bind(me));
     },
 
+    
+    checkOnOffline: function() {
+       var me=this, online=navigator.onLine,
+            navigationTree = me.navigationTree,
+            store = navigationTree.getStore();
+            
+       Ext.log('online: '+online);
+
+       store.each(function(rec) {
+            var type = rec.get('viewType');
+            
+            if ("online"===type) {
+                var txt = Ext.util.Format.stripTags(rec.get('text'));
+                if (online) {
+                   rec.set('text',txt);
+                } else {
+                    rec.set('text','<strike><i>'+txt+'</i></strike>');
+                }
+            }
+        
+        }, me, {filtered:true, collapsed:true});
+       
+    },
+    
     createMainMenu: function() {
         var me = this,
             menu = Ext.create('Ext.Menu', {
@@ -137,6 +164,8 @@ Ext.define('JukolaApp.view.main.MainController', {
                 Ext.log("Menu data cached");
             });
 
+            me.checkOnOffline();
+
         },
         failure: function(resp/*,opts*/) {
             Ext.log("Failed to load menu "+resp);
@@ -146,6 +175,8 @@ Ext.define('JukolaApp.view.main.MainController', {
                 Ext.log("Menu data loaded from cache ");
                 me.navigationTree.getStore().setRoot(menuData);
                 me.menuDataReady = true;
+
+                me.checkOnOffline();
             });
         }
       });
