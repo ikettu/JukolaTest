@@ -16,15 +16,13 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
 //    url:'https://crossorigin.me/http://data.fmi.fi/fmi-apikey/dd9a5197-3143-440a-8635-1373fa3d583b/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=eno&param=temperature,windspeedmsm,WindDirection,WeatherSymbol3',
     url:'https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/fmi-eno-weather', 
     
+    storeKey:'weatherData',
+
+    
     initialize: function() {
         var me=this;
         
         Ext.log('initialize');
-        
-        me.on({
-            activate : me.checkRefresh,
-            scope: me
-        });
         
         me.callParent();
     },
@@ -32,7 +30,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
      updateNode: function(newNode) {
         var me=this;
         if (newNode) {
-           me.fetchData();  
+           me.initialFetch();  
         }
     },
        
@@ -57,6 +55,27 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
             return datamap;
     },
        
+       
+    initialFetch: function() {
+        var me=this;
+        localforage.getItem(me.storeKey, function(err,cachedVersion) {
+            if (!cachedVersion) {
+                Ext.log("Did not find cached wheather.");
+                me.fetchData();
+            } else {
+              var dataview=me.down('dataview'), store=dataview.getStore();
+              Ext.log("Setting current weather from cache");
+              store.setData(cachedVersion);
+              me.checkRefresh();
+            }
+            me.on({
+                activate : me.checkRefresh,
+                scope: me
+            });
+        });
+    },
+    
+    
     fetchData:function() {
         
       var me=this,
@@ -107,6 +126,13 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
             }
             
             me.setMasked(false);
+
+            var weatherData = Ext.Array.pluck(store.getRange(),'data');
+            Ext.log('caching '+weatherData);
+            
+            localforage.setItem(me.storeKey, weatherData, function(err2, value2) {
+                Ext.log('cached weatherData '+value2+" e:"+err2);
+            });
 
  
        });
