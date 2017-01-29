@@ -149,7 +149,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
         Ext.log('checkRefresh '+now);
         
         while(store.getCount()>0 && store.first().get('ts')<now) {
-            Ext.log('Removing old weather '+store.first);
+            Ext.log('Removing old weather '+store.first());
             store.removeAt(0);
         }
         
