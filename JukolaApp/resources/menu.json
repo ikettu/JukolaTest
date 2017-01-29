@@ -37,6 +37,7 @@
                 "routeId": "ntjukola",
                 "version": 1,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2016/tervetuloa/nain-toimitaan-lappee-jukolassa/",
                 "selector":"div.entry-content",
                 "leaf": true
             },
@@ -47,6 +48,7 @@
                 "routeId": "kohjeet",
                 "version": 1,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2016/yleista/kilpailuohjeet/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2016/yleista/kilpailuohjeet/",
                 "selector":"div.entry-content",
                 "leaf": true
             },
@@ -57,6 +59,7 @@
                 "routeId": "kkutsu",
                 "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/kilpailukutsu/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
@@ -68,6 +71,7 @@
                 "routeId": "kmaasto",
                 "version": 1,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/vaihteleva-ja-vaativa-vaaramaasto/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/vaihteleva-ja-vaativa-vaaramaasto/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
