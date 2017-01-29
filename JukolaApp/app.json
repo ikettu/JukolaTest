@@ -526,7 +526,7 @@
      * Extra resources to be copied into the resource folder as specified in the "resources"
      * property of the "output" object. Folders specified in this list will be deeply copied.
      */
-    "resources": [
+    "resources": ["sw.js",
         {
             "path": "resources",
             "output": "shared"
