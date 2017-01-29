@@ -149,7 +149,9 @@ Ext.define('JukolaApp.AnalyticsManager', {
         }
         localforage.getItem(me.queueKey, function(err, queue) {
             
-            if (queue) {
+            if (!queue) {
+                me.clearSendTimer();
+            } else {
                 
                 var measurementRecord = queue.shift();
                 
@@ -173,10 +175,10 @@ Ext.define('JukolaApp.AnalyticsManager', {
                             }
                             me.initSendTimer();
                         });
+                    } else {
+                        me.initSendTimer();
                     }
-                                        
                 });
-                
             }
         });        
     },
