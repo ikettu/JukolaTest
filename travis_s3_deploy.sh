@@ -4,7 +4,7 @@ deployprod() {
   export AWS_ACCESS_KEY_ID=$JUKOLA_AWS_KEY
   export AWS_SECRET_ACCESS_KEY=$JUKOLA_AWS_SECRET
   echo "deploying with $AWS_ACCESS_KEY_ID"
-  s3cmd sync build/production/JukolaApp s3://jukolatest --acl-public --delete-removed
+  s3cmd -d -v --region=eu-west-1 sync build/production/JukolaApp/ s3://jukolatest/ --acl-public --delete-removed
 }
 
 deployprod
