@@ -30,6 +30,8 @@ before_script:
   - "cd $TRAVIS_BUILD_DIR/JukolaApp && sencha app clean && sencha app refresh && sencha app build"
   # Change directory back to the root of the repository ready for running tests
   - "cd $TRAVIS_BUILD_DIR"
+  # deploy
+  - ./travis_s3_deploy.sh
 
 addons:
   coverity_scan:
@@ -52,4 +54,4 @@ deploy:
   default_text_charset: "utf-8"
   cache_control: "no-cache"
   on:
-    branch: master
+    branch: nomaster
