@@ -2,7 +2,8 @@ deployprod() {
   sudo apt-get install s3cmd
   touch ~/.s3cfg
   export AWS_ACCESS_KEY_ID=$JUKOLA_AWS_KEY
-  export AWS_SECRET_ACCESS_KEY=$JUKOLA_AWS_SECRET   
+  export AWS_SECRET_ACCESS_KEY=$JUKOLA_AWS_SECRET
+  echo "deploying with $AWS_ACCESS_KEY_ID"
   s3cmd sync build/production/JukolaApp s3://jukolatest --acl-public --delete-removed
 }
 
