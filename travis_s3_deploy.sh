@@ -1,5 +1,9 @@
 deployprod() {
-  sudo apt-get install s3cmd
+  #sudo apt-get install s3cmd
+  sudo apt-get install python-pip python-dev build-essential
+  sudo pip install --upgrade pip
+  sudo pip install --upgrade virtualenv
+  sudo pip install s3cmd
   touch ~/.s3cfg
   export AWS_ACCESS_KEY_ID=$JUKOLA_AWS_KEY
   export AWS_SECRET_ACCESS_KEY=$JUKOLA_AWS_SECRET
