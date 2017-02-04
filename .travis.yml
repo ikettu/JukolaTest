@@ -31,6 +31,7 @@ before_script:
   # Change directory back to the root of the repository ready for running tests
   - "cd $TRAVIS_BUILD_DIR"
   # deploy
+  - chmod +x ./travis_s3_deploy.sh
   - ./travis_s3_deploy.sh
 
 addons:
