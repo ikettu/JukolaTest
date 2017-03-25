@@ -18,6 +18,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
     
     storeKey:'weatherData',
 
+    nsWildcard: Ext.browser.is.edge ? '' : '*|',
     
     initialize: function() {
         var me=this;
@@ -35,19 +36,20 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
     },
        
     createDataMap:function(doc, dataId) {
-            var i, datamap={},
-                 datas=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-'+dataId+'] *|MeasurementTVP')
+            var me=this, nswc = me.nsWildcard,
+                 i, datamap={}, 
+                 datas=doc.querySelectorAll(nswc+'MeasurementTimeseries['+nswc+'id=mts-1-1-'+dataId+'] '+nswc+'MeasurementTVP')
                  ;
- 
+ WDOC = doc;
             
             for(i in datas) {
                 if (!datas.hasOwnProperty(i)) {
                     continue;
                 }
                 var data=datas[i],
-                  time=Ext.Date.parse(data.querySelector('*|time').textContent,'c'),
+                  time=Ext.Date.parse(data.querySelector(nswc+'time').textContent,'c'),
                   timeFormatted = Ext.Date.format(time, 'D H:i'),
-                  value=data.querySelector('*|value').textContent;
+                  value=data.querySelector(nswc+'value').textContent;
                 
                 datamap[timeFormatted] = value;
             }
@@ -95,8 +97,8 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
        req.addEventListener('load',function()  {
             var doc= req.response;
 
-            var i,
-                 temps=doc.querySelectorAll('*|MeasurementTimeseries[*|id=mts-1-1-Temperature] *|MeasurementTVP'),
+            var i, nswc = me.nsWildcard,
+                 temps=doc.querySelectorAll(nswc+'MeasurementTimeseries['+nswc+'id=mts-1-1-Temperature] '+nswc+'MeasurementTVP'),
                  symbolmap = me.createDataMap(doc,'WeatherSymbol3'),
                  precipitation1hmap = me.createDataMap(doc,'Precipitation1h'),
                  windspeedmsmap = me.createDataMap(doc,'WindSpeedMS')
@@ -110,9 +112,9 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
                     continue;
                 }
                 var tempElem=temps[i],
-                  time=Ext.Date.parse(tempElem.querySelector('*|time').textContent,'c'),
+                  time=Ext.Date.parse(tempElem.querySelector(nswc+'time').textContent,'c'),
                   timeFormatted = Ext.Date.format(time, 'D H:i'),
-                  temp=tempElem.querySelector('*|value').textContent;
+                  temp=tempElem.querySelector(nswc+'value').textContent;
                 
                 Ext.log('adding '+temp);
                 store.add({
