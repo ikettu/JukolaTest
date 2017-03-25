@@ -336,6 +336,10 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
         Ext.log("3");
 
         req.open('GET',url,true);
+        
+        // forcing utf-8
+        req.overrideMimeType('text/html; charset=utf-8');
+        
         req.responseType='document';
 
         req.addEventListener('load',function()  {
