@@ -28,7 +28,17 @@
                 "url":"resources/twitter.html",
                 "leaf": true
             },
-           
+ /*           
+            {
+                "text": "Videot",
+                "iconCls": "x-fa fa-youtube",
+                "viewType": "online",
+                "routeId": "youtube",
+                "version": 1,
+                "url":"resources/youtube.html",
+                "leaf": true
+            },
+*/           
             {
                 "text": "2016 Näin toimit Jukolassa",
                 "iconCls": "x-fa fa-question",
