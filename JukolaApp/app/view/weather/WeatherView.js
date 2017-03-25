@@ -18,6 +18,8 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
     
     storeKey:'weatherData',
 
+    stripNS : Ext.browser.is.edge,
+    
     nsWildcard: Ext.browser.is.edge ? '' : '*|',
     
     initialize: function() {
@@ -80,7 +82,7 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
     
     fetchData:function() {
         
-      var me=this,
+      var me=this, stripNS = this.stripNS,
           dataview=me.down('dataview'), store=dataview.getStore(),
           req = new XMLHttpRequest();
 
@@ -92,11 +94,16 @@ Ext.define('JukolaApp.view.weather.WeatherView', {
   
           
        req.open('GET', me.url, true);
-       req.responseType='document';
+       req.responseType=stripNS ? 'text' : 'document';
 
        req.addEventListener('load',function()  {
             var doc= req.response;
 
+            if (stripNS) {
+                doc = doc.replace(/<(\/?)([^:>\s]*:)?([^>]+)>/g, "<$1$3>").replace(/gml:/g, "");
+                doc = new DOMParser().parseFromString(doc,'text/xml');
+            }
+WDOCX = doc;            
             var i, nswc = me.nsWildcard,
                  temps=doc.querySelectorAll(nswc+'MeasurementTimeseries['+nswc+'id=mts-1-1-Temperature] '+nswc+'MeasurementTVP'),
                  symbolmap = me.createDataMap(doc,'WeatherSymbol3'),
