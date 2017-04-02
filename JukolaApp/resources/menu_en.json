@@ -1,0 +1,64 @@
+  {
+   "success": true,
+   "errors": null,
+   "children": {
+        "expanded": true,
+        "children": [
+            {
+                "text": "Jukola 2017",
+                "iconCls": "x-fa fa-home",
+                "viewType": "welcome",
+                "routeId": "welcome",
+                "leaf": true
+            },
+            {
+                "text": "Competition centre",
+                "iconCls": "x-fa fa-map",
+                "viewType": "offlinemap",
+                "routeId": "map",
+                "leaf": true
+            },
+
+            {
+                "text": "Twitter",
+                "iconCls": "x-fa fa-twitter",
+                "viewType": "online",
+                "routeId": "twitter",
+                "version": 1,
+                "url":"resources/twitter.html",
+                "leaf": true
+            },
+            {
+                "text": "2017 Event Invitation",
+                "iconCls": "x-fa fa-star-o",
+                "viewType": "offline",
+                "routeId": "kkutsu",
+                "version": 2,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/event-invitation/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "2017 Terrain",
+                "iconCls": "x-fa fa-tree",
+                "viewType": "offline",
+                "routeId": "kmaasto",
+                "version": 1,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/terrain-and-map/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/vaihteleva-ja-vaativa-vaaramaasto/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "Weather",
+                "iconCls": "x-fa fa-cloud",
+                "viewType": "weather",
+                "routeId": "weather",
+                "leaf": true
+             }
+        ]
+   }
+ }

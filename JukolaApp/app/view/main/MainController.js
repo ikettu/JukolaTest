@@ -28,6 +28,7 @@ Ext.define('JukolaApp.view.main.MainController', {
 
     routes: {
         'reload': 'clearCaches',
+        'locale/:locale': 'changeLocale',
         ':node': 'onRouteChange'
     },
 
@@ -39,6 +40,9 @@ Ext.define('JukolaApp.view.main.MainController', {
     menuDataReady: false,
     
     menuCover: true,
+    
+    allowedLocales : ['fi','en'],
+    defaultLocale : 'fi',
 
     init: function (view) {
         var me = this;
@@ -46,11 +50,26 @@ Ext.define('JukolaApp.view.main.MainController', {
         me.callParent([view]);
 
         me.createMainMenu();
-        me.loadMenu();
+        
+        // fetch trough locale
+        localforage.getItem('locale', function(err, value) {
+            var locale = value;
+            if (!locale) {
+                locale = me.toAllowedLocale(me.browserLanguage());
+                localforage.setItem('locale',locale, function() {
+                    Ext.log('save browser locale '+locale+' as default');
+                }); 
+            }
+            me.loadMenu('resources/menu'+(me.defaultLocale == locale ? '' : '_'+locale)+'.json');
+        });
+  
+ //       me.loadMenu();
         
         
         window.addEventListener('online',  me.checkOnOffline.bind(me));
         window.addEventListener('offline', me.checkOnOffline.bind(me));
+        
+        X = me;
     },
 
     
@@ -127,6 +146,10 @@ Ext.define('JukolaApp.view.main.MainController', {
                            message :'<div><b>&copy; 2016-2017 @ikettu &amp; @kontza</b></div><div><i>https://github.com/ikettu/JukolaTest</i></div>' 
                         });
                     }
+                },{
+                    xtype:'component',
+                    data:me.allowedLocales,
+                    tpl:'<tpl for="."><span style="font-size:larger; margin-left: 2em;" onclick="JukolaApp.app.redirectTo(\'locale\/{.}\');">&nbsp;{.}&nbsp;</span></tpl>'
                 }]
             }),
             innerItems = menu.getInnerItems();
@@ -148,6 +171,24 @@ Ext.define('JukolaApp.view.main.MainController', {
         });
     },
 
+    browserLanguage: function() {
+      return navigator.language;  
+    },
+    
+    toAllowedLocale: function(newLocale) {
+      return  this.allowedLocales.indexOf(newLocale) < 0 ? this.defaultLocale : newLocale;  
+    },
+    
+    changeLocale: function(newLocale) {
+        
+      var me=this, locale = me.toAllowedLocale(newLocale); 
+        
+      localforage.setItem('locale',locale, function() {
+        me.redirectTo('');
+        Ext.defer(function() {location.reload(false);},500);
+      }); 
+    },
+    
     loadMenu: function(purl)  {
       var me = this, url=purl||'resources/menu.json'
       ;
