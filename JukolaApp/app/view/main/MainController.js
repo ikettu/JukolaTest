@@ -149,7 +149,7 @@ Ext.define('JukolaApp.view.main.MainController', {
                 },{
                     xtype:'component',
                     data:me.allowedLocales,
-                    tpl:'<tpl for="."><span style="font-size:larger; margin-left: 2em;" onclick="JukolaApp.app.redirectTo(\'locale\/{.}\');">&nbsp;{.}&nbsp;</span></tpl>'
+                    tpl:'<div><tpl for="."><span style="font-size:larger; margin-left: 2em;" onclick="JukolaApp.app.redirectTo(\'locale\/{.}\');">&nbsp;{.}&nbsp;</span></tpl></div>'
                 }]
             }),
             innerItems = menu.getInnerItems();
