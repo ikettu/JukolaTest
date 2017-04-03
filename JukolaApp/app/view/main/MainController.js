@@ -99,6 +99,7 @@ Ext.define('JukolaApp.view.main.MainController', {
     createMainMenu: function() {
         var me = this,
             menu = Ext.create('Ext.Menu', {
+                scrollable: true,
                 items: [{
                    xtype:'img',
                    src:'resources/Asikainen-640.jpg',
@@ -148,6 +149,8 @@ Ext.define('JukolaApp.view.main.MainController', {
                     }
                 },{
                     xtype:'component',
+                    width:'100%',
+                    height:'30px',
                     data:me.allowedLocales,
                     tpl:'<div><tpl for="."><span style="font-size:larger; margin-left: 2em;" onclick="JukolaApp.app.redirectTo(\'locale\/{.}\');">&nbsp;{.}&nbsp;</span></tpl></div>'
                 }]
