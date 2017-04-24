@@ -38,7 +38,8 @@
                 "url":"resources/youtube.html",
                 "leaf": true
             },
-*/           
+*/
+ /*
             {
                 "text": "2016 Näin toimit Jukolassa",
                 "iconCls": "x-fa fa-question",
@@ -59,6 +60,19 @@
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2016/yleista/kilpailuohjeet/",
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2016/yleista/kilpailuohjeet/",
                 "selector":"div.entry-content",
+                "leaf": true
+            },
+*/            
+            {
+                "text": "2017 Ruoka ja juoma",
+                "iconCls": "x-fa fa-coffee",
+                "viewType": "offline",
+                "routeId": "ruoka",
+                "version": 1,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/ruoka-ja-juoma/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/ruoka-ja-juoma/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
                 "leaf": true
             },
             {
