@@ -69,7 +69,7 @@
                 "viewType": "offline",
                 "routeId": "ruoka",
                 "version": 1,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/ruoka-ja-juoma/",
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/ruoka-ja-juoma/",
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2017/ruoka-ja-juoma/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
