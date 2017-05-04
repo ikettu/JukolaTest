@@ -8,7 +8,7 @@ deployprod() {
   export AWS_ACCESS_KEY_ID=$JUKOLA_AWS_KEY
   export AWS_SECRET_ACCESS_KEY=$JUKOLA_AWS_SECRET
 
-  s3cmd -v --region=eu-west-1 sync build/production/JukolaApp/ s3://jukolatest/ --acl-public --delete-removed
+  s3cmd -v --no-mime-magic --guess-mime-type --region=eu-west-1 sync build/production/JukolaApp/ s3://jukolatest/ --acl-public --delete-removed
 }
 
 if [[ $TRAVIS_PULL_REQUEST != 'false' ]]; then
