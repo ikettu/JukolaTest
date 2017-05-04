@@ -15,7 +15,7 @@
                 "text": "Kilpailukeskus",
                 "iconCls": "x-fa fa-map",
                 "viewType": "offlineimage",
-                "routeId": "map",
+                "routeId": "mapimage",
                 "leaf": true
             },
 

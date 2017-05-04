@@ -98,17 +98,29 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
     initLayers: function(/*node*/) {
         var me=this,
-            extent=[0,0,1132, 795],
+//            extent=[0,0,1132, 795],
+            extent=[0,0,4426,5123],
             projection = new ol.proj.Projection({
                code:'x-image',
                units:'pixels',
                extent: extent
             }),
-            
+/*            
             layer1 = new ol.layer.Image({
                 imageLoadFunction: me.olCachingImageLoadFunc,
                 source: new ol.source.ImageStatic({
                     url : 'resources/map/Eno2017kisakeskus_viestinta_1.gif',
+                    projection: projection,
+                    imageExtent: extent,
+                    imageSize: [extent[2], extent[3]]
+                })
+            });
+*/            
+            layer1 = new ol.layer.Image({
+                imageLoadFunction: me.olCachingImageLoadFunc,
+                extent: extent,
+                source: new ol.source.ImageStatic({
+                    url : 'resources/map/Eno2017kisakeskus_viestinta_025m.gif',
                     projection: projection,
                     imageExtent: extent,
                     imageSize: [extent[2], extent[3]]
@@ -129,7 +141,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
             var baseLayer = layers[0],
                 projection = baseLayer.getSource().getProjection(),
-                center = [500,600],
+                extent = baseLayer.getExtent(),
+                center = extent? ol.extent.getCenter(extent) : [100,100],
                 olmap = new ol.Map({
 
                     layers: layers,
@@ -139,9 +152,15 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                     view: new ol.View({
                         projection : projection,
                         center: center,
+                        extent: extent,
+/*                        
                         resolution: 1,
                         minResolution: 0.25,
                         maxResolution: 2
+*/                        
+                        resolution: 2,
+                        minResolution: 0.5,
+                        maxResolution: 4
                    })
                 }),
 
