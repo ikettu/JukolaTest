@@ -98,14 +98,13 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
     initLayers: function(/*node*/) {
         var me=this,
-//            extent=[0,0,1132, 795],
-            extent=[0,0,4426,5123],
+            extent=[0,0,1132, 795],
+//            extent=[0,0,4426,5123],
             projection = new ol.proj.Projection({
                code:'x-image',
                units:'pixels',
                extent: extent
             }),
-/*            
             layer1 = new ol.layer.Image({
                 imageLoadFunction: me.olCachingImageLoadFunc,
                 source: new ol.source.ImageStatic({
@@ -115,7 +114,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                     imageSize: [extent[2], extent[3]]
                 })
             });
-*/            
+/*            
             layer1 = new ol.layer.Image({
                 imageLoadFunction: me.olCachingImageLoadFunc,
                 extent: extent,
@@ -126,7 +125,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                     imageSize: [extent[2], extent[3]]
                 })
             });
-
+*/
 
         return [layer1];
     },
@@ -153,14 +152,15 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                         projection : projection,
                         center: center,
                         extent: extent,
-/*                        
+                        
                         resolution: 1,
                         minResolution: 0.25,
                         maxResolution: 2
-*/                        
+/*                        
                         resolution: 2,
                         minResolution: 0.5,
                         maxResolution: 4
+*/                        
                    })
                 }),
 
