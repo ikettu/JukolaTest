@@ -14,6 +14,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         'JukolaApp.view.online.OnlineView',
         'JukolaApp.view.offline.OfflineView',
         'JukolaApp.view.offlinemap.OfflineMapView',
+        'JukolaApp.view.offlinemap.OfflineImageView',
         'JukolaApp.view.weather.WeatherView',
         'Ext.util.Format'
     ],
