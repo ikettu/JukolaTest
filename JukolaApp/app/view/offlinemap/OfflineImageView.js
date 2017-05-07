@@ -196,9 +196,13 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
               })
             })
         }));
+        
+        var mapExtent = me.map.getLayers().item(0).getExtent(),
+            layerExtent = mapExtent ? [-mapExtent[2], -mapExtent[3], mapExtent[2]*2, mapExtent[3]*2]: undefined;
 
         me.geolocationLayer = new ol.layer.Vector({
             map : me.map,
+            extent : layerExtent,
             projection: me.map.getView().getProjection(),
             source : new ol.source.Vector({
                 features: [me.positionFeature]
