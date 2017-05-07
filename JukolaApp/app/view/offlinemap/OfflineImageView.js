@@ -2,7 +2,7 @@
 Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
     extend: 'Ext.Container',
 
-    requires: ['Ext.LoadMask'],
+    requires: ['Ext.LoadMask','Ext.Toast'],
 
     xtype: 'offlineimage',
 
@@ -22,13 +22,15 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
     positionFeature : undefined,
 
     
+    imageProjection: ol.proj.get('EPSG:3067'),
+    
     initialize: function() {
         var me = this;
         Ext.log("map initialize");
         me.callParent();
         me.initMap();
     
-        var tracking = me.getNode().get('tracking')||false;
+        var tracking = me.getNode().get('tracking')||true;
         
         if (tracking) {
             me.initGeolocation();
@@ -98,7 +100,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
     initLayers: function(/*node*/) {
         var me=this,
-            extent=[0,0,1132, 795],
+            extent=[0,0,1106, 1281],
 //            extent=[0,0,4426,5123],
             projection = new ol.proj.Projection({
                code:'x-image',
@@ -107,6 +109,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
             }),
             layer1 = new ol.layer.Image({
                 imageLoadFunction: me.olCachingImageLoadFunc,
+                extent: extent,
                 source: new ol.source.ImageStatic({
                     url : 'resources/map/Eno2017kisakeskus_viestinta_1.gif',
                     projection: projection,
@@ -141,7 +144,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
             var baseLayer = layers[0],
                 projection = baseLayer.getSource().getProjection(),
                 extent = baseLayer.getExtent(),
-                center = extent? ol.extent.getCenter(extent) : [100,100],
+                center = [500,800], //extent? ol.extent.getCenter(extent) : [100,100],
                 olmap = new ol.Map({
 
                     layers: layers,
@@ -154,8 +157,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                         extent: extent,
                         
                         resolution: 1,
-                        minResolution: 0.25,
-                        maxResolution: 2
+                        minResolution: 0.5,
+                        maxResolution: 4
 /*                        
                         resolution: 2,
                         minResolution: 0.5,
@@ -196,6 +199,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
         me.geolocationLayer = new ol.layer.Vector({
             map : me.map,
+            projection: me.map.getView().getProjection(),
             source : new ol.source.Vector({
                 features: [me.positionFeature]
             })
@@ -204,7 +208,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
       if (!me.geolocation) {
         me.geolocation = new ol.Geolocation({
-            projection : me.map.getView().getProjection(),
+            projection : me.imageProjection,
             tracking : false,
             trackingOptions: {
                  maximumAge : 15000
@@ -212,6 +216,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
         });
 
         me.geolocation.on('error', function(error) {
+          Ext.log("error: "+error+" "+error.message);
           Ext.toast({
             message: error.message,
             timeout: 5000
@@ -221,12 +226,34 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
         me.geolocation.on('change:position', function() {
            var coordinates = me.geolocation.getPosition();
            Ext.log("coords: "+coordinates);
-           me.positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
+           var pixel = me.coordToPixel(coordinates);
+           Ext.log("pixel:"+pixel);
+           me.positionFeature.setGeometry(pixel ? new ol.geom.Point(pixel) : null);
         });
       }
 
     },
 
+    
+    coordToPixel: function(coordinate) {
+      
+      // https://en.wikipedia.org/wiki/World_file
+      
+      // eno 62,789195795  30,156384325
+      
+      var w=1106, h=1281;
+      
+      var a=0.984807753000, b=0.173648177700, c=660158.3194,
+          d=0.173648177700, e=-0.984807753000, f=6966304.4200;
+      
+      var coord={x:coordinate[0], y:coordinate[1]};
+      
+      var x = ( (e*coord.x) - (b*coord.y) + (b*f) - (e*c) ) /  ((a*e) - (d*b)),
+          y = ( (-d*coord.x) + (a*coord.y) + (d*c) - (a*f) ) / ((a*e) - (d*b))
+          ;
+          return [x,h-y];
+    },
+    
     startTracking: function() {
         var me=this;
         Ext.log("Start tracking.");
