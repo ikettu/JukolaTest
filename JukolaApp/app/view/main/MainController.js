@@ -39,9 +39,9 @@ Ext.define('JukolaApp.view.main.MainController', {
     collapsedCls: 'main-nav-collapsed',
 
     menuDataReady: false,
-    
+
     menuCover: true,
-    
+
     allowedLocales : ['fi','en'],
     defaultLocale : 'fi',
 
@@ -51,7 +51,7 @@ Ext.define('JukolaApp.view.main.MainController', {
         me.callParent([view]);
 
         me.createMainMenu();
-        
+
         // fetch trough locale
         localforage.getItem('locale', function(err, value) {
             var locale = value;
@@ -59,31 +59,31 @@ Ext.define('JukolaApp.view.main.MainController', {
                 locale = me.toAllowedLocale(me.browserLanguage());
                 localforage.setItem('locale',locale, function() {
                     Ext.log('save browser locale '+locale+' as default');
-                }); 
+                });
             }
             me.loadMenu('resources/menu'+(me.defaultLocale == locale ? '' : '_'+locale)+'.json');
         });
-  
+
  //       me.loadMenu();
-        
-        
+
+
         window.addEventListener('online',  me.checkOnOffline.bind(me));
         window.addEventListener('offline', me.checkOnOffline.bind(me));
-        
+
         X = me;
     },
 
-    
+
     checkOnOffline: function() {
        var me=this, online=navigator.onLine,
             navigationTree = me.navigationTree,
             store = navigationTree.getStore();
-            
+
        Ext.log('online: '+online);
 
        store.each(function(rec) {
             var type = rec.get('viewType');
-            
+
             if ("online"===type) {
                 var txt = Ext.util.Format.stripTags(rec.get('text'));
                 if (online) {
@@ -92,11 +92,11 @@ Ext.define('JukolaApp.view.main.MainController', {
                     rec.set('text','<strike><i>'+txt+'</i></strike>');
                 }
             }
-        
+
         }, me, {filtered:true, collapsed:true});
-       
+
     },
-    
+
     createMainMenu: function() {
         var me = this,
             menu = Ext.create('Ext.Menu', {
@@ -145,7 +145,7 @@ Ext.define('JukolaApp.view.main.MainController', {
                         Ext.Msg.show({
                            title:'About',
                            // iconCls:'x-fa fa-info-circle',
-                           message :'<div><b>&copy; 2016-2017 @ikettu &amp; @kontza</b></div><div><i>https://github.com/ikettu/JukolaTest</i></div>' 
+                           message :'<div><b>&copy; 2016-2017 @ikettu &amp; @kontza</b></div><div><i>https://github.com/ikettu/JukolaTest</i></div>'
                         });
                     }
                 },{
@@ -163,12 +163,14 @@ Ext.define('JukolaApp.view.main.MainController', {
         } else {
             me.navigationTree = {};
         }
+
+        window.NAV_TREE = me.navigationTree;
         Ext.Viewport.setMenu(menu, {
             side: 'left',
             cover: me.menuCover,
             reveal: !me.menuCover
         });
-        
+
         me.on({
             edgeswipe: function(x) { Ext.log('x'+x);},
             swipe: function(y) { Ext.log('y'+y);}
@@ -176,23 +178,23 @@ Ext.define('JukolaApp.view.main.MainController', {
     },
 
     browserLanguage: function() {
-      return navigator.language;  
+      return navigator.language;
     },
-    
+
     toAllowedLocale: function(newLocale) {
-      return  this.allowedLocales.indexOf(newLocale) < 0 ? this.defaultLocale : newLocale;  
+      return  this.allowedLocales.indexOf(newLocale) < 0 ? this.defaultLocale : newLocale;
     },
-    
+
     changeLocale: function(newLocale) {
-        
-      var me=this, locale = me.toAllowedLocale(newLocale); 
-        
+
+      var me=this, locale = me.toAllowedLocale(newLocale);
+
       localforage.setItem('locale',locale, function() {
         me.redirectTo('');
         Ext.defer(function() {location.reload(false);},500);
-      }); 
+      });
     },
-    
+
     loadMenu: function(purl)  {
       var me = this, url=purl||'resources/menu.json'
       ;
@@ -211,6 +213,16 @@ Ext.define('JukolaApp.view.main.MainController', {
 
             me.checkOnOffline();
 
+            // Try to hide the top level expander.
+            var rootNode = me.navigationTree.getStore().getRootNode();
+            if (rootNode) {
+                var firstChildItem = me.navigationTree.getItem(rootNode.firstChild);
+                if (firstChildItem) {
+                    if (firstChildItem.expanderElement) {
+                        firstChildItem.expanderElement.hide();
+                    }
+                }
+            }
         },
         failure: function(resp/*,opts*/) {
             Ext.log("Failed to load menu "+resp);
