@@ -64,6 +64,18 @@
             },
 */            
             {
+                "text": "2017 Kilpailuohjeet",
+                "iconCls": "x-fa fa-star-o",
+                "viewType": "offline",
+                "routeId": "kohjeet",
+                "version": 2,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/kilpailuohjeet/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
                 "text": "2017 Ruoka ja juoma",
                 "iconCls": "x-fa fa-coffee",
                 "viewType": "offline",
@@ -71,18 +83,6 @@
                 "version": 1,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/ruoka-ja-juoma/",
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2017/ruoka-ja-juoma/",
-                "selector":"section.entry-content",
-                "tocSelector":"h3",
-                "leaf": true
-            },
-            {
-                "text": "2017 Kilpailukutsu",
-                "iconCls": "x-fa fa-star-o",
-                "viewType": "offline",
-                "routeId": "kkutsu",
-                "version": 2,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/kilpailukutsu/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true

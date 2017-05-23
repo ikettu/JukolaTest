@@ -14,8 +14,8 @@
             {
                 "text": "Competition centre",
                 "iconCls": "x-fa fa-map",
-                "viewType": "offlinemap",
-                "routeId": "map",
+                "viewType": "offlineimage",
+                "routeId": "mapimage",
                 "leaf": true
             },
 
@@ -29,12 +29,12 @@
                 "leaf": true
             },
             {
-                "text": "2017 Event Invitation",
+                "text": "2017 Competition Instructions",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
-                "routeId": "kkutsu",
+                "routeId": "kohjeet",
                 "version": 2,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/event-invitation/",
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/competition-instructions/",
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
