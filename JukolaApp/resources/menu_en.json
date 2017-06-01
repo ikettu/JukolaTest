@@ -29,6 +29,18 @@
                 "leaf": true
             },
             {
+                "text": "2017 Arrival",
+                "iconCls": "x-fa fa-bus",
+                "viewType": "offline",
+                "routeId": "kohjeet",
+                "version": 2,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/arrival/",
+//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
                 "text": "2017 Competition Instructions",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
