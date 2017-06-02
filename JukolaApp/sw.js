@@ -8,6 +8,7 @@
  
   global.toolbox.options.debug = true;
   
+  self.toolbox.router.get('/', self.toolbox.networkFirst);
   self.toolbox.router.get('index.html', self.toolbox.networkFirst);
   self.toolbox.router.get('resources/menu(.*).json', self.toolbox.networkFirst);
 

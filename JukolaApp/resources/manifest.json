@@ -1,5 +1,6 @@
 {
  "name": "JukolaApp",
+ "short_name": "JukolaApp",
  "descirption": "Mobile application for Jukola Relay competitors and spectators.",
  "display": "standalone",
  "dir": "ltr",
