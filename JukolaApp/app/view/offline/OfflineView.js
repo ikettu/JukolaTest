@@ -373,6 +373,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             html:'',
             width:'100%',
             height:'100%',
+            margin: 2,
             scrollable: true
         }, {
             xtype:'container',
