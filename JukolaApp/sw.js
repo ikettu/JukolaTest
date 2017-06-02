@@ -11,6 +11,7 @@
   self.toolbox.router.get('/', self.toolbox.networkFirst);
   self.toolbox.router.get('index.html', self.toolbox.networkFirst);
   self.toolbox.router.get('resources/menu(.*).json', self.toolbox.networkFirst);
+  self.toolbox.router.get('resources/JukolaApp-all.css', self.toolbox.networkFirst);
 
   self.toolbox.router.get('resources/(.*)', self.toolbox.cacheFirst, {  
     cache: {
