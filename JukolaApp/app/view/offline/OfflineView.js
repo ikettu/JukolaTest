@@ -21,10 +21,12 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
     
     imagePrefixMap:[{
 //        'http://www.jukola.com/' : ' https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacom/'
-        'http://www.jukola.com/' : 'https://crossorigin.me/https://www.jukola.com/'
-//        'http://www.jukola.com/2017/' : 'https://do934w2wzk7ql.cloudfront.net/2017/',
+//        'http://www.jukola.com/' : 'https://crossorigin.me/https://www.jukola.com/'
+        'http://www.jukola.com/2017/' : 'https://do934w2wzk7ql.cloudfront.net/2017/',
 //        'http://www.jukola.com/2016/' : 'https://do934w2wzk7ql.cloudfront.net/2016/',
  
+    },{
+        'http://www.jukola.com/' : 'https://crossorigin.me/https://www.jukola.com/'
     }],
 
     getKey:function(key) {
