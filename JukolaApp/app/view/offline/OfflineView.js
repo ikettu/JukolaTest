@@ -193,6 +193,10 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             img.src = onePixel;
             img.srcset = '';
             img.sizes = '';
+            
+            if (img.width > 0 && Ext.isChrome) {
+                img.style="max-width: 100%; height:auto;"+img.style;
+            }
 
 
             localforage.getItem(key, function(err, value) {
