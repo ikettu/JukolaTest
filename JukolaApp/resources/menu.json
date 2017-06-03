@@ -105,7 +105,7 @@
                 "iconCls": "x-fa fa-tree",
                 "viewType": "offline",
                 "routeId": "kmaasto",
-                "version": 1,
+                "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/maasto-ja-kartta/",
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2017/vaihteleva-ja-vaativa-vaaramaasto/",
                 "selector":"section.entry-content",
