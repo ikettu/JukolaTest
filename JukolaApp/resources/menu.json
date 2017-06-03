@@ -28,6 +28,7 @@
                 "url":"resources/twitter.html",
                 "leaf": true
             },
+
  /*           
             {
                 "text": "Videot",
@@ -109,6 +110,16 @@
 //                "url":"https://do934w2wzk7ql.cloudfront.net/2017/vaihteleva-ja-vaativa-vaaramaasto/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "Pikalinkit",
+                "iconCls": "x-fa fa-external-link",
+                "viewType": "online",
+                "routeId": "klinks",
+                "version": 1,
+                "url":"resources/linkit.html",
+ //               "url":"https://results.jukola.com/tulokset/fi/",
                 "leaf": true
             },
             {
