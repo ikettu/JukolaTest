@@ -112,6 +112,7 @@
                 "tocSelector":"h3",
                 "leaf": true
             },
+/*
             {
                 "text": "Pikalinkit",
                 "iconCls": "x-fa fa-external-link",
@@ -122,6 +123,7 @@
  //               "url":"https://results.jukola.com/tulokset/fi/",
                 "leaf": true
             },
+*/
             {
                 "text": "Sää Enossa",
                 "iconCls": "x-fa fa-cloud",
