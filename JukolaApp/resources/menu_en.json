@@ -52,6 +52,7 @@
                 "tocSelector":"h3",
                 "leaf": true
             },
+/*            
             {
                 "text": "2017 Terrain",
                 "iconCls": "x-fa fa-tree",
@@ -64,6 +65,7 @@
                 "tocSelector":"h3",
                 "leaf": true
             },
+*/            
             {
                 "text": "Weather",
                 "iconCls": "x-fa fa-cloud",
