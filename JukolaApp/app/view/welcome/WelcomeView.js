@@ -46,11 +46,11 @@ Ext.define('JukolaApp.view.welcome.WelcomeView', {
         me.add([{
            html:'<div style="text-align:center; font-size:larger; font-weight:bolder;">#joensuu #jukola</div>',
            docked:'bottom'
-        },{
-           xtype:'dataview',
-           store:me.eventStore,
-           itemTpl: tpl,
-           docked:'bottom'
+//        },{
+//           xtype:'dataview',
+//           store:me.eventStore,
+//           itemTpl: tpl,
+//           docked:'bottom'
         }]);
         
         me.callParent();
