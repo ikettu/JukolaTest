@@ -30,7 +30,7 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
         me.callParent();
         me.initMap();
     
-        var tracking = me.getNode().get('tracking')||true;
+        var tracking = me.getNode().get('tracking')||false;
         
         if (tracking) {
             me.initGeolocation();
@@ -100,7 +100,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
 
     initLayers: function(/*node*/) {
         var me=this,
-            extent=[0,0,1106, 1281],
+            extent=[0,0,843,596], // kisakeskus_fi.png
+//            extent=[0,0,1106, 1281], // Eno2017kisakeskus_viestinta_1.gif
 //            extent=[0,0,4426,5123],
             projection = new ol.proj.Projection({
                code:'x-image',
@@ -111,7 +112,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
                 imageLoadFunction: me.olCachingImageLoadFunc,
                 extent: extent,
                 source: new ol.source.ImageStatic({
-                    url : 'resources/map/Eno2017kisakeskus_viestinta_1.gif',
+//                    url : 'resources/map/Eno2017kisakeskus_viestinta_1.gif',
+                    url : 'resources/map/kisakeskus_FI.png',
                     projection: projection,
                     imageExtent: extent,
                     imageSize: [extent[2], extent[3]]
@@ -144,7 +146,8 @@ Ext.define('JukolaApp.view.offlinemap.OfflineImageView', {
             var baseLayer = layers[0],
                 projection = baseLayer.getSource().getProjection(),
                 extent = baseLayer.getExtent(),
-                center = [500,800], //extent? ol.extent.getCenter(extent) : [100,100],
+                center = [500,300],
+//                center = [500,800], //extent? ol.extent.getCenter(extent) : [100,100],
                 olmap = new ol.Map({
 
                     layers: layers,
