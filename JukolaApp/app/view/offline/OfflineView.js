@@ -194,7 +194,7 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             img.srcset = '';
             img.sizes = '';
             
-            if (img.width > 0 && Ext.isChrome) {
+            if (img.width > 0) {
                 img.style="max-width: 100%; height:auto;"+img.style;
             }
 
