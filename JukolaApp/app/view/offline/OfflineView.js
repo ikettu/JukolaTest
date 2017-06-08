@@ -196,6 +196,14 @@ Ext.define('JukolaApp.view.offline.OfflineView', {
             
             if (img.width > 0) {
                 img.style="max-width: 100%; height:auto;"+img.style;
+                
+                img.onclick = function() {
+                    if (this.style.maxWidth) {
+                        this.style.maxWidth = '';
+                    } else {
+                        this.style.maxWidth='100%';
+                    }
+                };
             }
 
 
