@@ -14,7 +14,7 @@
   self.toolbox.router.get('resources/JukolaApp-all.css', self.toolbox.networkFirst);
   self.toolbox.router.get('resources/(.*).html', self.toolbox.networkFirst);
 
-  self.toolbox.router.get('resources/(.*)', self.toolbox.cacheFirst, {  
+  self.toolbox.router.get('resources/(.*)', self.toolbox.networkFirst, {  
     cache: {
       name: 'resources-libs-cache-v'+VERSION,
       maxEntries: 50
