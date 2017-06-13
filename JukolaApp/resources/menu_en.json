@@ -18,24 +18,46 @@
                 "routeId": "mapimage",
                 "leaf": true
             },
-
             {
-                "text": "Twitter",
-                "iconCls": "x-fa fa-twitter",
-                "viewType": "online",
-                "routeId": "twitter",
-                "version": 1,
-                "url":"resources/twitter.html",
+                "text": "Schedule",
+                "iconCls": "x-fa fa-bus",
+                "viewType": "offline",
+                "routeId": "kaikataulu",
+                "version": 3,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/schedule/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
                 "leaf": true
             },
             {
-                "text": "2017 Arrival",
+                "text": "Food & Drink",
+                "iconCls": "x-fa fa-coffee",
+                "viewType": "offline",
+                "routeId": "kruoka",
+                "version": 2,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/food-drink/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "Opening Hours",
+                "iconCls": "x-fa fa-clock-o",
+                "viewType": "offline",
+                "routeId": "kaukiolot",
+                "version": 2,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/opening-hours/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "Arrival",
                 "iconCls": "x-fa fa-bus",
                 "viewType": "offline",
                 "routeId": "ksaapuminen",
                 "version": 3,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/arrival/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
@@ -47,25 +69,39 @@
                 "routeId": "kohjeet",
                 "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/competition-instructions/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
             },
-/*            
             {
-                "text": "2017 Terrain",
-                "iconCls": "x-fa fa-tree",
+                "text": "How to operate in Joensuu-Jukola",
+                "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
-                "routeId": "kmaasto",
-                "version": 1,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/terrain-and-map/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/vaihteleva-ja-vaativa-vaaramaasto/",
+                "routeId": "kntjj",
+                "version": 3,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/en/how-to-operate-in-joensuu-jukola/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
             },
-*/            
+            {
+                "text": "Twitter",
+                "iconCls": "x-fa fa-twitter",
+                "viewType": "online",
+                "routeId": "twitter",
+                "version": 1,
+                "url":"resources/twitter.html",
+                "leaf": true
+            },
+            {
+                "text": "Bookmarks",
+                "iconCls": "x-fa fa-external-link",
+                "viewType": "online",
+                "routeId": "klinks",
+                "version": 1,
+                "url":"resources/linkit_en.html",
+                "leaf": true
+            },
             {
                 "text": "Weather",
                 "iconCls": "x-fa fa-cloud",

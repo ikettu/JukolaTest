@@ -23,8 +23,8 @@
                 "iconCls": "x-fa fa-calendar",
                 "viewType": "offline",
                 "routeId": "kaikataulu",
-                "version": 2,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/oheisohjelma/",
+                "version": 3,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/aikataulu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
@@ -33,27 +33,24 @@
                 "text": "Ruoka ja juoma",
                 "iconCls": "x-fa fa-coffee",
                 "viewType": "offline",
-                "routeId": "ruoka",
+                "routeId": "kruoka",
                 "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/ruoka-ja-juoma/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/ruoka-ja-juoma/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
             },
-/*            
             {
                 "text": "Aukioloajat",
                 "iconCls": "x-fa fa-clock-o",
                 "viewType": "offline",
-                "routeId": "ruoka",
+                "routeId": "kaukiolot",
                 "version": 2,
-                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/ruoka-ja-juoma/",
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/aukioloajat/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
             },
-*/            
             {
                 "text": "Saapuminen",
                 "iconCls": "x-fa fa-bus",
@@ -61,7 +58,6 @@
                 "routeId": "ksaapuminen",
                 "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/saapuminen/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
@@ -73,7 +69,17 @@
                 "routeId": "kohjeet",
                 "version": 2,
                 "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/kilpailuohjeet/",
-//                "url":"https://do934w2wzk7ql.cloudfront.net/2017/kilpailukutsu/",
+                "selector":"section.entry-content",
+                "tocSelector":"h3",
+                "leaf": true
+            },
+            {
+                "text": "Näin toimitaan Joensuu-Jukolassa",
+                "iconCls": "x-fa fa-star-o",
+                "viewType": "offline",
+                "routeId": "kntjj",
+                "version": 3,
+                "url":"https://o3uus2zqy9.execute-api.eu-west-1.amazonaws.com/beta/jukolacompage/2017/ntjj/",
                 "selector":"section.entry-content",
                 "tocSelector":"h3",
                 "leaf": true
@@ -88,13 +94,12 @@
                 "leaf": true
             },
             {
-                "text": "Pikalinkit",
+                "text": "Linkit",
                 "iconCls": "x-fa fa-external-link",
                 "viewType": "online",
                 "routeId": "klinks",
                 "version": 1,
                 "url":"resources/linkit.html",
- //               "url":"https://results.jukola.com/tulokset/fi/",
                 "leaf": true
             },
 
