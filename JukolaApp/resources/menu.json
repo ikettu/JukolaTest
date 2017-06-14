@@ -63,7 +63,7 @@
                 "leaf": true
             },
             {
-                "text": "2017 Kilpailuohjeet",
+                "text": "Kilpailuohjeet",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
                 "routeId": "kohjeet",
@@ -74,7 +74,7 @@
                 "leaf": true
             },
             {
-                "text": "Näin toimitaan Joensuu-Jukolassa",
+                "text": "Näin toimitaan",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
                 "routeId": "kntjj",

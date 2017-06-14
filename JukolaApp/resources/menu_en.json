@@ -20,7 +20,7 @@
             },
             {
                 "text": "Schedule",
-                "iconCls": "x-fa fa-bus",
+                "iconCls": "x-fa fa-calendar",
                 "viewType": "offline",
                 "routeId": "kaikataulu",
                 "version": 3,
@@ -63,7 +63,7 @@
                 "leaf": true
             },
             {
-                "text": "2017 Competition Instructions",
+                "text": "Competition Instructions",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
                 "routeId": "kohjeet",
@@ -74,7 +74,7 @@
                 "leaf": true
             },
             {
-                "text": "How to operate in Joensuu-Jukola",
+                "text": "How to operate",
                 "iconCls": "x-fa fa-star-o",
                 "viewType": "offline",
                 "routeId": "kntjj",
